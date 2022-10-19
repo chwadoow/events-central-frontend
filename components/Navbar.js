@@ -1,6 +1,6 @@
-import {Menu} from "antd"
+import {Menu} from "antd";
 import { MailOutlined} from '@ant-design/icons';
-import Link from "next/link"
+import Link from "next/link";
 function Navbar(){
 return (
     <Menu mode="horizontal" defaultSelectedKeys={['mail']}>
