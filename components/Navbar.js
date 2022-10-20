@@ -17,14 +17,18 @@ return (
       <Link href="/">Home</Link>
     </Menu.Item>
     <Menu.Item >
-      <Link href="/createvent">Create Event</Link>
-    </Menu.Item>
-    <Menu.Item >
       <Link href="/about">About us</Link>
       </Menu.Item>
       <Menu.Item >
       <Link href="/login">Login</Link>
       </Menu.Item>
+      <Menu.Item >
+      <Link href="/signup">SignUp</Link>
+      </Menu.Item>
+      <Menu.Item >
+      <Link href="/createvent">Create Event</Link>
+    </Menu.Item>
+    
     </Menu>
     </Row>
 )
