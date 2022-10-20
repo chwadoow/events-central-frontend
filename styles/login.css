@@ -44,3 +44,8 @@ body {
     margin-bottom: 0;
   } 
 
+  .login-form-button {
+    background-color: rgb(247, 58, 25);
+    width: 100%;
+  }
+
