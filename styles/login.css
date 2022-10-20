@@ -49,3 +49,15 @@ body {
     width: 100%;
   }
 
+  .illustration-wrapper {
+    display: flex;
+    align-items: flex-end;
+    max-width: 800px;
+    min-height: 100%;
+    background-color: #fffdf2;
+  }
+  .illustration-wrapper img {
+    display: block;
+    width: 100%;
+  }
+
