@@ -29,5 +29,18 @@ body {
     max-width: 480px;
     width: 100%;
     padding: 60px;
-  }  
+  } 
+  
+  #login-form p {
+    padding: 10px;
+    margin-bottom: 30px;
+  }
+  #login-form p.form-title {
+    color: #333333;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 42px;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 0;
+  } 
 
