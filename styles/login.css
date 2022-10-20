@@ -92,3 +92,17 @@ body {
     border-radius: 8px;
   }
 
+  @media screen and (max-width: 1023px) {
+    .login-box {
+      flex-direction: column;
+      box-shadow: none;
+    }
+    .illustration-wrapper {
+      max-width: 100%;
+      min-height: auto;
+    }
+    #login-form {
+      max-width: 100%;
+    }
+  } 
+
