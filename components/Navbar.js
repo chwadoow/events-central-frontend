@@ -1,5 +1,5 @@
 import {Typography, Menu, Row, Col, Input, Space} from "antd"
-import { MailOutlined, HomeTwoTone} from '@ant-design/icons';
+import {HomeTwoTone} from '@ant-design/icons';
 const { Title } = Typography
 const {Search} = Input
 import Link from "next/link"
@@ -28,7 +28,6 @@ return (
       <Menu.Item >
       <Link href="/createvent">Create Event</Link>
     </Menu.Item>
-    
     </Menu>
     </Row>
 )
