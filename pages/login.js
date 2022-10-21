@@ -5,7 +5,7 @@ import { Form, Input, Button, Checkbox } from 'antd';
 function Login(){
     return (
         <>
-        <h1>The Login Component</h1>
+        {/* <h1>The Login Component</h1> */}
 
 
         <div className="login-page">
