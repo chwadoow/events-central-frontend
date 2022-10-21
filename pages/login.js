@@ -1,13 +1,7 @@
-
+import Link from "next/link"
 import { Form, Input, Button, Checkbox } from 'antd';
-
-
 function Login(){
     return (
-        <>
-        {/* <h1>The Login Component</h1> */}
-
-
         <div className="login-page">
       <div className="login-box">
         <div className="illustration-wrapper">
@@ -44,12 +38,10 @@ function Login(){
               LOGIN
             </Button>
           </Form.Item>
-          <p>Dont have an account?Sign Up</p>
+          <p>Dont have an account?<Link href="/signup">Sign Up</Link></p>
         </Form>
       </div>
     </div>
-
-        </>      
     )
     }
     export default Login

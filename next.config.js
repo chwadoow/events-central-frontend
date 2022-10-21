@@ -4,4 +4,9 @@ const nextConfig = {
   swcMinify: true,
 }
 
+// module.exports = {
+//   images: {
+//     domains: ["as2.ftcdn.net"]
+//   }
+// }
 module.exports = nextConfig
