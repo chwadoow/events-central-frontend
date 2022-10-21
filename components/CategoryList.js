@@ -15,7 +15,7 @@ return (
             <Button
               shape="round"
               style={{width: "11rem"}}>
-             <Link href="/eventcategories/[id]" as={`/eventcategories/${event.id}`}>{event.category}</Link>
+             <Link href={`/eventcategories/${event.id}`}>{event.category}</Link>
             </Button>
           </Col>
         );

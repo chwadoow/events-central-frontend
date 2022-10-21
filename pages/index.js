@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import NextImage from "next/image";
 import CategoryList from "../components/CategoryList";
-import { Col, Row, Card, Typography, Button } from "antd";
+import { Col, Row, Card, Typography} from "antd";
 import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
 import { useState } from "react";
 const { Title } = Typography;
