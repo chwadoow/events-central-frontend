@@ -1,4 +1,4 @@
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.css'; 
 import '../styles/globals.css';
 import "../styles/login.css";
 import Navbar from '../components/Navbar';
