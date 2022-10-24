@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Form, Input, Button, Checkbox } from 'antd';
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import { useRouter } from "next/router";
 
 
@@ -13,7 +13,8 @@ function SignUp(){
     email: "",
   });
 
-  const handleSubmit = (e) => { 
+  //defining onclick function 
+  const handleChange = (e) => { 
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -32,9 +33,11 @@ function SignUp(){
       body: JSON.stringify(userCreds),
     }).then((res) => {
       if (res.ok) {
-        res.json().then((user) => {
+        res.json().then(
+          (user) => {
           setCurrentUser(user);
-        });
+        }
+        );
       } else {
         res.json().then((errors) => {
           console.error(errors);
@@ -42,7 +45,6 @@ function SignUp(){
       }
     });
   }
-
 
     return (
         <> 
@@ -62,6 +64,7 @@ function SignUp(){
           >
             <Input
               placeholder="Username" 
+              onChange={handleChange}
             />
           </Form.Item>
 
@@ -71,7 +74,8 @@ function SignUp(){
             
           >
             <Input
-              placeholder="Email Address"  
+              placeholder="Email Address" 
+              onChange={handleChange} 
             />
           </Form.Item>
 
@@ -82,7 +86,7 @@ function SignUp(){
           >
             <Input.Password 
               placeholder="Password"
-              
+              onChange={handleChange}  
             />
           </Form.Item>
 
@@ -92,7 +96,7 @@ function SignUp(){
 
           <Form.Item>
             <Button  
-               onSubmit={handleSubmit} 
+               onClick={handleSubmit} 
               type="submit" className="login-form-button">
               SIGN UP 
             </Button>

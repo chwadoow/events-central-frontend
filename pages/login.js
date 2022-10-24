@@ -1,8 +1,17 @@
 import Link from "next/link"
 import { Form, Input, Button, Checkbox } from 'antd';
+import React, { useState } from "react";
 
 
 function Login(){
+
+  //defining states 
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+  });
+
+
     return (
         <div className="login-page">
       <div className="login-box">
