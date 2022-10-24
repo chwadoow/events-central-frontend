@@ -6,11 +6,15 @@ function event(){
     const [categoryData, setCategoryData] = useState({})
     const router = useRouter()
     const {id} = router.query
+
+
     useEffect(()=>{
-    fetch(`http://localhost:5000/eventcategories/${id}`)
+    fetch(`http://localhost:3000/categories/${id}`)
     .then(response => response.json())
     .then((data)=> setCategoryData(data))
-    },[])
+    },[id])
+
+   console.log(categoryData)
     return (
 
         <>
