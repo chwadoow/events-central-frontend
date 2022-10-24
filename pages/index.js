@@ -12,7 +12,7 @@ export default function Home({ events }) {
   return (
     <div>
       <Head>
-        <title>ThunderTicks</title>
+        <title>Bomboclat Events</title>
       </Head>
       <Row style={{ marginTop: "1rem" }}>
         <Col span={24}>
