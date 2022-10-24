@@ -1,8 +1,9 @@
 import { Col, Card, Row } from "antd";
 import Link from "next/link";
-
+import NextImage from "next/image";
+import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
 const HomePageEvents = ({events}) => {
-
+console.log(events)
 return (
     <Row>
       <Col span={24}>
@@ -12,9 +13,28 @@ return (
                 <>
                   <Link href={`/events/${event.id}`}>
                     <div>
-                      <Card style={{ textAlign: "center", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}>
-                      <p><b>{event.title}</b></p>
-                      </Card>
+                    <Card
+    style={{
+      width: 300,
+    }}
+    cover={
+      <img
+        alt="example"
+        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+      />
+    }
+    actions={[
+      <SettingOutlined key="setting" />,
+      <EditOutlined key="edit" />,
+      <EllipsisOutlined key="ellipsis" />,
+    ]}
+  >
+    <Meta
+      avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+      title="Card title"
+      description="This is the description"
+    />
+  </Card>
                     </div>
                   </Link>
                   &nbsp;
