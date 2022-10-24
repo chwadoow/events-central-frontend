@@ -8,27 +8,25 @@ function SignUp(){
     
   // setting states
   const router = useRouter();
-  const emailInput = useRef();
+  const usernameInput = useRef();
   const passwordInput = useRef();
 
   //defining the handle submit function 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const email = emailInput.current.value;
+    const username = usernameInput.current.value;
     const password = passwordInput.current.value;
 
     //the users table in the backend has a create action that will act as a sign up 
-
     const response = await fetch("/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify({ username, password }) 
     });
 
     if (response.ok) {
-      return router.push("/login"); 
+      return router.push("/login");
     }
   };
 
@@ -48,18 +46,22 @@ function SignUp(){
           <Form.Item
             name="username"
             rules={[{ required: true, message: 'Please input your username!' }]}
+            
           >
             <Input
               placeholder="Username"
+              ref={usernameInput}
             />
           </Form.Item>
 
           <Form.Item
             name="password"
             rules={[{ required: true, message: 'Please input your password!' }]}
+            
           >
             <Input.Password 
               placeholder="Password"
+              ref={passwordInput} 
             />
           </Form.Item>
 
