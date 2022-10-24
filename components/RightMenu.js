@@ -1,11 +1,15 @@
-import React, { Component } from 'react';
-import { Menu, Icon, Avatar } from 'antd';
+import React from 'react';
+import { Menu, Avatar, Grid } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 
-class RightMenu extends Component {
-  render() {
+const { useBreakpoint } = Grid;
+
+const RightMenu = () => {
+    
+    const { md } = useBreakpoint();
+
     return (
-    <Menu mode="horizontal">
+    <Menu mode={md ? "horizontal" : "inline"}>
        <Menu.Item >
           <a href="/">Home</a>
         </Menu.Item>
@@ -20,11 +24,11 @@ class RightMenu extends Component {
         </Menu.Item>
         <Menu.Item>
             <div>
-                <Avatar size={64} icon={<UserOutlined />} />
+                <Avatar size={30} icon={<UserOutlined />} />
             </div>
         </Menu.Item>
     </Menu>
     );
-  }
 }
+
 export default RightMenu;

@@ -14,9 +14,9 @@ export default function Home({ events }) {
       <Head>
         <title>Bomboclat Events</title>
       </Head>
-      <Row style={{ marginTop: "1rem" }}>
+      <Row >
         <Col span={24}>
-          <NextImage src={img} height="1050px" />
+          <NextImage src={img} height="720" />
         </Col>
       </Row>
       <Row style={{ marginTop: "1rem" }}>

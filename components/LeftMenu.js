@@ -1,27 +1,28 @@
-import React, { Component } from 'react';
-import { Menu, Icon } from 'antd';
+import React from 'react';
+import { Input } from 'antd';
+import { SearchOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 
-class LeftMenu extends Component {
-  render() {
+const LeftMenu = () => {
+
     return (
-      <Menu mode="horizontal">
-        <Menu.Item >
-            <Link href="/">
-                <div className='headerLogo' >
-                    <p style={{fontWeight: "bolder", fontSize: 14, color: 'black', cursor: "pointer"}}>
-                    Events
-                    <br />
-                    <span style={{ color: "#d1410a", cursor: "pointer" }}>Bomboclat</span>
-                    </p>
-                </div>
-            </Link>
-        </Menu.Item>
-        <Menu.Item >
-            <Search placeholder="search by tag" allowClear style={{ width: "20%", borderRadius: 10 }} />
-        </Menu.Item>
-      </Menu>
+      <>
+      <div style={{display: "inline-flex"}}>
+      <Link href="/" style={{textDecoration: "none"}}>
+            <div className='headerLogo' >
+                <p style={{fontWeight: "bolder", fontSize: 14, color: 'black', cursor: "pointer"}}>
+                Events
+                <br />
+                <span style={{ color: "#d1410a", cursor: "pointer" }}>Bomboclat</span>
+                </p>
+            </div>
+        </Link>
+        <div style={{marginLeft: 100 }}>
+            <Input size="large" placeholder="search by tag ..." suffix={<SearchOutlined />} style={{width: 400, borderRadius: 10}}/>
+        </div>
+      </div>
+      </>
     );
-  }
 }
+
 export default LeftMenu;
