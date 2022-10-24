@@ -11,6 +11,27 @@ function SignUp(){
   const emailInput = useRef();
   const passwordInput = useRef();
 
+  //defining the handle submit function 
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const email = emailInput.current.value;
+    const password = passwordInput.current.value;
+
+    //the users table in the backend has a create action that will act as a sign up 
+
+    const response = await fetch("/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+
+    if (response.ok) {
+      return router.push("/login"); 
+    }
+  };
+
 
     return (
         <> 
@@ -20,6 +41,7 @@ function SignUp(){
           <img src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700" alt="Login"/>
         </div>
         <Form
+          onSubmit={handleSubmit} 
           name="login-form"
         >
           <p className="form-title">SIGN UP </p>
