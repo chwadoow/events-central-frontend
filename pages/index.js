@@ -1,22 +1,24 @@
 import Head from "next/head";
-import Link from "next/link";
+import HomePageEvents from "../components/HomePageEvents";
 import NextImage from "next/image";
 import CategoryList from "../components/CategoryList";
-import { Col, Row, Card, Typography} from "antd";
+import { Col, Row } from "antd";
 import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
-const { Title } = Typography;
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/eventcategories");
-  const events = await res.json();
+  const res1 = await fetch("http://localhost:5000/events");
+  const res2 = await fetch("http://localhost:5000/eventcategories");
+  const events = await await res1.json()
+  const categories = await res2.json()
   return {
     props: {
       events,
+      categories
     },
   };
 };
 
-export default function Home({ events }) {
+export default function Home({ categories, events }) {
   
   return (
     <div>
@@ -40,7 +42,7 @@ export default function Home({ events }) {
       </Row>
 
       <Row >
-        <CategoryList events={events}/>
+        <CategoryList events={categories}/>
       </Row>
 
       <br />
@@ -51,6 +53,10 @@ export default function Home({ events }) {
             <p>Events available</p>
           </div>
         </Col>
+      </Row>
+
+      <Row >
+        <HomePageEvents events={events}/>
       </Row>
 
     </div>
