@@ -11,6 +11,13 @@ function Login(){
     password: "",
   });
 
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  }; 
+
 
     return (
         <div className="login-page">
@@ -28,6 +35,8 @@ function Login(){
           >
             <Input
               placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
             />
           </Form.Item>
 
@@ -37,6 +46,8 @@ function Login(){
           >
             <Input.Password 
               placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
             />
           </Form.Item>
 
