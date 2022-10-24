@@ -75,9 +75,16 @@ const App = () => {
       <Form.Item label="Ticket Number">
         <InputNumber />
       </Form.Item>
-      <Form.Item label="">
+      <Form.Item label="location">
       <Input />
       </Form.Item>
+      <Form.Item label="price">
+      <Select>
+          <Select.Option value="demo">regular_price</Select.Option>
+          <Select.Option value="demo">vip_price</Select.Option>
+        </Select>
+      </Form.Item>
+      
       <Form.Item label="Submit">
         <Button>Button</Button>
       </Form.Item>
