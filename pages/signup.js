@@ -1,31 +1,46 @@
 import Link from "next/link"
 import { Form, Input, Button, Checkbox } from 'antd';
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import { useRouter } from "next/router";
 
 
 function SignUp(){
     
   // setting states
-  const [username, setUsername] = useState(""); 
-  const [password, setPassword] = useState(""); 
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
 
-  //handlesubmit function definition
-
+  const handleSubmit = (e) => { 
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
   function handleSubmit(e) {
     e.preventDefault();
-    fetch("http://127.0.0.1:3000/users", {
+
+    const userCreds = { ...formData };
+
+    fetch("http://localhost:3000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    })
-      .then((r) => r.json())
-      .then(r => console.log(r));
+      body: JSON.stringify(userCreds),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setCurrentUser(user);
+        });
+      } else {
+        res.json().then((errors) => {
+          console.error(errors);
+        });
+      }
+    });
   }
 
 
@@ -46,8 +61,17 @@ function SignUp(){
             
           >
             <Input
-              placeholder="Username"
-              ref={usernameInput}
+              placeholder="Username" 
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="email" 
+            rules={[{ required: true, message: 'Please input your email address!' }]} 
+            
+          >
+            <Input
+              placeholder="Email Address"  
             />
           </Form.Item>
 
@@ -58,7 +82,7 @@ function SignUp(){
           >
             <Input.Password 
               placeholder="Password"
-              ref={passwordInput} 
+              
             />
           </Form.Item>
 
