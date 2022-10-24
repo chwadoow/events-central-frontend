@@ -1,7 +1,15 @@
-import { Col, Card, Row } from "antd";
+import { Col,  Row } from "antd";
 import Link from "next/link";
-import NextImage from "next/image";
-import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
+// import NextImage from "next/image";
+// import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
+import styles from '../styles/HomePage.module.css'
+
+
+
+import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Avatar, Card } from 'antd';
+
+const { Meta } = Card;
 const HomePageEvents = ({events}) => {
 console.log(events)
 return (
@@ -13,27 +21,35 @@ return (
                 <>
                   <Link href={`/events/${event.id}`}>
                     <div>
-                    <Card
+      <Card
+      className={styles.tag}
     style={{
-      width: 300,
+      width: 200,
+     
+      
+      
     }}
     cover={
       <img
         alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+        src={event.banner_img}
       />
     }
-    actions={[
-      <SettingOutlined key="setting" />,
-      <EditOutlined key="edit" />,
-      <EllipsisOutlined key="ellipsis" />,
-    ]}
+    // actions={[
+    //   <SettingOutlined key="setting" />,
+    //   <EditOutlined key="edit" />,
+    //   <EllipsisOutlined key="ellipsis" />,
+    // ]}
   >
+    {event.id}
     <Meta
-      avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-      title="Card title"
-      description="This is the description"
+      // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+      title={event.title}
+      description= {event.location}
     />
+   
+    {event.event_date}
+    
   </Card>
                     </div>
                   </Link>
