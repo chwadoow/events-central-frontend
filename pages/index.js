@@ -6,7 +6,7 @@ import { Col, Row } from "antd";
 import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
 
 export const getStaticProps = async () => {
-  const res1 = await fetch("http://localhost:5000/events");
+  const res1 = await fetch("http://localhost:3000/events");
   const res2 = await fetch("http://localhost:5000/eventcategories");
   const events = await res1.json()
   const categories = await res2.json()
