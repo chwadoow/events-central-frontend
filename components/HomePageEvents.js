@@ -13,7 +13,7 @@ return (
                   <Link href={`/events/${event.id}`}>
                     <div>
                       <Card style={{ textAlign: "center", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}>
-                          <p>{event.title}</p>
+                      <p><b>{event.title}</b></p>
                       </Card>
                     </div>
                   </Link>

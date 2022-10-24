@@ -1,4 +1,4 @@
-import { Col, Card, Row } from "antd";
+import { Col, Row } from "antd";
 import Link from "next/link";
 
 function CategoryList({events}){
@@ -10,10 +10,8 @@ return (
               return (
                 <>
                   <Link href={`/eventcategories/${event.id}`}>
-                    <div>
-                      <Card style={{ textAlign: "center", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}>
-                          <p>{event.category}</p>
-                      </Card>
+                    <div style={{ textAlign: "center", border: 1, borderStyle: "solid", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}>
+                      <p style={{marginTop: 10}}><b>{event.category}</b></p>
                     </div>
                   </Link>
                   &nbsp;
