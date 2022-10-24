@@ -1,7 +1,8 @@
-import { Col, Row } from "antd";
+import { Col, Card, Row } from "antd";
 import Link from "next/link";
 
-function CategoryList({events}){
+const HomePageEvents = ({events}) => {
+
 return (
     <Row>
       <Col span={24}>
@@ -9,9 +10,11 @@ return (
           {events.map((event) => {
               return (
                 <>
-                  <Link href={`/eventcategories/${event.id}`}>
-                    <div style={{ textAlign: "center", border: 1, borderStyle: "solid", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}>
-                      <p style={{marginTop: 10}}><b>{event.category}</b></p>
+                  <Link href={`/events/${event.id}`}>
+                    <div>
+                      <Card style={{ textAlign: "center", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}>
+                      <p><b>{event.title}</b></p>
+                      </Card>
                     </div>
                   </Link>
                   &nbsp;
@@ -24,4 +27,4 @@ return (
     </Row>
 )
 }
-export default CategoryList
+export default HomePageEvents;
