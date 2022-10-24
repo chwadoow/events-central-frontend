@@ -1,44 +1,67 @@
 import Head from "next/head";
-import Link from "next/link";
+import HomePageEvents from "../components/HomePageEvents";
 import NextImage from "next/image";
 import CategoryList from "../components/CategoryList";
-import { Col, Row, Card, Typography} from "antd";
+import { Col, Row } from "antd";
 import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
-import { useState } from "react";
-const { Title } = Typography;
-export default function Home({ events }) {
-  const [event, setEvent] = useState({})
+
+export const getStaticProps = async () => {
+  const res1 = await fetch("http://localhost:5000/events");
+  const res2 = await fetch("http://localhost:5000/eventcategories");
+  const events = await res1.json()
+  const categories = await res2.json()
+  return {
+    props: {
+      events,
+      categories
+    },
+  };
+};
+
+export default function Home({ categories, events }) {
   
   return (
     <div>
       <Head>
-        <title>ThunderTicks</title>
+        <title>Bomboclat Events</title>
       </Head>
-      <Row style={{ marginTop: "1rem" }}>
+      <Row >
         <Col span={24}>
-          <NextImage src={img} height="1050px" />
+          <NextImage src={img} height="1040" />
         </Col>
       </Row>
-      <Row style={{ marginTop: "1rem" }}>
-        <Col style={{ marginLeft: "4rem" }}>
-          <Card bordered={true} style={{ borderRadius: "5rem" }}>
-            <Title level={4}>Check out trending categories</Title>
-          </Card>
+
+      <br />
+
+      <Row>
+        <Col span={24}>
+          <div style={{fontWeight: "bolder", marginLeft: 40, fontSize: "30px"}}>
+            <p>Check out trending categories</p>
+          </div>
         </Col>
       </Row>
-      <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} style={{ marginLeft: "2rem", marginTop: "0.5rem" }}>
-        <CategoryList events={events}/>
+
+      <Row >
+        <CategoryList events={categories}/>
       </Row>
+
+      <br />
+
+      <Row>
+        <Col span={24}>
+          <div style={{fontWeight: "bolder", marginLeft: 40, fontSize: "30px"}}>
+            <p>Events available</p>
+          </div>
+        </Col>
+      </Row>
+
+      <Row >
+        <HomePageEvents events={events}/>
+      </Row>
+
+      <br />
+
     </div>
   );
 }
-export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/eventcategories");
-  const events = await res.json();
-  return {
-    props: {
-      events,
-    },
-  };
-};
 
