@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Form, Input, Button, Checkbox } from 'antd';
 import React, { useState } from "react";
+import {router} from "next/router"
 
 
 function Login(){
@@ -49,7 +50,7 @@ function Login(){
           <img src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700" alt="Login"/>
         </div>
         <Form
-           onSubmit={handleSubmit}
+          
           name="login-form"
         >
           <p className="form-title">LOG IN</p>
@@ -59,7 +60,7 @@ function Login(){
           >
             <Input
               placeholder="Username"
-              value={formData.username}
+              // value={formData.username}
               onChange={handleChange}
             />
           </Form.Item>
@@ -70,7 +71,7 @@ function Login(){
           >
             <Input.Password 
               placeholder="Password"
-              value={formData.password}
+              // value={formData.password}
               onChange={handleChange}
             />
           </Form.Item>
@@ -81,7 +82,10 @@ function Login(){
 
           <Form.Item>
             <Button  
-            htmlType="submit" className="login-form-button">
+             onSubmit={handleSubmit}
+             type="submit"
+            // htmlType="submit" 
+            className="login-form-button">
               LOGIN
             </Button>
           </Form.Item>
