@@ -17,7 +17,7 @@ const LeftMenu = () => {
                 </p>
             </div>
         </Link>
-        <div style={{marginLeft: 20 }}>
+        <div style={{marginLeft: 80 }}>
             <Input size="large" placeholder="search by tag ..." suffix={<SearchOutlined />} style={{width: 400, borderRadius: 10}}/>
         </div>
       </div>
