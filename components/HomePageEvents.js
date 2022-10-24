@@ -3,9 +3,7 @@ import { Col, Card, Row } from "antd";
 
 const HomePageEvents = ({events}) => {
   var date = new Date()
-  console.log(date)
-  var dd = date.getTime()
-  console.log(dd)
+  var currentDate = date.getTime()
 return (
     <Row>
       <Col span={24}>
@@ -19,8 +17,8 @@ return (
                         cover={<img alt="example" src={event.image_url1} />}>
                       <p><b>{event.title}</b></p>
                       <p><b>{event.location}</b></p>
-                      <p><b>{`${event.event_date}`.split("-").join("/")}</b></p>
-                      <p><b>{`${event.event_time}`.split("2000-01-01T")}</b></p> 
+                      <p><b>{event.event_date}</b></p>
+                      <p><b>{parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</b></p>
                       </Card>
                     </div>
                   </Link>
