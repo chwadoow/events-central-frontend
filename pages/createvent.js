@@ -84,6 +84,12 @@ const App = () => {
           <Select.Option value="demo">vip_price</Select.Option>
         </Select>
       </Form.Item>
+      <Form.Item label="no_of_tickets">
+      <Select>
+          <Select.Option value="demo">regular</Select.Option>
+          <Select.Option value="demo">vip</Select.Option>
+        </Select>
+      </Form.Item>
       
       <Form.Item label="Submit">
         <Button>Button</Button>
