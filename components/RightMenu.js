@@ -9,23 +9,23 @@ const RightMenu = () => {
     const { md } = useBreakpoint();
 
     return (
-    <Menu mode={md ? "horizontal" : "inline"}>
+    <Menu overflowedIndicator mode={md ? "horizontal" : "inline"}>
        <Menu.Item >
-          <a href="/">Home</a>
+          <a href="/"><b>Home</b></a>
         </Menu.Item>
         <Menu.Item >
-          <a href="/createvent">Create an Event</a>
+          <a href="/createvent"><b>Create an Event</b></a>
         </Menu.Item>
         <Menu.Item >
-          <a href="/about">About Us</a>
+          <a href="/about"><b>About Us</b></a>
         </Menu.Item>
         <Menu.Item >
-          <a href="/login">Login</a>
+          <a href="/login"><b>Login</b></a>
         </Menu.Item>
         <Menu.Item>
-            <div>
-                <Avatar size={30} icon={<UserOutlined />} />
-            </div>
+          <div>
+              <Avatar size={35} icon={<UserOutlined />} />
+          </div>
         </Menu.Item>
     </Menu>
     );
