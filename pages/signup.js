@@ -1,6 +1,17 @@
 import Link from "next/link"
 import { Form, Input, Button, Checkbox } from 'antd';
+import React, {useRef} from 'react';
+import { useRouter } from "next/router";
+
+
 function SignUp(){
+    
+  // setting states
+  const router = useRouter();
+  const emailInput = useRef();
+  const passwordInput = useRef();
+
+
     return (
         <> 
        <div className="login-page">
