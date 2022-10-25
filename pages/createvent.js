@@ -37,16 +37,16 @@ const App = () => {
       <Form.Item label="Event Name">
         <Input />
       </Form.Item>
-      <Form.Item label="Organiser Name">
+      <Form.Item label="category_id">
         <Input />
       </Form.Item>
-      <Form.Item label="Location">
+      <Form.Item label="title">
         <Input />
       </Form.Item>
-      <Form.Item label="Description">
+      <Form.Item label="event_date">
         <Input />
       </Form.Item>
-      <Form.Item label="Category">
+      <Form.Item label="early_booking_end_date">
         <Select>
           <Select.Option value="demo">Art ant Theatre</Select.Option>
           <Select.Option value="demo">Sports</Select.Option>
@@ -75,11 +75,28 @@ const App = () => {
       <Form.Item label="Ticket Number">
         <InputNumber />
       </Form.Item>
-     
+      <Form.Item label="location">
+      <Input />
+      </Form.Item>
+      <Form.Item label="price">
+      <Select>
+          <Select.Option value="demo">regular_price</Select.Option>
+          <Select.Option value="demo">vip_price</Select.Option>
+        </Select>
+      </Form.Item>
+      <Form.Item label="no_of_tickets">
+      <Select>
+          <Select.Option value="demo">regular</Select.Option>
+          <Select.Option value="demo">vip</Select.Option>
+        </Select>
+      </Form.Item>
+      
       <Form.Item label="Submit">
         <Button>Button</Button>
       </Form.Item>
     </Form>
+
+    
    </div>
   );
 };
