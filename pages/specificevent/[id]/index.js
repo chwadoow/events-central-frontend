@@ -32,8 +32,13 @@ const SpecificEvent = () => {
           </Col>
           <Col span={12}>
             <br />
-            <div style={{textAlign: "center", width: "100%"}}>
-              <p>Timer section</p>
+            <div style={{textAlign: "center", width: "100%" }}>
+              <Row justify="center" align="middle" style={{marginTop: 30}}>
+                <div style={{ border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
+                  <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
+                  <p>4m : 50s</p>
+                </div>
+              </Row>
             </div>
           </Col>
         </Row>
@@ -73,12 +78,14 @@ const SpecificEvent = () => {
         <br />
         <Row>
           <Col span={12}>
-            <div style={{textAlign: "center", width: "100%"}}>
+            <div style={{textAlign: "center", width: "100%", fontFamily: "nunito"}}>
               <h2 style={{fontWeight: "bold", fontSize: 30}}>Event Details</h2>
+              <br />
+              <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
             </div>
           </Col>
           <Col span={12}>
-          <div style={{display: "inline-flex", width: "100%", justifyContent: "center", textAlign: "center"}}>
+          <div style={{display: "inline-flex", fontFamily: "nunito", width: "100%", justifyContent: "center", textAlign: "center"}}>
             <p>images section</p>
           </div>
         </Col>
