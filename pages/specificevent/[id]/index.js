@@ -1,11 +1,30 @@
-import { Col, Row } from "antd";
+import { Col, Row, Button, Modal } from "antd";
 import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
+import BuyTicketForm from "../../../components/BuyTicketForm";
 
 const SpecificEvent = () => {
   const [event, setEvent] = useState({});
   const router = useRouter();
   const {id} = router.query;
+  const [open, setOpen] = useState(false);
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const showModal = () => {
+    setOpen(true);
+  };
+
+  const handleOk = () => {
+    setConfirmLoading(true);
+    setTimeout(() => {
+      setOpen(false);
+      setConfirmLoading(false);
+    }, 500);
+  };
+
+  const handleCancel = () => {
+    setOpen(false);
+  };
 
   return (
     <Row>
@@ -27,7 +46,7 @@ const SpecificEvent = () => {
         <Row>
           <Col span={12}>
             <div style={{ marginLeft: 40, width: "100%"}}>
-              <h1 style={{fontWeight: "bolder", fontSize: 60}}>The Big 5 Construct Kenya</h1>
+              <h1 style={{fontWeight: "bolder", fontFamily: "nunito", fontSize: 60}}>The Big 5 Construct Kenya</h1>
             </div>    
           </Col>
           <Col span={12}>
@@ -65,8 +84,35 @@ const SpecificEvent = () => {
             </Row>
           </Col>
           <Col span={12}>
-            <div style={{textAlign: "center", width: "100%"}}>
-              <p>Ticket section</p>
+          <div style={{textAlign: "center", width: "100%" }}>
+              <Row justify="center" align="middle">
+                <div style={{ border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
+                  <h3 style={{fontWeight: "bold"}}>Attend Event</h3>
+                  <button
+                  style={{backgroundColor: "#d1410a", cursor: "pointer", width: "70%", margin: 20, color: "#fff", borderRadius: 10, height: 40, border: "none"}}
+                  onClick={showModal}
+                  >
+                    Buy Ticket
+                  </button>
+                  <Modal
+                    title="Pay with Mpesa"
+                    open={open}
+                    onOk={handleOk}
+                    confirmLoading={confirmLoading}
+                    onCancel={handleCancel}
+                    footer={[
+                      <Button key="back" onClick={handleCancel}>
+                        Cancel
+                      </Button>,
+                      <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOk}>
+                        Submit
+                      </Button>
+                    ]}
+                  >
+                    <BuyTicketForm />
+                  </Modal>
+                </div>
+              </Row>
             </div>
           </Col>
         </Row>
@@ -86,10 +132,36 @@ const SpecificEvent = () => {
           </Col>
           <Col span={12}>
           <div style={{display: "inline-flex", fontFamily: "nunito", width: "100%", justifyContent: "center", textAlign: "center"}}>
-            <p>images section</p>
+            <Row justify="center" align="middle">
+              <Col span={24}>
+                <img 
+                src="https://p4.wallpaperbetter.com/wallpaper/669/914/562/mobile-legends-mobile-legend-mlbb-hd-wallpaper-preview.jpg"
+                alt="Tech"
+                style={{
+                  width: "100%",
+                  height: "405px",
+                  display: "block"
+                }}
+                />
+              </Col>
+            </Row>
           </div>
-        </Col>
+         </Col>
         </Row>
+      </Col>
+
+      <Col span={12}>
+        <div style={{width: "100%"}}>
+        <img 
+          src="https://p4.wallpaperbetter.com/wallpaper/442/515/764/mobile-legends-moskov-twilight-dragon-hd-wallpaper-preview.jpg"
+          alt="Tech"
+          style={{
+            width: "100%",
+            height: "405px",
+            display: "block"
+          }}
+          />
+        </div>
       </Col>
 
     </Row>
