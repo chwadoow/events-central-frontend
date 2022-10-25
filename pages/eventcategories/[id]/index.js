@@ -1,9 +1,6 @@
 import {useRouter} from "next/router"
 import { useEffect,useState } from "react"
 import {Row,Col, Divider,Card} from "antd"
-import NextImage from "next/image"
-import img from "../../../public/redd-qMFSP1xYVTQ-unsplash.jpg";
-import  SpecCategoryList  from "../../../components/SpecCategoryList";
 
 const { Meta } = Card;
 
