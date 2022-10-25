@@ -10,27 +10,42 @@ const HomePageEvents = ({events}) => {
     )
 
 return (
-    <Row>
+    <Row justify="center" align="middle">
       <Col span={24}>
-        <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 10, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
+        <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 20, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
           {filteredDates.map((event) => {
               return (
                 <>
-                  <Link href={`/events/${event.id}`}>
-                    <div>
+                
+                  <Link href={`/specificevent/${event.id}`}>
+                      <div >
 
-                      <Card style={{ textAlign: "center", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}
-                        cover={<img alt="example" src={event.image_url1} />}>
-                      <p><b>{event.title}</b></p>
-                      <p><b>{event.location}</b></p>
-                      <p><b>{event.event_date}</b></p>
-                      <p><b>{parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</b></p>
-                      </Card>
+                        <Card style={{ 
+                          textAlign: "left", 
+                          width: 280, 
+                          height: 350, 
+                          padding: 2, 
+                          cursor: "pointer",
+                          boxShadow: "5px 5px 5px #d1410a",
+                          
+                          }}
 
-                    </div>
+                          cover={<img alt={event.title} src={event.image_url1} height="100px"/>}
+                          bordered={true}
+                        >
+                          <div>
+                            <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
+                            <p>{event.event_date}</p>
+                            <p style={{color: "#d1410a"}}>{parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</p>
+                            <p>{event.location}</p>
+                          </div>
+                          
+                        </Card>
+
+                      </div>
                   </Link>
                   &nbsp;
-                  &nbsp;
+                  
                 </>
               );
           })}

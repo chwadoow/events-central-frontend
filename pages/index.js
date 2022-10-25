@@ -55,7 +55,7 @@ export default function Home({ categories, events }) {
         </Col>
       </Row>
 
-      <Row >
+      <Row justify="center" align="middle">
         <HomePageEvents events={events}/>
       </Row>
 
