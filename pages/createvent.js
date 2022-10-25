@@ -99,6 +99,11 @@ const App = () => {
       <Input />
       </Form.Item>
 
+      <Form.Item label="description">
+      <Input />
+      </Form.Item>
+
+
       <Form.Item label="image_url1">
       <Input />
       </Form.Item>
@@ -108,6 +113,10 @@ const App = () => {
         <Button>Button</Button>
       </Form.Item>
     </Form>
+
+
+      
+    
 
     
    </div>
