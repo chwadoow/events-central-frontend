@@ -1,31 +1,78 @@
 import {useRouter} from "next/router"
 import { useEffect,useState } from "react"
-import {Row,Col, Divider} from "antd"
-import Image from "next/image"
+import {Row,Col, Divider,Card} from "antd"
+import NextImage from "next/image"
+import img from "../../../public/redd-qMFSP1xYVTQ-unsplash.jpg";
+import  SpecCategoryList  from "../../../components/SpecCategoryList";
+
+const { Meta } = Card;
+
 function event(){
-    const [categoryData, setCategoryData] = useState({})
+    const [categoryData, setCategoryData] = useState([])
     const router = useRouter()
     const {id} = router.query
+
+
     useEffect(()=>{
-    fetch(`http://localhost:5000/eventcategories/${id}`)
+    fetch(`http://localhost:3000/categories/${id}`)
     .then(response => response.json())
     .then((data)=> setCategoryData(data))
-    },[])
+    },[id])
+
+  console.log(categoryData)
     return (
 
         <>
         <Row style={{ marginTop: "1rem"}}>
-        <Col span={12} style={{backgroundColor:"blue",padding:"5rem"}}>
-            <Divider orientation="center" style={{color:"white"}}>{categoryData.category}</Divider>
-        </Col>
+      
         <Col span={12}>
-            <div>
-            <img src={categoryData.image_url}/>
-            </div>
+            
+         {categoryData.title}
+            
+        </Col>
+        <Col span={12} >
+            
+            <img src={categoryData.banner_img} height="360"/>
+            
         </Col>
       </Row>
-      <Row>
-      </Row>
+       <br></br>
+     <Row>
+    
+   { categoryData.events ?
+    categoryData.events.map((element)=>( 
+ 
+
+        <Card
+    style={{
+      width: 300,
+      
+    }}
+    cover={
+      <img
+        alt="example"
+        src={element.image_url1}
+      />
+    }
+  
+  >
+    <Meta
+      // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+      title={element.title}
+      description={element.location}
+    />
+     {element.event_date}
+  </Card>
+
+
+
+
+
+  
+   ) ): <div>no events</div>
+  }
+</Row>
+  
         </>      
     )
     }
