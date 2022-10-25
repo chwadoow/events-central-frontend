@@ -37,20 +37,28 @@ const App = () => {
       <Form.Item label="Event Name">
         <Input />
       </Form.Item>
-      <Form.Item label="category_id">
-        <Input />
+      <Form.Item label="category">
+      <Select>
+      <Select.Option value="demo">Music</Select.Option>
+      <Select.Option value="demo">Business</Select.Option>
+      <Select.Option value="demo">Games</Select.Option>
+      <Select.Option value="demo">Hobbies</Select.Option>
+      <Select.Option value="demo">Food & Drink</Select.Option>
+      <Select.Option value="demo">Performing Arts</Select.Option>
+      <Select.Option value="demo">Sciences</Select.Option>
+      <Select.Option value="demo">Sport & Fitness</Select.Option>
+    </Select>
       </Form.Item>
       <Form.Item label="title">
-        <Input />
+      <Select>
+      
+    </Select>
+        
       </Form.Item>
       <Form.Item label="event_date">
         <Input />
       </Form.Item>
       <Form.Item label="early_booking_end_date">
-        <Select>
-          <Select.Option value="demo">Art ant Theatre</Select.Option>
-          <Select.Option value="demo">Sports</Select.Option>
-        </Select>
       </Form.Item>
       {/* <Form.Item label="TreeSelect">
         <TreeSelect
@@ -89,6 +97,9 @@ const App = () => {
           <Select.Option value="demo">regular</Select.Option>
           <Select.Option value="demo">vip</Select.Option>
         </Select>
+      </Form.Item>
+      <Form.Item label="banner_img">
+      <Input />
       </Form.Item>
       
       <Form.Item label="Submit">
