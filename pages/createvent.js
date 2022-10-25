@@ -12,28 +12,68 @@ import {
   TreeSelect,
 } from 'antd';
 import React, { useState } from 'react';
-const App = () => {
-  const [componentSize, setComponentSize] = useState('large');
-  const onFormLayoutChange = ({ size }) => {
-    setComponentSize(size);
-  };
-  const updateEvent = () => {
-    setEvent(previousState => {
-      return { ...previousState, color: "blue" }
-    });
-  }
 
-  function eventtime () {
-    const [eventtime, seteventtime] = useState();
+const event= ({handlePosting}) => {
+  const [FormEvent, setFormEvent] = useState({
+      event_date: '',
+      event_time: '',
+      early_booking_end_date: '',
+      early_booking_end_time: '',
+      early_booking_price_regular: '',
+      early_booking_price_vip: '',
+      location: '',
+      regular_price: '',
+      vip_price: '',
+      vip_no_of_tickets: '',
+      regular_no_of_tickets: '',
+      banner_img: '',
+      description:'',
+      image_url1:'',
+      image_url2:'',
+
+        })
+        fetch('/api/route-name', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify(objectWithData),
+})
+
+        setEventData({
+          event_date: '',
+          event_time: '',
+          early_booking_end_date: '',
+          early_booking_end_time: '',
+          early_booking_price_regular: '',
+          early_booking_price_vip: '',
+          location: '',
+          regular_price: '',
+          vip_price: '',
+          vip_no_of_tickets: '',
+          regular_no_of_tickets: '',
+          banner_img: '',
+          description:'',
+          image_url1:'',
+          image_url2:'',
+    
+        })
+    }
+
+
+
+
+
+
+
+
+
+  })
+
   
-    useEffect(() => {
-      setStartingTime(() => {
-        setEndingtime((eventtime) => eventtime + 1);
-      }, 1000);
-    });
   
 
-  const [regular_price,setregular_price]=useState("large")
+  
   return (
     <div className='create'>
     <Form
