@@ -11,9 +11,9 @@ import {
   Switch,
   TreeSelect,
 } from 'antd';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
-const event= ({handlePosting}) => {
+const event= () => {
   const [FormEvent, setFormEvent] = useState({
       event_date: '',
       event_time: '',
@@ -32,13 +32,13 @@ const event= ({handlePosting}) => {
       image_url2:'',
 
         })
-        fetch('http://127.0.0.1:3000', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(objectWithData),
-        })
+        // fetch('http://127.0.0.1:3000', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(objectWithData),
+        // })
 
         setEventData({
           event_date: '',
@@ -164,6 +164,6 @@ const event= ({handlePosting}) => {
     
    </div>
   );
-};
+
 export default App;
 
