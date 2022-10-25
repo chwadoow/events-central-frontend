@@ -29,7 +29,11 @@ function Login(){
         <div className="illustration-wrapper">
           <img src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700" alt="Login"/>
         </div>
-        <Form
+        
+     
+
+      <Col xs={24} md={12}>
+      <Form 
           name="login-form"
         >
           <p className="form-title">LOG IN</p>
@@ -71,8 +75,9 @@ function Login(){
           </Form.Item>
           <p>If you dont have an account?<Link href="/signup"> Click me!</Link></p>
         </Form>
+      </Col>
       </div>
-    </div>
+      </div>
     )
     }
     export default Login
