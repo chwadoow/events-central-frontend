@@ -1,56 +1,32 @@
-import { Col,  Row } from "antd";
+
 import Link from "next/link";
-// import NextImage from "next/image";
-// import img from "../public/redd-qMFSP1xYVTQ-unsplash.jpg";
-import styles from '../styles/HomePage.module.css'
+import { Col, Card, Row } from "antd";
 
-
-
-import { EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
-import { Avatar, Card } from 'antd';
-
-const { Meta } = Card;
 const HomePageEvents = ({events}) => {
-// console.log(events)
+  var date = new Date()
+  var currentDate = date.getTime()
+  const filteredDates = events.filter((event)=> 
+     (parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) > 0)
+    )
+
 return (
     <Row>
       <Col span={24}>
         <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 10, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
-          {events.map((event) => {
+          {filteredDates.map((event) => {
               return (
                 <>
                   <Link href={`/events/${event.id}`}>
                     <div>
-      <Card
-      className={styles.tag}
-    style={{
-      width: 200,
-   
-      
-      
-    }}
-    cover={
-      <img
-        alt="example"
-        src={event.banner_img}
-      />
-    }
-    // actions={[
-    //   <SettingOutlined key="setting" />,
-    //   <EditOutlined key="edit" />,
-    //   <EllipsisOutlined key="ellipsis" />,
-    // ]}
-  >
-    {event.id}
-    <Meta
-      // avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-      title={event.title}
-      description= {event.location}
-    />
-   
-    {event.event_date}
-    
-  </Card>
+
+                      <Card style={{ textAlign: "center", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}
+                        cover={<img alt="example" src={event.image_url1} />}>
+                      <p><b>{event.title}</b></p>
+                      <p><b>{event.location}</b></p>
+                      <p><b>{event.event_date}</b></p>
+                      <p><b>{parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</b></p>
+                      </Card>
+
                     </div>
                   </Link>
                   &nbsp;
