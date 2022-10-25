@@ -1,7 +1,7 @@
-import { Button, Cascader, DatePicker, Form, Input, InputNumber, Radio, Select, Switch, TreeSelect } from 'antd';
+import { Button, Form, Input, Radio } from 'antd';
 import React, { useState } from 'react';
 
-  const BuyTicketForm = () => {
+  const BuyTicketForm = ({loading, onClick}) => {
     const [componentSize, setComponentSize] = useState('default');
     const onFormLayoutChange = ({ size }) => {
       setComponentSize(size);
@@ -29,58 +29,21 @@ import React, { useState } from 'react';
             <Radio.Button value="large">Large</Radio.Button>
           </Radio.Group>
         </Form.Item>
-        <Form.Item label="Input">
+        <Form.Item label="Regular">
           <Input />
         </Form.Item>
-        <Form.Item label="Select">
-          <Select>
-            <Select.Option value="demo">Demo</Select.Option>
-          </Select>
+        <Form.Item label="Amount">
+          <Input />
         </Form.Item>
-        <Form.Item label="TreeSelect">
-          <TreeSelect
-            treeData={[
-              {
-                title: 'Light',
-                value: 'light',
-                children: [
-                  {
-                    title: 'Bamboo',
-                    value: 'bamboo',
-                  },
-                ],
-              },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item label="Cascader">
-          <Cascader
-            options={[
-              {
-                value: 'zhejiang',
-                label: 'Zhejiang',
-                children: [
-                  {
-                    value: 'hangzhou',
-                    label: 'Hangzhou',
-                  },
-                ],
-              },
-            ]}
-          />
-        </Form.Item>
-        <Form.Item label="DatePicker">
-          <DatePicker />
-        </Form.Item>
-        <Form.Item label="InputNumber">
-          <InputNumber />
-        </Form.Item>
-        <Form.Item label="Switch" valuePropName="checked">
-          <Switch />
+        <Form.Item label="Mobile no">
+          <Input />
         </Form.Item>
         <Form.Item >
-          <Button>Submit</Button>
+            <Button type="primary" htmlType="submit" loading={loading} onClick={onClick}>
+            Submit
+            </Button>
         </Form.Item>
+
       </Form>
     );
   };

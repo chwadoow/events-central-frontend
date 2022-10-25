@@ -100,16 +100,9 @@ const SpecificEvent = () => {
                     onOk={handleOk}
                     confirmLoading={confirmLoading}
                     onCancel={handleCancel}
-                    footer={[
-                      <Button key="back" onClick={handleCancel}>
-                        Cancel
-                      </Button>,
-                      <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOk}>
-                        Submit
-                      </Button>
-                    ]}
+                    footer="Bomboclat Events"
                   >
-                    <BuyTicketForm />
+                    <BuyTicketForm loading={confirmLoading} onClick={handleOk}/>
                   </Modal>
                 </div>
               </Row>
