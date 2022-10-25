@@ -11,12 +11,69 @@ import {
   Switch,
   TreeSelect,
 } from 'antd';
-import React, { useState } from 'react';
-const App = () => {
-  const [componentSize, setComponentSize] = useState('large');
-  const onFormLayoutChange = ({ size }) => {
-    setComponentSize(size);
-  };
+import  { useState } from 'react';
+
+const event= () => {
+  const [FormEvent, setFormEvent] = useState({
+      event_date: '',
+      event_time: '',
+      early_booking_end_date: '',
+      early_booking_end_time: '',
+      early_booking_price_regular: '',
+      early_booking_price_vip: '',
+      location: '',
+      regular_price: '',
+      vip_price: '',
+      vip_no_of_tickets: '',
+      regular_no_of_tickets: '',
+      banner_img: '',
+      description:'',
+      image_url1:'',
+      image_url2:'',
+
+        })
+        // fetch('http://127.0.0.1:3000', {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-Type': 'application/json',
+        //   },
+        //   body: JSON.stringify(objectWithData),
+        // })
+
+        setEventData({
+          event_date: '',
+          event_time: '',
+          early_booking_end_date: '',
+          early_booking_end_time: '',
+          early_booking_price_regular: '',
+          early_booking_price_vip: '',
+          location: '',
+          regular_price: '',
+          vip_price: '',
+          vip_no_of_tickets: '',
+          regular_no_of_tickets: '',
+          banner_img: '',
+          description:'',
+          image_url1:'',
+          image_url2:'',
+    
+        })
+    }
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+
+  
   return (
     <div className='create'>
     <Form
@@ -37,8 +94,17 @@ const App = () => {
       <Form.Item label="Event Name">
         <Input />
       </Form.Item>
-      <Form.Item label="category_id">
-        <Input />
+      <Form.Item label="category">
+      <Select>
+      <Select.Option value="demo">Music</Select.Option>
+      <Select.Option value="demo">Business</Select.Option>
+      <Select.Option value="demo">Games</Select.Option>
+      <Select.Option value="demo">Hobbies</Select.Option>
+      <Select.Option value="demo">Food & Drink</Select.Option>
+      <Select.Option value="demo">Performing Arts</Select.Option>
+      <Select.Option value="demo">Sciences</Select.Option>
+      <Select.Option value="demo">Sport & Fitness</Select.Option>
+    </Select>
       </Form.Item>
       <Form.Item label="title">
         <Input />
@@ -47,27 +113,8 @@ const App = () => {
         <Input />
       </Form.Item>
       <Form.Item label="early_booking_end_date">
-        <Select>
-          <Select.Option value="demo">Art ant Theatre</Select.Option>
-          <Select.Option value="demo">Sports</Select.Option>
-        </Select>
       </Form.Item>
-      {/* <Form.Item label="TreeSelect">
-        <TreeSelect
-          treeData={[
-            {
-              title: 'Light',
-              value: 'light',
-              children: [
-                {
-                  title: 'Bamboo',
-                  value: 'bamboo',
-                },
-              ],
-            },
-          ]}
-        />
-      </Form.Item> */}
+   
      
       <Form.Item label="Event Starting date">
         <DatePicker />
@@ -90,15 +137,33 @@ const App = () => {
           <Select.Option value="demo">vip</Select.Option>
         </Select>
       </Form.Item>
+      <Form.Item label="banner_img">
+      <Input />
+      </Form.Item>
+
+      <Form.Item label="description">
+      <Input />
+      </Form.Item>
+
+
+      <Form.Item label="image_url1">
+      <Input />
+      </Form.Item>
+      
       
       <Form.Item label="Submit">
-        <Button>Button</Button>
+        <Button type="Submit">
+        </Button>
       </Form.Item>
     </Form>
+
+
+      
+    
 
     
    </div>
   );
-};
+
 export default App;
 
