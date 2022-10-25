@@ -11,7 +11,7 @@ import { Avatar, Card } from 'antd';
 
 const { Meta } = Card;
 const HomePageEvents = ({events}) => {
-console.log(events)
+// console.log(events)
 return (
     <Row>
       <Col span={24}>
@@ -25,7 +25,7 @@ return (
       className={styles.tag}
     style={{
       width: 200,
-     
+   
       
       
     }}
