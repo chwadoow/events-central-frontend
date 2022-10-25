@@ -2,11 +2,19 @@ import { Button, Form, Input, Radio } from 'antd';
 import React, { useState } from 'react';
 
   const BuyTicketForm = ({loading, onClick, event}) => {
+    const [vipTickets, setVipTickets] = useState(0)
+    const [regularTickets, setRegularTickets] = useState(0)
+    const [totalAmount, setTotalAmount] = useState(0)
     const [componentSize, setComponentSize] = useState('default');
     const onFormLayoutChange = ({ size }) => {
       setComponentSize(size);
     };
+    var date = new Date()
+    var currentDate = date.getTime()
+    const conditionedPricingVIP = parseInt(((new Date(`${event.early_booking_end_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) > 0 ? event.early_booking_price_vip: event.vip_price
 
+    const conditionedPricingRegular = parseInt(((new Date(`${event.early_booking_end_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) > 0 ? event.early_booking_price_regular: event.regular_price
+    
     return (
       <Form
         labelCol={{
@@ -34,8 +42,8 @@ import React, { useState } from 'react';
           <Form.Item label={event.vip_no_of_tickets}>
           </Form.Item>
         <Form.Item label="Price">
-        <Form.Item label={event.early_booking_price_vip}>
-          <Input  type="number" placeholder="book vip seat"/>
+        <Form.Item label={conditionedPricingVIP}>
+          <Input  type="number" placeholder="book vip seat" onChange={(event)=> setVipTickets(event.target.value)}/>
           </Form.Item>
           </Form.Item>
         </Form.Item>
@@ -44,13 +52,13 @@ import React, { useState } from 'react';
         <Form.Item label={event.regular_no_of_tickets}>
           </Form.Item>
           <Form.Item label="Price">
-        <Form.Item label={event.early_booking_price_regular}>
-          <Input placeholder="booked regular number of seats " type="number"/>
+        <Form.Item label={conditionedPricingRegular}>
+          <Input placeholder="booked regular number of seats " type="number" onChange={(event)=> setRegularTickets(event.target.value)}/>
           </Form.Item>
           </Form.Item>
         </Form.Item>
         <Form.Item label="Amount">
-          <Input placeholder="Total Amount" type="number"/>
+          <Input type="number" value={totalAmount}/>
           </Form.Item>
         <Form.Item label="Mobile no">
           <Input placeholder="phone number"/>
