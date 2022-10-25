@@ -32,13 +32,13 @@ const event= ({handlePosting}) => {
       image_url2:'',
 
         })
-        fetch('/api/route-name', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify(objectWithData),
-})
+        fetch('http://127.0.0.1:3000', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(objectWithData),
+        })
 
         setEventData({
           event_date: '',
@@ -68,7 +68,7 @@ const event= ({handlePosting}) => {
 
 
 
-  })
+  
 
   
   
@@ -114,22 +114,7 @@ const event= ({handlePosting}) => {
       </Form.Item>
       <Form.Item label="early_booking_end_date">
       </Form.Item>
-      {/* <Form.Item label="TreeSelect">
-        <TreeSelect
-          treeData={[
-            {
-              title: 'Light',
-              value: 'light',
-              children: [
-                {
-                  title: 'Bamboo',
-                  value: 'bamboo',
-                },
-              ],
-            },
-          ]}
-        />
-      </Form.Item> */}
+   
      
       <Form.Item label="Event Starting date">
         <DatePicker />
@@ -167,7 +152,8 @@ const event= ({handlePosting}) => {
       
       
       <Form.Item label="Submit">
-        <Button>Button</Button>
+        <Button type="Submit">
+        </Button>
       </Form.Item>
     </Form>
 
