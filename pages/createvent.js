@@ -17,6 +17,23 @@ const App = () => {
   const onFormLayoutChange = ({ size }) => {
     setComponentSize(size);
   };
+  const updateEvent = () => {
+    setEvent(previousState => {
+      return { ...previousState, color: "blue" }
+    });
+  }
+
+  function eventtime () {
+    const [eventtime, seteventtime] = useState();
+  
+    useEffect(() => {
+      setStartingTime(() => {
+        setEndingtime((eventtime) => eventtime + 1);
+      }, 1000);
+    });
+  
+
+  const [regular_price,setregular_price]=useState("large")
   return (
     <div className='create'>
     <Form
