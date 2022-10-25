@@ -1,76 +1,148 @@
 import Link from "next/link"
 import { Form, Input, Button, Checkbox } from 'antd';
-import React, {useRef} from 'react';
+import React, {useState} from 'react';
 import { useRouter } from "next/router";
 
 
-function SignUp(){
+function SignUp({setLogin}){
     
   // setting states
-  const router = useRouter();
-  const usernameInput = useRef();
-  const passwordInput = useRef();
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
 
-  //defining the handle submit function 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const username = usernameInput.current.value;
-    const password = passwordInput.current.value;
-
-    //the users table in the backend has a create action that will act as a sign up 
-    const response = await fetch("/users", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, password }) 
+  //defining onclick function 
+  const handleChange = (e) => { 
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
     });
-
-    if (response.ok) {
-      return router.push("/login");
-    }
   };
 
+  // const handleCheckbox = (e) => {
+  //   console.log(e.target.value)
+  // }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+    const userCreds = { ...formData };
+
+    fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userCreds),
+    })
+    .then((r) => r.json())
+    .then(setLogin);
+    // .then((res) => {
+    //   if (res.ok) {
+    //     res.json()
+    //     .then(
+    //       (user) => {
+    //       setCurrentUser(user);
+    //     }
+    //     );
+    //   } else {
+    //     res.json().then((errors) => {
+    //       console.error(errors);
+    //     });
+    //   }
+    // });
+  }
 
     return (
         <> 
+        {/* <form onSubmit={handleSubmit}>
+      <label htmlFor="username">Username:</label>
+      <input
+        id="username-signup-input"
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+      />
+      <label htmlFor="email">Email:</label>
+      <input
+        id="email-signup-input"
+        type="text"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <label htmlFor="password">Password:</label>
+      <input
+        id="password-signup-input"
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      <button type="submit">Submit</button>
+    </form> */}
+
        <div className="login-page">
       <div className="login-box">
         <div className="illustration-wrapper">
           <img src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700" alt="Login"/>
         </div>
         <Form
-          onSubmit={handleSubmit} 
           name="login-form"
         >
           <p className="form-title">SIGN UP </p>
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
-            
+            rules={[{message: 'Please input your username!' }]} 
           >
             <Input
-              placeholder="Username"
-              ref={usernameInput}
+        id="username-signup-input"
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+      />
+          </Form.Item>
+
+          <Form.Item
+            name="email" 
+            rules={[{  message: 'Please input your email address!' }]}   
+          >
+            <Input
+              type="text"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
             />
           </Form.Item>
 
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
-            
+            rules={[{  message: 'Please input your password!' }]} 
           >
-            <Input.Password 
-              placeholder="Password"
-              ref={passwordInput} 
+            <Input.Password
+              id="password-signup-input"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
             />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+          {/* <Form.Item 
+          onChange={handleCheckbox} 
+          name="isAccepted"
+          valuePropName="checked">
+          <Checkbox>Organizer</Checkbox>
+          </Form.Item> */}
 
           <Form.Item>
-            <Button  htmlType="submit" className="login-form-button">
+            <Button  
+               onClick={handleSubmit} 
+              type="submit" className="login-form-button">
               SIGN UP 
             </Button>
           </Form.Item>
