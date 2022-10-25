@@ -12,6 +12,17 @@ function userprofile() {
       <Form.Item label="avatar_img">
         <Input />
       </Form.Item>
+      <Form.Item label="phone_number">
+        <Input />
+      </Form.Item>
+      <Form.Item label="bio">
+        <Input />
+      </Form.Item>
+      <Form.Item label="gender">
+        <Input />
+      </Form.Item>
+
+      
       </div>
     
   )
