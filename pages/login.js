@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Col, Row, Form, Input, Button, Checkbox } from 'antd';
 import React, { useState } from "react";
 import {router} from "next/router"
 
@@ -43,14 +43,16 @@ function Login(){
   };
 
 
-    return (
-        <div className="login-page">
-      <div className="login-box">
-        <div className="illustration-wrapper">
+    return <Row>
+      <Col xs={24} md={12}>
+      <div className="illustration-wrapper">
           <img src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700" alt="Login"/>
         </div>
-        <Form
-          
+        
+      </Col>
+
+      <Col xs={24} md={12}>
+      <Form 
           name="login-form"
         >
           <p className="form-title">LOG IN</p>
@@ -82,7 +84,7 @@ function Login(){
 
           <Form.Item>
             <Button  
-             onSubmit={handleSubmit}
+             onClick={handleSubmit}
              type="submit"
             // htmlType="submit" 
             className="login-form-button">
@@ -91,8 +93,7 @@ function Login(){
           </Form.Item>
           <p>Dont have an account?<Link href="/signup">Sign Up</Link></p>
         </Form>
-      </div>
-    </div>
-    )
+      </Col>
+    </Row>
     }
     export default Login

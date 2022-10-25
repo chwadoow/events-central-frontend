@@ -4,7 +4,7 @@ import React, {useState} from 'react';
 import { useRouter } from "next/router";
 
 
-function SignUp(){
+function SignUp({setLogin}){
     
   // setting states
   const [formData, setFormData] = useState({
@@ -20,6 +20,11 @@ function SignUp(){
       [e.target.name]: e.target.value,
     });
   };
+
+  // const handleCheckbox = (e) => {
+  //   console.log(e.target.value)
+  // }
+
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -31,23 +36,55 @@ function SignUp(){
         "Content-Type": "application/json",
       },
       body: JSON.stringify(userCreds),
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then(
-          (user) => {
-          setCurrentUser(user);
-        }
-        );
-      } else {
-        res.json().then((errors) => {
-          console.error(errors);
-        });
-      }
-    });
+    })
+    .then((r) => r.json())
+    .then(setLogin);
+    // .then((res) => {
+    //   if (res.ok) {
+    //     res.json()
+    //     .then(
+    //       (user) => {
+    //       setCurrentUser(user);
+    //     }
+    //     );
+    //   } else {
+    //     res.json().then((errors) => {
+    //       console.error(errors);
+    //     });
+    //   }
+    // });
   }
 
     return (
         <> 
+        {/* <form onSubmit={handleSubmit}>
+      <label htmlFor="username">Username:</label>
+      <input
+        id="username-signup-input"
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+      />
+      <label htmlFor="email">Email:</label>
+      <input
+        id="email-signup-input"
+        type="text"
+        name="email"
+        value={formData.email}
+        onChange={handleChange}
+      />
+      <label htmlFor="password">Password:</label>
+      <input
+        id="password-signup-input"
+        type="password"
+        name="password"
+        value={formData.password}
+        onChange={handleChange}
+      />
+      <button type="submit">Submit</button>
+    </form> */}
+
        <div className="login-page">
       <div className="login-box">
         <div className="illustration-wrapper">
@@ -59,40 +96,48 @@ function SignUp(){
           <p className="form-title">SIGN UP </p>
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Please input your username!' }]}
-            
+            rules={[{message: 'Please input your username!' }]} 
           >
             <Input
-              placeholder="Username" 
+        id="username-signup-input"
+        type="text"
+        name="username"
+        value={formData.username}
+        onChange={handleChange}
+      />
+          </Form.Item>
+
+          <Form.Item
+            name="email" 
+            rules={[{  message: 'Please input your email address!' }]}   
+          >
+            <Input
+              type="text"
+              name="email"
+              value={formData.email}
               onChange={handleChange}
             />
           </Form.Item>
 
           <Form.Item
-            name="email" 
-            rules={[{ required: true, message: 'Please input your email address!' }]} 
-            
-          >
-            <Input
-              placeholder="Email Address" 
-              onChange={handleChange} 
-            />
-          </Form.Item>
-
-          <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input your password!' }]}
-            
+            rules={[{  message: 'Please input your password!' }]} 
           >
-            <Input.Password 
-              placeholder="Password"
-              onChange={handleChange}  
+            <Input.Password
+              id="password-signup-input"
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
             />
           </Form.Item>
 
-          <Form.Item name="remember" valuePropName="checked">
-            <Checkbox>Remember me</Checkbox>
-          </Form.Item>
+          {/* <Form.Item 
+          onChange={handleCheckbox} 
+          name="isAccepted"
+          valuePropName="checked">
+          <Checkbox>Organizer</Checkbox>
+          </Form.Item> */}
 
           <Form.Item>
             <Button  
