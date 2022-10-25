@@ -29,51 +29,9 @@ const event= () => {
       banner_img: '',
       description:'',
       image_url1:'',
-      image_url2:'',
+      image_url2:''
+    })
 
-        })
-        // fetch('http://127.0.0.1:3000', {
-        //   method: 'POST',
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        //   body: JSON.stringify(objectWithData),
-        // })
-
-        setEventData({
-          event_date: '',
-          event_time: '',
-          early_booking_end_date: '',
-          early_booking_end_time: '',
-          early_booking_price_regular: '',
-          early_booking_price_vip: '',
-          location: '',
-          regular_price: '',
-          vip_price: '',
-          vip_no_of_tickets: '',
-          regular_no_of_tickets: '',
-          banner_img: '',
-          description:'',
-          image_url1:'',
-          image_url2:'',
-    
-        })
-    }
-
-
-
-
-
-
-
-
-
-  
-
-  
-  
-
-  
   return (
     <div className='create'>
     <Form
@@ -83,12 +41,7 @@ const event= () => {
       wrapperCol={{
         span: 14,
       }}
-      layout="horizontal"
-      initialValues={{
-        size: componentSize,
-      }}
-      onValuesChange={onFormLayoutChange}
-      size={componentSize}
+     
     >
      
       <Form.Item label="Event Name">
@@ -156,14 +109,10 @@ const event= () => {
         </Button>
       </Form.Item>
     </Form>
-
-
-      
-    
-
     
    </div>
-  );
+  )
+}
 
-export default App;
+export default event;
 
