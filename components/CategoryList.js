@@ -8,7 +8,7 @@ return (
         <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 10, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
           {events.map((event) => {
               return (
-                <>
+                <div key={event.id}>
                   <Link href={`/eventcategories/${event.id}`}>
                     <div style={{ textAlign: "center", border: 1, borderStyle: "solid", width: 280, height: 50, padding: 2, cursor: "pointer", borderRadius: 10}}>
                       <p style={{marginTop: 10}}><b>{event.category}</b></p>
@@ -16,7 +16,7 @@ return (
                   </Link>
                   &nbsp;
                   &nbsp;
-                </>
+                </div>
               );
           })}
         </div>
