@@ -50,10 +50,7 @@ const App = () => {
     </Select>
       </Form.Item>
       <Form.Item label="title">
-      <Select>
-      
-    </Select>
-        
+        <Input />
       </Form.Item>
       <Form.Item label="event_date">
         <Input />
@@ -101,6 +98,11 @@ const App = () => {
       <Form.Item label="banner_img">
       <Input />
       </Form.Item>
+
+      <Form.Item label="image_url1">
+      <Input />
+      </Form.Item>
+      
       
       <Form.Item label="Submit">
         <Button>Button</Button>
