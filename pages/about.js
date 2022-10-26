@@ -16,13 +16,13 @@ const about  = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`/community`)
+    fetch(`http://localhost:3000/communities`)
     .then(r => r.json())
     .then(data => setCommunityData(data))
   }, []);
 
   useEffect(() => {
-    fetch(`/aboutus`)
+    fetch(`http://localhost:3000/abouts`)
     .then(r => r.json())
     .then(data => setAboutUsData(data))
   }, []);
@@ -58,8 +58,8 @@ const about  = () => {
           <Col span={12}>
             <Row justify="center" align="middle">
               <img 
-                src={aboutUsData[randomIndexAbout]?.image_url}
-                alt={aboutUsData[randomIndexAbout]?.title}
+                src={aboutUsData[randomIndexAbout]?.about_img}
+                alt={aboutUsData[randomIndexAbout]?.id}
                 style={{
                   width: "70%",
                   height: "405px",
@@ -72,7 +72,7 @@ const about  = () => {
           </Col>
           <Col span={12}>
             <Row justify='center' align='middle'>
-              <p>{aboutUsData[randomIndexAbout]?.description}</p>
+              <p>{aboutUsData[randomIndexAbout]?.about_description}</p>
 
               <br />
 
@@ -105,8 +105,8 @@ const about  = () => {
           <Col span={12}>
             <Row justify="center" align="middle">
               <img 
-              src={communityData[randomIndexCommunity]?.image_url}
-              alt={communityData[randomIndexCommunity]?.title}
+              src={communityData[randomIndexCommunity]?.community_img}
+              alt={communityData[randomIndexCommunity]?.id}
               style={{
                 width: "70%",
                 height: "405px",
@@ -119,7 +119,7 @@ const about  = () => {
           </Col>
           <Col span={12}>
             <Row justify='center' align='middle'>
-              <p>{communityData[randomIndexCommunity]?.description}</p>
+              <p>{communityData[randomIndexCommunity]?.community_description}</p>
 
               <br />
 
