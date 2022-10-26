@@ -5,7 +5,7 @@ function CategoryList({events}){
 return (
     <Row>
       <Col span={24}>
-        <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 10, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
+        <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 20, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
           {events.map((event) => {
               return (
                 <div key={event.id}>

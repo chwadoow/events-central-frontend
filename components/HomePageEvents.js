@@ -26,6 +26,7 @@ return (
                           height: 350, 
                           padding: 2, 
                           cursor: "pointer",
+                          border: "0.5px solid"
                           }}
 
                           cover={<img alt={event.title} src={event.image_url1} height="100px"/>}
