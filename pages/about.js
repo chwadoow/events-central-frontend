@@ -51,7 +51,7 @@ const about  = () => {
           </div>
         </Col>
       </Col>
-
+      
       <Col span={24}>
         <Row justify='center' align='middle'>
           <Col span={12}>
