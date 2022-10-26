@@ -11,10 +11,27 @@ import React, { useState } from 'react';
     };
     var date = new Date()
     var currentDate = date.getTime()
+    
     const conditionedPricingVIP = parseInt(((new Date(`${event.early_booking_end_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) > 0 ? event.early_booking_price_vip: event.vip_price
 
     const conditionedPricingRegular = parseInt(((new Date(`${event.early_booking_end_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) > 0 ? event.early_booking_price_regular: event.regular_price
+
+    function handleChange(event){
+      console.log(event.target.value)
+      setTotalAmount((vipTickets * conditionedPricingVIP) + (regularTickets * conditionedPricingRegular))
+    }
+    console.log(event.tickets)
+    const vipTicketCount = event.tickets.reduce((previouseTicketCount, currentTicketCount) => previouseTicketCount + currentTicketCount.number_of_vip_tickets,0);
+
+    const regularTicketCount = event.tickets.reduce((previouseTicketCount, currentTicketCount) => previouseTicketCount + currentTicketCount.number_of_regular_tickets,0);
+
     
+    console.log(vipTicketCount)
+
+    console.log(regularTicketCount)
+
+
+
     return (
       <Form
         labelCol={{
@@ -37,13 +54,17 @@ import React, { useState } from 'react';
             <Radio.Button value="large">Large</Radio.Button>
           </Radio.Group>
         </Form.Item>
+        <Form.Item label="Ticket No:">
+        <label>Yet to Input</label>
+          </Form.Item>
         <Form.Item label="VIP">
         <label>Tickets Remaining</label>
           <Form.Item label={event.vip_no_of_tickets}>
           </Form.Item>
         <Form.Item label="Price">
         <Form.Item label={conditionedPricingVIP}>
-          <Input  type="number" placeholder="book vip seat" onChange={(event)=> setVipTickets(event.target.value)}/>
+          <Input  type="number" placeholder="book vip seat" onChange={handleChange}/>
+          {/* // onChange={(event)=> setVipTickets(event.target.value)} */}
           </Form.Item>
           </Form.Item>
         </Form.Item>
@@ -53,7 +74,8 @@ import React, { useState } from 'react';
           </Form.Item>
           <Form.Item label="Price">
         <Form.Item label={conditionedPricingRegular}>
-          <Input placeholder="booked regular number of seats " type="number" onChange={(event)=> setRegularTickets(event.target.value)}/>
+          <Input placeholder="booked regular number of seats " type="number" onChange={handleChange}/>
+          {/* //  onChange={(event)=> setRegularTickets(event.target.value)} */}
           </Form.Item>
           </Form.Item>
         </Form.Item>
