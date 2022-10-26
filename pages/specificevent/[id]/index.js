@@ -26,7 +26,6 @@ const SpecificEvent = () => {
       setConfirmLoading(false);
     }, 500);
   };
-  console.log(event)
 
   const handleCancel = () => {
     setOpen(false);

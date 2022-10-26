@@ -1,30 +1,105 @@
-import { Image } from 'antd';
-import React, { useState } from 'react';
+import { Col, Row } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 const about  = () => {
-  const [visible, setVisible] = useState(false);
+  const [communityData, setCommunityData] = useState([]);
+  const [aboutUsData, setAboutUsData] = useState([]);
+  const [randomIndexCommunity, setRandomIndex] = useState();
+  const [randomIndexAbout, setRandomIndexAbout] = useState();
+
+  useEffect(() => {
+    changeCommunityImage()
+  }, []);
+
+  useEffect(() => {
+    changeAboutImage()
+  }, []);
+
+  useEffect(() => {
+    fetch(`/community`)
+    .then(r => r.json())
+    .then(data => setCommunityData(data))
+  }, []);
+
+  useEffect(() => {
+    fetch(`/aboutus`)
+    .then(r => r.json())
+    .then(data => setAboutUsData(data))
+  }, []);
+
+  function changeAboutImage(){
+    const randomNumber = Math.floor(Math.random() * aboutUsData.length);
+    setRandomIndexAbout(randomNumber)
+  }
+
+  function changeCommunityImage(){
+    const randomNumber = Math.floor(Math.random() * communityData.length);
+    setRandomIndex(randomNumber)
+  }
 
   return (
-    <div>
-    <h1>Who we are</h1>
-    <p>Bringing the World together through live experience</p>
-    <p1>Thunder tick is a global self-service ticketing platform for live experiences that allows anyone to create, share, find and attend events that fuel their passions and enrich their lives. From music festivals, marathons, conferences, community rallies, and fundraisers, to gaming competitions and air guitar contests. Our mission is to bring the world together through live experiences.</p1>
-      <Image
-        preview={{ visible: false }}
-        width={200}
-        src="https://i.pinimg.com/564x/8e/34/f2/8e34f26b587a5a8a291ca3c7511d8d63.jpg"
-        onClick={() => setVisible(true)}
-      />
-      <div style={{ display: 'none' }}>
-        <Image.PreviewGroup preview={{ visible, onVisibleChange: vis => setVisible(vis) }}>
-          <Image src="" />
-          <Image src="https://i.pinimg.com/564x/58/ae/36/58ae361361ebfd70e91391ccff2cfd85.jpg" />
-          <Image src="https://i.pinimg.com/564x/8c/da/fc/8cdafc67418faf8b9993e830cbc8c6fb.jpg" />
-        </Image.PreviewGroup>
-      </div>
-      </div>
-    
+    <Row justify='center' align='middle'>
+      <Col span={24}>
+        <Col span={12}>
+          <br />
+          <div style={{
+            display: "flex", justifyContent: "center", alignItems: "center", fontSize: 30, fontFamily: "nunito", fontWeight: "bolder"
+            }}>
+              <p>
+                About Us
+              </p>
+          </div>
+        </Col>
+      </Col>
+
+      <Col span={24}>
+        <Row justify='center' align='middle'>
+          <Col span={12}>
+            <Row justify="center" align="middle">
+              <img 
+                src="https://p4.wallpaperbetter.com/wallpaper/326/156/986/mobile-legends-hanzo-akuma-ninja-hd-wallpaper-preview.jpg"
+                alt="Tech"
+                style={{
+                  width: "70%",
+                  height: "405px",
+                  display: "block",
+                  padding: 10,
+                  borderRadius: 20
+                }}
+              />
+            </Row>
+          </Col>
+          <Col span={12}>
+            description
+          </Col>
+        </Row>
+      </Col>
+
+      <Col span={24}>
+        <Row justify='center' align='middle'>
+          <Col span={12}>
+            <Row justify="center" align="middle">
+              <img 
+              src="https://p4.wallpaperbetter.com/wallpaper/326/156/986/mobile-legends-hanzo-akuma-ninja-hd-wallpaper-preview.jpg"
+              alt="Tech"
+              style={{
+                width: "70%",
+                height: "405px",
+                display: "block",
+                padding: 10,
+                borderRadius: 20
+              }}
+              />
+            </Row>
+          </Col>
+          <Col span={12}>
+            description
+          </Col>
+        </Row>
+      </Col>
+
+    </Row>
   );
 };
 
-export default about
+export default about;
