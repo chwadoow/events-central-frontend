@@ -26,12 +26,10 @@ return (
                           height: 350, 
                           padding: 2, 
                           cursor: "pointer",
-                          boxShadow: "5px 5px 5px #d1410a",
-                          
                           }}
 
                           cover={<img alt={event.title} src={event.image_url1} height="100px"/>}
-                          bordered={true}
+                          hoverable
                         >
                           <div>
                             <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
