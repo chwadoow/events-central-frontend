@@ -26,14 +26,13 @@ const SpecificEvent = () => {
       setConfirmLoading(false);
     }, 500);
   };
-  console.log(event)
 
   const handleCancel = () => {
     setOpen(false);
   };
 
   return (
-    <Row>
+    <Row justify="center" align="middle">
       <Col span={24}>
         <img 
         src={event.banner_img}
@@ -47,7 +46,7 @@ const SpecificEvent = () => {
       </Col>
 
       <br />
-
+      
       <Col span={24}>
         <Row>
           <Col span={12}>
@@ -55,17 +54,7 @@ const SpecificEvent = () => {
               <h1 style={{fontWeight: "bolder", fontFamily: "nunito", fontSize: 60}}>{event.title}</h1>
             </div>    
           </Col>
-          <Col span={12}>
-            <br />
-            <div style={{textAlign: "center", width: "100%" }}>
-              <Row justify="center" align="middle" style={{marginTop: 30}}>
-                <div style={{ border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
-                  <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
-                  <p>{parseInt(((new Date(`${event.early_booking_end_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</p>
-                </div>
-              </Row>
-            </div>
-          </Col>
+          
         </Row>
       </Col>
 
@@ -89,6 +78,34 @@ const SpecificEvent = () => {
               </Col>
             </Row>
           </Col>
+
+          <Col span={12}>
+            <br />
+            <div style={{textAlign: "center", width: "100%" }}>
+              <Row justify="center" align="middle" style={{marginTop: 30}}>
+                <div style={{ border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
+                  <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
+                  <p>{parseInt(((new Date(`${event.early_booking_end_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</p>
+                </div>
+              </Row>
+            </div>
+          </Col>
+        </Row>
+      </Col>
+
+      <br />
+
+      <Col span={24}>
+        <br />
+        <Row>
+          <Col span={12}>
+            <div style={{textAlign: "center", marginLeft: 40, width: "100%", fontFamily: "nunito"}}>
+              <h2 style={{fontWeight: "bold", fontSize: 30}}>Event Details</h2>
+              <br />
+              <p>{event.description}</p>
+            </div>
+          </Col>
+
           <Col span={12}>
           <div style={{textAlign: "center", width: "100%" }}>
               <Row justify="center" align="middle">
@@ -113,55 +130,55 @@ const SpecificEvent = () => {
                 </div>
               </Row>
             </div>
-          </Col>
+          </Col>   
         </Row>
       </Col>
-
-      <br />
-
-      <Col span={24}>
-        <br />
-        <Row>
-          <Col span={12}>
-            <div style={{textAlign: "center", width: "100%", fontFamily: "nunito"}}>
-              <h2 style={{fontWeight: "bold", fontSize: 30}}>Event Details</h2>
-              <br />
-              <p>{event.description}</p>
-            </div>
-          </Col>
-          <Col span={12}>
-          <div style={{display: "inline-flex", fontFamily: "nunito", width: "100%", justifyContent: "center", textAlign: "center"}}>
-            <Row justify="center" align="middle">
-              <Col span={24}>
-                <img 
-                src={event.image_url2}
-                alt="Tech"
-                style={{
-                  width: "100%",
-                  height: "405px",
-                  display: "block"
-                }}
-                />
+      
+      <Row justify="center" align="middle" >
+        <Col span={24}>
+          <Row justify="center" align="middle" >
+            <div style={{ marginRight: 40, marginLeft: 40, borderRadius: 20, gap: 20, justifyContent: "center", display: "inline-flex", flexDirection: 'row' }}>
+              <Col span={12}>
+                <div style={{display: "inline-flex", fontFamily: "nunito", width: "100%", justifyContent: "center", textAlign: "center"}}>
+                  <Row justify="center" align="middle">
+                    <Col >
+                      <img 
+                      src={event.image_url1}
+                      alt="Tech"
+                      style={{
+                        width: "100%",
+                        height: "405px",
+                        display: "block",
+                        paddingTop: 30
+                      }}
+                      />
+                    </Col>
+                  </Row>
+                </div>
               </Col>
-            </Row>
-          </div>
-         </Col>
-        </Row>
-      </Col>
 
-      <Col span={12}>
-        <div style={{width: "100%"}}>
-        <img 
-          src={event.image_url1}
-          alt="Tech"
-          style={{
-            width: "100%",
-            height: "405px",
-            display: "block"
-          }}
-          />
-        </div>
-      </Col>
+              <Col span={12}>
+                <div style={{display: "inline-flex", fontFamily: "nunito", width: "100%", justifyContent: "center", textAlign: "center"}}>
+                  <Row justify="center" align="middle">
+                    <Col >
+                      <img 
+                      src={event.image_url2}
+                      alt="Tech"
+                      style={{
+                        width: "100%",
+                        height: "405px",
+                        display: "block",
+                        paddingTop: 30
+                      }}
+                      />
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+            </div>
+          </Row>
+        </Col>
+      </Row>
 
     </Row>
   )
