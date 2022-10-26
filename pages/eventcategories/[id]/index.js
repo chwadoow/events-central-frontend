@@ -5,7 +5,6 @@ import Link from "next/link";
 
 function event(){
   const [categoryData, setCategoryData] = useState({});
-  const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const {id} = router.query;
@@ -21,8 +20,6 @@ function event(){
     setIsLoading(false)
   })
   },[id])
-
-  console.log(categoryData)
 
   if(isLoading === true) return (
     <Row justify="center" align="middle">
@@ -96,11 +93,13 @@ function event(){
               )
             })
           ) : (
-            <Row justify="center" align="middle">
-              <div>
-                <h1>There are no available events currently</h1>
-              </div>
-            </Row>
+            <Col span={24}>
+              <Row justify="center" align="middle">
+                <div>
+                  <h1>There are no available events currently</h1>
+                </div>
+              </Row>
+            </Col>
           )
           }
           
