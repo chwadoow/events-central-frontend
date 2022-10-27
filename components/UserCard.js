@@ -11,7 +11,7 @@ function  UserCard  ()  {
       style={{
         marginTop: 16,
         width: "100%",
-        boxShadow: "5px 5px 5px #888" 
+        boxShadow: "1px 1px 1px #888" 
       }}
    
     >
@@ -34,7 +34,7 @@ moz
       style={{
         marginTop: 16,
         width: "100%",
-        boxShadow: "5px 5px 5px #888" 
+        boxShadow: "1px 1px 1px #888" 
       }}
    
     >
@@ -57,7 +57,7 @@ style={{ float:"right"}}
       style={{
         marginTop: 16,
         width: "100%",
-        boxShadow: "5px 5px 5px #888" 
+        boxShadow: "1px 1px 1px #888" 
       }}
    
     >
@@ -81,7 +81,7 @@ male
       style={{
         marginTop: 16,
         width: "100%",
-        boxShadow: "5px 5px 5px #888" 
+        boxShadow: "1px 1px 1px #888" 
       }}
    
     >
