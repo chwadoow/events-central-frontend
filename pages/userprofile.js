@@ -2,6 +2,7 @@ import { Col, Row ,Card} from 'antd';
 import { AntDesignOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import {LeftSquareOutlined} from  '@ant-design/icons';
+import UserCard from '../components/UserCard';
 
 function userprofile() {
   return (
@@ -29,7 +30,18 @@ justifyContent:"center"
       }}>
         avatar image
      </Card>
+     
 
+</Row>
+<Row
+style={{width: "100%" ,
+textAlign: "center",
+justifyContent:"center"
+}}> 
+  user username
+</Row>
+<Row>
+  <UserCard/>
 </Row>
 
 </div>
