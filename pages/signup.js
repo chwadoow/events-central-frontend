@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Form, Input, Button, Checkbox } from "antd";
 import React, { useState } from "react";
 import { useRouter } from "next/router";
+import Navbar from "../components/Navbar";
 
 function SignUp({ setLogin }) {
   const [username, setUsername] = useState("")
@@ -20,6 +21,7 @@ function SignUp({ setLogin }) {
   console.log(signData)
   return (
     <>
+    <Navbar/>
       <div className="login-page">
         <div className="login-box">
           <div className="illustration-wrapper">
