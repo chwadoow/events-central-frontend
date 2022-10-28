@@ -146,6 +146,12 @@ const SpecificEvent = () => {
 
           <Col span={12}>
             <Row justify="center" align="middle">
+              <div>
+                <p style={{fontWeight: "bold"}}><i>Allow Pop ups on your browser to add events to calendar</i></p>
+              </div>
+            </Row>
+            <Row justify="center" align="middle">
+              <br />
                 <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
                   <h3 style={{fontWeight: "bold"}}>Add To Calendar</h3>
                   <button
