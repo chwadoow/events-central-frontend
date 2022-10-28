@@ -28,6 +28,7 @@ export default function Home({ categories, events, homebanners }) {
       <Head>
         <title>Bomboclat Events</title>
       </Head>
+      
       <Row >
         <Col span={24}>
           <Carousel 
