@@ -37,7 +37,6 @@ const SpecificEvent = () => {
 
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
-      console.log("loaded client")
 
       gapi.client.init({
         apiKey: API_KEY,
@@ -46,11 +45,10 @@ const SpecificEvent = () => {
         scope: SCOPES
       })
 
-      gapi.client.load('calendar', 'v3', () => console.log('loaded calendar'))
+      gapi.client.load('calendar', 'v3',)
 
       gapi.auth2.getAuthInstance().signIn()
       .then(() => {
-        console.log('signed In')
 
         var event = {
           'summary': eventOne.title,
@@ -73,7 +71,6 @@ const SpecificEvent = () => {
         })
 
         request.execute(event => {
-          console.log("got here")
           window.open(event.htmlLink)
         })
       })
