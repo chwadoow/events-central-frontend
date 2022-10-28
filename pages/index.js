@@ -39,7 +39,8 @@ export default function Home({ categories, events, homebanners }) {
           draggable
           pauseOnHover={true}
           >
-              {homebanners.map((banner) => {
+              
+              {(Array.isArray(homebanners) ? homebanners : []).map((banner) => {
                 return(
                   <>
                     <img 
