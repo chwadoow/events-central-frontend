@@ -28,6 +28,7 @@ export default function Home({ categories, events, homebanners }) {
       <Head>
         <title>Bomboclat Events</title>
       </Head>
+      
       <Row >
         <Col span={24}>
           <Carousel 
@@ -39,7 +40,8 @@ export default function Home({ categories, events, homebanners }) {
           draggable
           pauseOnHover={true}
           >
-              {homebanners.map((banner) => {
+              
+              {(Array.isArray(homebanners) ? homebanners : []).map((banner) => {
                 return(
                   <>
                     <img 

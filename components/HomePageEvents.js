@@ -5,7 +5,8 @@ import { Col, Card, Row } from "antd";
 const HomePageEvents = ({events}) => {
   var date = new Date()
   var currentDate = date.getTime()
-  const filteredDates = events.filter((event)=> 
+  
+  const filteredDates = (Array.isArray(events) ? events : []).filter((event)=> 
      (parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) > 0)
     )
 
@@ -13,7 +14,7 @@ return (
     <Row justify="center" align="middle">
       <Col span={24}>
         <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 20, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
-          {filteredDates.map((event) => {
+          {(Array.isArray(filteredDates) ? filteredDates : []).map((event) => {
               return (
                 <>
                 
@@ -23,13 +24,12 @@ return (
                         <Card style={{ 
                           textAlign: "left", 
                           width: 280, 
-                          height: 350, 
+                          height: 420, 
                           padding: 2, 
                           cursor: "pointer",
-                          border: "0.5px solid"
                           }}
 
-                          cover={<img alt={event.title} src={event.image_url1} height="100px"/>}
+                          cover={<img alt={event.title} src={event.image_url1} height="200px"/>}
                           hoverable
                         >
                           <div>
