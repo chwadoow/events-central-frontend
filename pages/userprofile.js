@@ -1,31 +1,52 @@
-// import React from 'react'
+import { Col, Row ,Card} from 'antd';
+import { AntDesignOutlined } from '@ant-design/icons';
+import { Avatar } from 'antd';
+import {LeftSquareOutlined} from  '@ant-design/icons';
+import UserCard from '../components/UserCard';
 
-// function userprofile() {
-//   return (
-//     <div>userprofile
-//     <Form.Item label="user_id">
-//         <Input />
-//       </Form.Item>
-//       <Form.Item label="full_name">
-//         <Input />
-//       </Form.Item>
-//       <Form.Item label="avatar_img">
-//         <Input />
-//       </Form.Item>
-//       <Form.Item label="phone_number">
-//         <Input />
-//       </Form.Item>
-//       <Form.Item label="bio">
-//         <Input />
-//       </Form.Item>
-//       <Form.Item label="gender">
-//         <Input />
-//       </Form.Item>
+function userprofile() {
+  return (
+  <div
+  style={{width: "100%" ,
+  textAlign: "center",
+  }}
+  >
 
-      
-//       </div>
+
+
+  
+<Row 
+style={{width: "100%" ,
+textAlign: "center",
+justifyContent:"center"
+}}> 
+ <Card
+    hoverable
+    style={{
+      background: "grey",
+      borderRadius: "50%",
+      width: "100px",
+      height: "100px",
+      }}>
+        avatar image
+     </Card>
+     
+
+</Row>
+<Row
+style={{width: "100%" ,
+textAlign: "center",
+justifyContent:"center"
+}}> 
+  user username
+</Row>
+<Row>
+  <UserCard/>
+</Row>
+
+</div>
     
-//   )
-// }
+  )
+}
 
-// export default userprofile
+export default userprofile
