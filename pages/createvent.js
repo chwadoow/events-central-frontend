@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Checkbox, Form, Input, Row, Col } from 'antd';
+import image from "next/image";
 
 
 
@@ -8,7 +9,7 @@ function text() {
         <div style={{ maxWidth: '5000px', margin: 'auto' }}>
             <Row gutter={[78, 40]} align="middle" justify='space-around'>
                 <Col span={12}>
-                    <img src="https://cdn.evbstatic.com/s3-build/fe/build/images/baedf009bb329458ae80eb599fb8a4d5-3_tablet_1067x470.jpg" alt="" style={{ width: '300px' }} />
+                    <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" style={{ width: '300px' }} />
                 </Col>
                 <Col span={12}>
                     <Form
