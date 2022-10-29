@@ -3,8 +3,32 @@ import {Button,Cascader,DatePicker,TimePicker,Form,Input,InputNumber,Radio,Selec
 import  { useEffect } from 'react';
 import moment from 'moment';
 const { option } = Select;
+import { Col, Row } from 'antd';
 
 const event= () => {
+
+  <div>
+    <Row>
+      <Col span={24}>col</Col>
+    </Row>
+    <Row>
+      <Col span={12}>col-12</Col>
+      <Col span={12}>col-12</Col>
+    </Row>
+    <Row>
+      <Col span={8}>col-8</Col>
+      <Col span={8}>col-8</Col>
+      <Col span={8}>col-8</Col>
+    </Row>
+    <Row>
+      <Col span={6}>col-6</Col>
+      <Col span={6}>col-6</Col>
+      <Col span={6}>col-6</Col>
+      <Col span={6}>col-6</Col>
+    </Row>
+    </div>
+
+
 
   let router= useRouter()
 
