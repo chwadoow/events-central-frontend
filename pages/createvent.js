@@ -5,7 +5,7 @@ function text() {
         <div style={{ maxWidth: '1200px', margin: 'auto' }}>
             <Row gutter={[48, 8]} align="middle" justify='space-around'>
                 <Col span={12}>
-                    <img src="https://picsum.photos/200" alt="" style={{ width: '300px' }} />
+                    <img src="https://cdn.evbstatic.com/s3-build/fe/build/images/baedf009bb329458ae80eb599fb8a4d5-3_tablet_1067x470.jpg" alt="" style={{ width: '300px' }} />
                 </Col>
                 <Col span={12}>
                     <Form
