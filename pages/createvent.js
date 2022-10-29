@@ -22,6 +22,11 @@ const event= () => {
 			}
 		})
   });
+
+  style={width: "100%" ,
+textAlign: "center",
+justifyContent:"center"
+}
   
 
 
