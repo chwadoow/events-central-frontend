@@ -14,9 +14,9 @@ function Login(){
   // const loginData = { username: username, password: password}
 
   // condition base redirecting
-function redirect() {
-  router.push('/')
-}
+// function redirect() {
+//   router.push('/')
+// }
 
   function set_session (user){
     sessionStorage.setItem("user_id", (user.id))
@@ -40,11 +40,15 @@ function redirect() {
       if(res.ok){
         res.json().then((data)=>
         // console.log(data)
-         set_session(data)
+        {set_session(data)
+          router.push('/')
+          alert("You have loggged in successfully")
+        } 
+         
         )
       } else{
         res.json().then((e)=> 
-        console.log([e.error]))
+        setError([e.error]))
       }
       // window.reload("/")
     })
@@ -92,7 +96,7 @@ function redirect() {
 
           <Form.Item>
             <Button 
-            onClick={redirect}
+            onClick={handleSubmit}
             htmlType="submit" className="login-form-button" >
               LOGIN
             </Button>
