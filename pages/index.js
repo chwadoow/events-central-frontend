@@ -70,7 +70,7 @@ export default function Home({ categories, events, homebanners }) {
       </Row>
 
       <Row >
-        <CategoryList events={categories}/>
+        <CategoryList categories={categories}/>
       </Row>
 
       <br />
