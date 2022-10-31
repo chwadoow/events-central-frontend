@@ -1,7 +1,9 @@
-import Home from "./Home";
+
 import Head from "next/head";
 import { Col, Row } from "antd";
 import { Carousel } from 'antd';
+import CategoryList from "../components/CategoryList"
+import HomePageEvents from "../components/HomePageEvents"
 
 export const getStaticProps = async () => {
   const res1 = await fetch("http://localhost:3000/events");
@@ -69,7 +71,7 @@ export default function Home({ categories, events, homebanners }) {
       </Row>
 
       <Row >
-        <CategoryList events={categories}/>
+        <CategoryList categories={categories}/>
       </Row>
 
       <br />
