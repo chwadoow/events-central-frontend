@@ -186,7 +186,7 @@ const event= ({user,setUser}) => {
 
     
 
-<Form.Item label="Regular ticket price">
+      <Form.Item label="Regular ticket price">
         <input value={formData.regular_price} onChange={handleChange}name='regular_price'/>
       </Form.Item>
 
@@ -194,6 +194,18 @@ const event= ({user,setUser}) => {
         <input value={formData.vip_price}onChange={handleChange}name='vip_price'/>
       </Form.Item>
 
+
+      <Form.Item
+      label="ticket_format"
+      name="set format"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+      >
+      <Input.Password />
       
  
 
@@ -205,6 +217,19 @@ const event= ({user,setUser}) => {
   <input value={formData.regular_no_of_tickets} onChange={handleChange}name='regular_no_of_tickets' />
 </Form.Item>
 
+      </Form.Item>
+      <Form.Item
+      label="earling_booking_end_date"
+      name="set date"
+        rules={[
+          {
+            required: true,
+            message: 'Please input your password!',
+          },
+        ]}
+      >
+      <Input.Password />
+      
 
       <Form.Item label="banner_img">
       <Input  value={formData.banner_img}onChange={handleChange}name='banner_img' />
@@ -223,6 +248,8 @@ const event= ({user,setUser}) => {
       <Input value={formData.image_url2} onChange={handleChange}name='image_url2'/>
       </Form.Item>
       
+
+      </Form.Item>
       
       <Form.Item>
         <Button type="Submit" 
@@ -238,3 +265,5 @@ const event= ({user,setUser}) => {
   
 export default event;
 
+
+     

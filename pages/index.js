@@ -6,7 +6,7 @@ import { Carousel } from 'antd';
 
 export const getStaticProps = async () => {
   const res1 = await fetch("http://localhost:3000/events");
-  const res2 = await fetch("http://localhost:5000/eventcategories");
+  const res2 = await fetch("http://localhost:3000/categories");
   const res3 = await fetch("http://localhost:3000/home_banners");
   const events = await res1.json()
   const categories = await res2.json()
@@ -21,13 +21,13 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ categories, events, homebanners }) {
-  console.log(homebanners)
   
   return (
     <div>
       <Head>
         <title>Bomboclat Events</title>
       </Head>
+      
       <Row >
         <Col span={24}>
           <Carousel 
@@ -70,7 +70,7 @@ export default function Home({ categories, events, homebanners }) {
       </Row>
 
       <Row >
-        <CategoryList events={categories}/>
+        <CategoryList categories={categories}/>
       </Row>
 
       <br />

@@ -1,10 +1,23 @@
 import { Col, Row ,Card} from 'antd';
-import { AntDesignOutlined } from '@ant-design/icons';
-import { Avatar } from 'antd';
+import { AntDesignOutlined,EditOutlined,LogoutOutlined } from '@ant-design/icons';
+import { Avatar,Button } from 'antd';
 import {LeftSquareOutlined} from  '@ant-design/icons';
 import UserCard from '../components/UserCard';
-
+import {useEffect,useState} from 'react'
 function userprofile() {
+const [userData,setUserData] = useState([])
+
+  useEffect(()=>{
+    fetch(`http://localhost:3000/users/2`)
+    .then(response => response.json())
+    .then((data)=> {
+  setUserData(data)
+     
+    })
+    },[])
+  
+
+
   return (
   <div
   style={{width: "100%" ,
@@ -33,19 +46,34 @@ justifyContent:"center"
      
 
 </Row>
+<br></br>
 <Row
 style={{width: "100%" ,
 textAlign: "center",
 justifyContent:"center"
 }}> 
-  user username
-</Row>
-<Row>
-  <UserCard/>
+{userData.username}
+
 </Row>
 
+<Row>
+  <UserCard userData={userData}/>
+</Row>
+<br></br>
+<Row>
+<Button 
+
+style={{width: "100%" ,
+textAlign: "center",
+justifyContent:"center"
+}}
+
+type="primary" icon={<LogoutOutlined />} size="large"/>
+
+</Row>
 </div>
     
+
   )
 }
 
