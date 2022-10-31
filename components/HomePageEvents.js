@@ -4,7 +4,6 @@ import { Col, Card, Row } from "antd";
 const HomePageEvents = ({ events }) => {
   var date = new Date();
   var currentDate = date.getTime();
-    console.log(events)
   const filteredDates = (Array.isArray(events) ? events : []).filter(
     (event) =>
       parseInt(
@@ -29,10 +28,10 @@ const HomePageEvents = ({ events }) => {
             flexDirection: "row",
           }}
         >
-          {(Array.isArray(filteredDates) ? filteredDates : []).map((event) => {
+          {(Array.isArray(filteredDates) ? filteredDates : []).map((event,index) => {
             return (
               <>
-                <Link href={`/specificevent/${event.id}`}>
+                <Link href={`/specificevent/${event.id}`} key={index}>
                   <div>
                     <Card
                       style={{
