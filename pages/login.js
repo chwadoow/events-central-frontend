@@ -15,7 +15,7 @@ function Login(){
 
   // condition base redirecting
 function redirect() {
-  router.push('/')
+  router.back()
 }
 
   function set_session (user){
@@ -40,8 +40,11 @@ function redirect() {
       if(res.ok){
         res.json().then((data)=>
         // console.log(data)
-         set_session(data)
+         set_session(data),
+         redirect()
+
         )
+
       } else{
         res.json().then((e)=> 
         console.log([e.error]))
@@ -92,7 +95,7 @@ function redirect() {
 
           <Form.Item>
             <Button 
-            onClick={redirect}
+          //  onClick={redirect}
             htmlType="submit" className="login-form-button" >
               LOGIN
             </Button>

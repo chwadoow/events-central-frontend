@@ -1,4 +1,5 @@
 import { Col, Row } from 'antd';
+import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react';
 
 const about  = () => {
@@ -38,6 +39,8 @@ const about  = () => {
   }
 
   return (
+    <>
+    <Navbar/>
     <Row justify='center' align='middle'>
 
       <Col span={24}>
@@ -135,6 +138,7 @@ const about  = () => {
       </Col>
 
     </Row>
+    </>
   );
 };
 
