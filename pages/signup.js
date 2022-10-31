@@ -4,21 +4,50 @@ import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Navbar from "../components/Navbar";
 
-function SignUp({ setLogin }) {
+function SignUp() {
+
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [isOrganizer, setIsOrganizer] = useState(false)
   const [emailAddress, setEmailAddress] = useState("")
+  const [currentUser, setCurrentUser] = useState([])
+
   const signData = {
     username: username,
     password: password,
     isOrganizer: isOrganizer,
     emailAddress: emailAddress
   }
+
   function handleCheckBox(event){
     setIsOrganizer(event.target.value)
   }
   console.log(signData)
+
+  function handleSubmit(e) {
+    // e.preventDefault();
+
+ fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(signData),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          setCurrentUser(user);
+        });
+      } else {
+        res.json().then((errors) => {
+          console.error(errors);
+        });
+      }
+    });
+    // window.location("/login")
+  }
+
+
   return (
     <>
     <Navbar/>
@@ -30,7 +59,9 @@ function SignUp({ setLogin }) {
               alt="Login"
             />
           </div>
-          <Form name="login-form">
+          <Form 
+            onFinish={handleSubmit} 
+             name="login-form">
             <p className="form-title">SIGN UP </p>
             <Form.Item
               name="username"
@@ -71,7 +102,8 @@ function SignUp({ setLogin }) {
 
             <Form.Item>
               <Button
-                type="submit"
+              
+                htmlType="submit"
                 className="login-form-button"
               >
                 SIGN UP
@@ -85,5 +117,6 @@ function SignUp({ setLogin }) {
       </div>
     </>
   );
-}
+
+  };
 export default SignUp;
