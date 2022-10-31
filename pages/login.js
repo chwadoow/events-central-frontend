@@ -2,26 +2,16 @@ import Link from "next/link"
 import {useState} from "react"
 import { useRouter } from 'next/router'
 import { Form, Input, Button, Checkbox } from 'antd';
+import { NoStyleItemContext } from "antd/lib/form/context";
 
 
-function Login(){
+function Login({user, setUser}){
   let router= useRouter()
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState([])
-  const[user, setUser]= useState([])
-  // const loginData = { username: username, password: password}
 
-  // condition base redirecting
-// function redirect() {
-//   router.push('/')
-// }
-
-  function set_session (user){
-    sessionStorage.setItem("user_id", (user.id))
-    setUser(user)
-  }
 
   function handleSubmit(event){
     // event.preventDefault();
@@ -39,8 +29,9 @@ function Login(){
     }).then((res)=> {
       if(res.ok){
         res.json().then((data)=>
-        // console.log(data)
-        {set_session(data)
+        {
+          window.localStorage.setItem('session', JSON.stringify(data));
+          console.log("logged in ? ", data) 
           router.push('/')
           alert("You have loggged in successfully")
         } 
@@ -50,9 +41,11 @@ function Login(){
         res.json().then((e)=> 
         setError([e.error]))
       }
-      // window.reload("/")
     })
 }
+
+
+
     return (
         <div className="login-page">
       <div className="login-box">
@@ -96,7 +89,7 @@ function Login(){
 
           <Form.Item>
             <Button 
-            onClick={handleSubmit}
+            // onClick={handleSubmit}
             htmlType="submit" className="login-form-button" >
               LOGIN
             </Button>

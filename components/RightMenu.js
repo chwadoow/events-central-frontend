@@ -22,6 +22,7 @@ function redirect() {
              if (res.ok) {
                 sessionStorage.clear()
                  redirect()
+                 alert("logged out")
               }
             })
      } 

@@ -4,7 +4,38 @@ import  { useEffect, useState } from 'react';
 import moment from 'moment';
 const { option } = Select;
 
-const event= () => {
+const event= ({user,setUser}) => {
+  
+
+  useEffect(() => {
+    console.log("user from create event", window.localStorage.getItem('session')) 
+    
+    const session = sessionStorage.getItem('session')
+    if(session && !user.id){
+      fetch("http://localhost:3000/me", {
+        headers: {
+          Authorization: "Bearer " + session,
+        },
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data)
+        setUser(data)
+        console.log(user);
+      })
+    }
+    }, [user]);
+
+  // useEffect(() => {
+  //   fetch("http://localhost:3000/me")
+  //   .then((response) =>{
+  //       if(response.ok){
+  //         response.json().then((user) => setUser(user));
+  //       }
+  //   });
+  // }, []) 
+
+
 
   let router= useRouter()
     const [formData, setFormData] = useState({
@@ -37,14 +68,15 @@ const event= () => {
 
   // },[]);
 
-  function handleAuth(){
-    fetch('http://localhost:3000/auth')
-		.then(res=>{
-			if(res.status === 401){
-				router.push('/login')
-			}
-		})
-  }
+  // function handleAuth(){
+  //   fetch('http://localhost:3000/auth')
+	// 	.then(res=>{
+	// 		if(res.status === 401){
+	// 			router.push('/login')
+	// 		}
+	// 	})
+  // }
+ 
   
 
   function handleSubmit(e){
@@ -193,7 +225,9 @@ const event= () => {
       
       
       <Form.Item>
-        <Button type="Submit" onClick={handleAuth}>Submit
+        <Button type="Submit" 
+        // onClick={handleAuth}
+        >Submit
         </Button>
         </Form.Item>
     </Form>
