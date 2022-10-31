@@ -82,259 +82,282 @@ function event() {
 
 
   return (
+    
     <>
-      <div style={{ maxWidth: '1200px', margin: 'auto' }}>
-          <Row gutter={[48, 8]} align="left" justify='space-around'>
-              <Col span={12}>
-                  <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" style={{ width: '300px' }} />
-              </Col>
-              </Row>
-              </div>
+    <div className='containerr'>
+      <div className='row1'>
+        <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" style={{ width: '300px' }} />
+      </div>
+      <div className='row2'>
 
-              <Form.Item
-              label="category_id"
-              name="username"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your username!',
-                },
-              ]}
-            >
-              <Input />
+          <Form.Item
+          label="category_id"
+          name="username"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your username!',
+            },
+          ]}
+        >
+        <select onChange={handleChange}name="category_id" >
+        <option value="1">Music</option>
+        <option value="2">Business</option>
+        <option value="3">Games</option>
+        <option value="4">Hobbies</option>
+        <option value="5">Food & Drink</option>
+        <option value="6">Performing Arts</option>
+        <option value="7">Sciences</option>
+        <option value="8">Sport & Fitness</option>
+      </select>
+          
+          
+          
+        </Form.Item>
+        
+      
+        <Form.Item
+          label="event_date"
+          name=""
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+          <input type='date' onChange={handleChange}name='event_date' value={formData.event_date}/>
+      
+        </Form.Item>
+        <Form.Item
+        label="event_time"
+        name="set time"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <input type='time' value={formData.event_time} size="large" onChange={handleChange}name='event_time' />
+        
+      
+        </Form.Item>
+      
+        <Form.Item
+        label="ticket_format"
+        name="set format"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input.Password />
+        
+      
+        </Form.Item>
+        <Form.Item
+        label="earling_booking_end_date"
+        name="set date"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <input type='date'  onChange={handleChange}name='early_booking_end_date' />
+        
+      
+        </Form.Item>
+        <Form.Item
+        label="early_booking_price_regular"
+        name="price"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <input  type='integer' value={formData.early_booking_price_regular}  onChange={handleChange}name='early_booking_price_regular'/>
+        
+      
+        </Form.Item>
+      
+        <Form.Item
+        label="early_booking_price_vip"
+        name="price"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <input value={formData.early_booking_price_vip}  onChange={handleChange} name='early_booking_price_vip'/>
+        
+      
+        </Form.Item>
+      
+        
+      
+        <Form.Item
+        label="location"
+        name="set location"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input value={formData.location} onChange={handleChange} name='location'/>
+        
+        
+      
+        </Form.Item>
+      
+        <Form.Item
+        label="regular_price"
+        name="set time"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <input value={formData.regular_price} onChange={handleChange}name='regular_price' />
+        
+      
+        </Form.Item>
+      
+        <Form.Item
+        label="vip_price"
+        name="vip_price"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <input value={formData.vip_price} onChange={handleChange}name='vip_price' />
+        </Form.Item>
+        <Form.Item
+        label="vip_no_of_tickets"
+        name="vip_no_of_tickets"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input.Password />
+        </Form.Item>
+        <Form.Item
+        label="regular_no_of_tickets"
+        name="regular_no_of_tickets"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input.Password />
+        </Form.Item>
+        <Form.Item
+        label="banner_image"
+        name="banner_image"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input  value={formData.banner_img}onChange={handleChange}name='banner_img' />
+        </Form.Item>
+        <Form.Item
+        label="description"
+        name="description"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input  value={formData.description}onChange={handleChange} name='description' />
+        </Form.Item>
+        <Form.Item
+        label="image_url1"
+        name="image_url1"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input.Password />
+        </Form.Item>
+        <Form.Item
+        label="image_url2"
+        name="image_url2"
+          rules={[
+            {
+              required: true,
+              message: 'Please input your password!',
+            },
+          ]}
+        >
+        <Input.Password />
+        </Form.Item>
+        <Form.Item
+          name="remember"
+          valuePropName="checked"
+          // wrapperCol={{
+          //   offset: 8,
+          //   span: 16,
+          // }}
+        >
+          <Checkbox>Remember me</Checkbox>
+        </Form.Item>
+        <Form.Item
+          // wrapperCol={{
+          //   offset: 8,
+          //   span: 16,
+          // }}
+        >
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
+        </Form.Item>
+      </div>
+    </div>
+    
+    // <row>
+    //   <div style={{ maxWidth: '1200px', margin: 'auto' }}>
+    //       <Row gutter={[48, 8]} align="middle" justify='space-around'>
+    //           <Col span={12}>
+    //           </Col>
+    //           </Row>
+    //           </div>
+    //           </row>
               
-            </Form.Item>
-            <Form.Item
-              label="event_date"
-              name=""
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-              <input type='date' onChange={handleChange}name='event_date' value={formData.event_date}/>
-      
-            </Form.Item>
-            <Form.Item
-            label="event_time"
-            name="set time"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <input type='time' value={formData.event_time} size="large" onChange={handleChange}name='event_time' />
-            
-      
-            </Form.Item>
-      
-            <Form.Item
-            label="ticket_format"
-            name="set format"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            
-      
-            </Form.Item>
-            <Form.Item
-            label="earling_booking_end_date"
-            name="set date"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <input type='date'  onChange={handleChange}name='early_booking_end_date' />
-            
-      
-            </Form.Item>
-      
-            <Form.Item
-            label="early_booking_price_vip"
-            name="price"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <input  type='integer' value={formData.early_booking_price_regular}  onChange={handleChange}name='early_booking_price_regular'/>
-            
-      
-            </Form.Item>
-      
-            <Form.Item
-            label="location"
-            name="set location"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            
-      
-            </Form.Item>
-      
-            <Form.Item
-            label="regular_price"
-            name="set time"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            
-      
-            </Form.Item>
-      
-            <Form.Item
-            label="vip_price"
-            name="vip_price"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            
-      
-            </Form.Item>
-      
-      
-            <Form.Item
-            label="vip_no_of_tickets"
-            name="vip_no_of_tickets"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            
-      
-            </Form.Item>
-      
-      
-            <Form.Item
-            label="regular_no_of_tickets"
-            name="regular_no_of_tickets"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            
-      
-            </Form.Item>
-      
-      
-            <Form.Item
-            label="banner_image"
-            name="banner_image"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            </Form.Item>
-      
-            <Form.Item
-            label="description"
-            name="description"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            </Form.Item>
-      
-            <Form.Item
-            label="image_url1"
-            name="image_url1"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-            </Form.Item>
-      
-            <Form.Item
-            label="image_url2"
-            name="image_url2"
-              rules={[
-                {
-                  required: true,
-                  message: 'Please input your password!',
-                },
-              ]}
-            >
-            <Input.Password />
-      
-            
-      
-            </Form.Item>
-      
-      
-            
-      
-      
-            <Form.Item
-              name="remember"
-              valuePropName="checked"
-              // wrapperCol={{
-              //   offset: 8,
-              //   span: 16,
-              // }}
-            >
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-            <Form.Item
-              // wrapperCol={{
-              //   offset: 8,
-              //   span: 16,
-              // }}
-            >
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
-            </Form.Item>
+              // display:flex
+              // column:
 
+              // <div>
+              
 
+            </div>
 </>
   )}
 export default event;
