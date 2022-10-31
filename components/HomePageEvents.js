@@ -34,7 +34,13 @@ return (
                           <div>
                             <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
                             <p>{event.event_date}</p>
-                            <p style={{color: "#d1410a"}}>{parseInt(event.time_diff) + " days remaining"}</p>
+                            <p style={{color: "#d1410a"}}>{event.time_diff < 0 ?
+                              (<p>Event has passed</p>)
+                              : (
+                                event.time_diff + " days remaining"
+                              )
+                              }
+                            </p>
                             <p>{event.location}</p>
                           </div>
                           

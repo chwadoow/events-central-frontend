@@ -128,7 +128,7 @@ const SpecificEvent = () => {
             <Row justify="center" align="middle" style={{marginTop: 30}}>
               <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
                 <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
-                <p>
+                <p style={{color: "#d1410a"}}>
                   <i>
                     <DateCountdown dateTo={new Date(eventOne.early_booking_end_date).toISOString()} />
                   </i>

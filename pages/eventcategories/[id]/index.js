@@ -81,7 +81,14 @@ function event(){
                           <div>
                             <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
                             <p>{event.event_date}</p>
-                            <p style={{color: "#d1410a"}}>{parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</p>
+                            <p style={{color: "#d1410a"}}>
+                              {event.time_diff < 0 ?
+                              (<p>Event has passed</p>)
+                              : (
+                                event.time_diff + " days remaining"
+                              )
+                              }
+                            </p>
                             <p>{event.location}</p>
                           </div>
                           
