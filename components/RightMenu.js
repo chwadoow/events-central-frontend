@@ -20,8 +20,9 @@ function redirect() {
         fetch('http://localhost:3000/logout', {method: "DELETE"})
            .then(res => {
              if (res.ok) {
-                sessionStorage.clear()
+                localStorage.clear()
                  redirect()
+                 alert("logged out")
               }
             })
      } 
