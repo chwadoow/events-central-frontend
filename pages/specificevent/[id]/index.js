@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
 import Script from 'next/script';
 import { gapi } from 'gapi-script';
+import DateCountdown from 'react-date-countdown-timer';
 
 const SpecificEvent = () => {
   var date = new Date();
-  var currentDate = date.getTime();
 
   var CLIENT_ID = "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
   var API_KEY = "AIzaSyDSu0IfbznPAlKhL8LKY6YZuwItkfLwLvE";
@@ -19,10 +19,15 @@ const SpecificEvent = () => {
   const {id} = router.query;
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   
   useEffect(()=>{
-      fetch(`http://localhost:3000/events/${id}`).then((response)=> response.json()).then((data)=> setEventOne(data))
+      fetch(`http://localhost:3000/events/${id}`).then((response)=> response.json()).then((data)=> {
+        setEventOne(data)
+        setIsLoading(false)
+      })
   },[])
+
   const showModal = () => {
     setOpen(true);
   };
@@ -34,9 +39,9 @@ const SpecificEvent = () => {
       setConfirmLoading(false);
     }, 500);
   };
-  
-  console.log(eventOne.event_start_date)
 
+  console.log(eventOne.early_booking_end_date)
+  
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
 
@@ -83,6 +88,14 @@ const SpecificEvent = () => {
     setOpen(false);
   };
 
+  if(isLoading === true) return (
+    <Row justify="center" align="middle">
+      <div style={{marginTop: "25%"}}>
+        <div className="loader"></div>
+      </div>
+    </Row>
+  )
+
   return (
     <>
     <Script src="https://apis.google.com/js/api.js" type="text/javascript"/>
@@ -115,7 +128,11 @@ const SpecificEvent = () => {
             <Row justify="center" align="middle" style={{marginTop: 30}}>
               <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
                 <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
-                <p>{parseInt(((new Date(`${eventOne.early_booking_end_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</p>
+                <p>
+                  <i>
+                    <DateCountdown dateTo={new Date(eventOne.early_booking_end_date).toISOString()} />
+                  </i>
+                </p>
               </div>
             </Row>
           </Col>
