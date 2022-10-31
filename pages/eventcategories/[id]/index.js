@@ -71,11 +71,11 @@ function event(){
                         <Card style={{ 
                           textAlign: "left", 
                           width: 280, 
-                          height: 420, 
+                          maxHeight: 600,
                           padding: 2, 
                           cursor: "pointer",
                           }}
-                          cover={<img alt={event.title} src={event.image_url1} height="200px"/>}
+                          cover={<img alt={event.title} src={event.banner_img} height="200px"/>}
                           hoverable
                         >
                           <div>
