@@ -84,7 +84,7 @@ function event() {
   return (
     <>
       <div style={{ maxWidth: '1200px', margin: 'auto' }}>
-          <Row gutter={[48, 8]} align="middle" justify='space-around'>
+          <Row gutter={[48, 8]} align="left" justify='space-around'>
               <Col span={12}>
                   <img src="https://images.unsplash.com/photo-1530023367847-a683933f4172?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt="" style={{ width: '300px' }} />
               </Col>
@@ -156,7 +156,7 @@ function event() {
                 },
               ]}
             >
-            <Input.Password />
+            <input type='date'  onChange={handleChange}name='early_booking_end_date' />
             
       
             </Form.Item>
@@ -171,7 +171,7 @@ function event() {
                 },
               ]}
             >
-            <Input.Password />
+            <input  type='integer' value={formData.early_booking_price_regular}  onChange={handleChange}name='early_booking_price_regular'/>
             
       
             </Form.Item>
