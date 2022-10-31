@@ -257,7 +257,7 @@ function event() {
             },
           ]}
         >
-        <Input.Password />
+        <input value={formData.vip_no_of_tickets} onChange={handleChange}name='vip_no_of_tickets' />
         </Form.Item>
         <Form.Item
         label="regular_no_of_tickets"
@@ -269,7 +269,7 @@ function event() {
             },
           ]}
         >
-        <Input.Password />
+        <input value={formData.regular_no_of_tickets} onChange={handleChange}name='regular_no_of_tickets'  />
         </Form.Item>
         <Form.Item
         label="banner_image"
@@ -305,7 +305,7 @@ function event() {
             },
           ]}
         >
-        <Input.Password />
+        <Input  value={formData.image_url1}onChange={handleChange}name='image_url1' />
         </Form.Item>
         <Form.Item
         label="image_url2"
@@ -317,7 +317,7 @@ function event() {
             },
           ]}
         >
-        <Input.Password />
+        <Input value={formData.image_url2} onChange={handleChange}name='image_url2'/>
         </Form.Item>
         <Form.Item
           name="remember"
