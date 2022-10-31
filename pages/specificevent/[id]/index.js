@@ -34,6 +34,8 @@ const SpecificEvent = () => {
       setConfirmLoading(false);
     }, 500);
   };
+  
+  console.log(eventOne.event_start_date)
 
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
@@ -56,11 +58,11 @@ const SpecificEvent = () => {
           'description': eventOne.description,
           'colorId': '6',
           'start': {
-            'dateTime': new Date(eventOne.event_date),
+            'dateTime': new Date(eventOne.event_start_date).toJSON(),
             'timeZone': 'Africa/Nairobi'
           },
           'end': {
-            'dateTime': new Date(eventOne.event_date),
+            'dateTime': new Date(eventOne.event_end_date).toJSON(),
             'timeZone': 'Africa/Nairobi'
           },
         };
@@ -127,9 +129,9 @@ const SpecificEvent = () => {
           <Col span={12}>
             <Row justify="center" align="middle">
               <Col span={6}>
-                <div style={{ textAlign: "left", fontFamily: "nunito" }}>
+                <div style={{ textAlign: "center", fontFamily: "nunito" }}>
                   <h4 style={{fontWeight: "regular", fontSize: 25}}>Date</h4>
-                  <p>{eventOne.event_date}</p>
+                  <p>{new Date(eventOne.event_start_date).toDateString()}</p>
                 </div>
               </Col>
               <Col span={6}>
@@ -204,14 +206,13 @@ const SpecificEvent = () => {
         </Row>
       </Col>
       
-      <Row justify="center" align="middle" >
+      <Row  >
         <Col span={24}>
-          <Row justify="center" align="middle" >
-            <div style={{ marginRight: 40, marginLeft: 40, borderRadius: 20, gap: 20, justifyContent: "center", display: "inline-flex", flexDirection: 'row' }}>
+          <Row >
+            <div style={{ borderRadius: 20, gap: 20, justifyContent: "center", display: "inline-flex", flexDirection: 'row' }}>
               <Col span={12}>
                 <div style={{display: "inline-flex", fontFamily: "nunito", width: "100%", justifyContent: "center", textAlign: "center"}}>
                   <Row justify="center" align="middle">
-                    <Col >
                       <img 
                       src={eventOne.image_url1}
                       alt="Tech"
@@ -222,7 +223,6 @@ const SpecificEvent = () => {
                         paddingTop: 30
                       }}
                       />
-                    </Col>
                   </Row>
                 </div>
               </Col>

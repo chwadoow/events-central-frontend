@@ -6,7 +6,7 @@ const HomePageEvents = ({events}) => {
   var date = new Date()
   var currentDate = date.getTime()
   const filteredDates = events.filter((event)=> 
-     (parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) > 0)
+     (parseInt(event.time_diff) > 0)
     )
 
 return (
@@ -23,18 +23,18 @@ return (
                         <Card style={{ 
                           textAlign: "left", 
                           width: 280, 
-                          height: 420, 
+                          maxHeight: 600, 
                           padding: 2, 
                           cursor: "pointer",
                           }}
 
-                          cover={<img alt={event.title} src={event.image_url1} height="200px"/>}
+                          cover={<img alt={event.title} src={event.banner_img} height="200px"/>}
                           hoverable
                         >
                           <div>
                             <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
                             <p>{event.event_date}</p>
-                            <p style={{color: "#d1410a"}}>{parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</p>
+                            <p style={{color: "#d1410a"}}>{parseInt(event.time_diff) + " days remaining"}</p>
                             <p>{event.location}</p>
                           </div>
                           
