@@ -21,7 +21,7 @@ export const getStaticProps = async () => {
 };
 
 export default function Home({ categories, events, homebanners }) {
-  
+  console.log(homebanners)
   return (
     <div>
       <Head>
@@ -70,7 +70,7 @@ export default function Home({ categories, events, homebanners }) {
       </Row>
 
       <Row >
-        <CategoryList events={categories}/>
+        <CategoryList categories={categories}/>
       </Row>
 
       <br />

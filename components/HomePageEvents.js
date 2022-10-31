@@ -12,6 +12,7 @@ const HomePageEvents = ({ events }) => {
           (1000 * 60 * 60 * 24)
       ) > 0
   );
+  console.log(events)
 
   return (
     <Row justify="center" align="middle">
