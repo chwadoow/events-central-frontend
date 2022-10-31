@@ -11,6 +11,9 @@ function SignUp() {
   const [emailAddress, setEmailAddress] = useState("")
   const [currentUser, setCurrentUser] = useState([])
 
+  let router= useRouter()
+
+
   const signData = {
     username: username,
     password: password,
@@ -35,7 +38,9 @@ function SignUp() {
     }).then((res) => {
       if (res.ok) {
         res.json().then((user) => {
-          setCurrentUser(user);
+          setCurrentUser(user)
+          router.push('/login') 
+
         });
       } else {
         res.json().then((errors) => {
