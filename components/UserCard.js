@@ -29,22 +29,22 @@ const onChange = (value) => {
 
 }
 
-function handleSubmit(e){
-  e.preventDefault()
-  fetch(`http://localhost:3000/user_profiles/2`, {
-      method: "PUT",
-      headers: {
-          "Content-Type" : "application/json"
-      },
-      body: JSON.stringify({
-        full_name,
-        gender,
-        phone_number,
-        bio
-      }),
-  })
-  .then((r) => r.json())
-  .then((data) => console.log(data))
+// function handleSubmit(e){
+//   e.preventDefault()
+//   fetch(`http://localhost:3000/user_profiles/2`, {
+//       method: "PUT",
+//       headers: {
+//           "Content-Type" : "application/json"
+//       },
+//       body: JSON.stringify({
+//         full_name,
+//         gender,
+//         phone_number,
+//         bio
+//       }),
+//   })
+//   .then((r) => r.json())
+//   .then((data) => console.log(data))
 
   
 }
@@ -124,7 +124,7 @@ moz
 </>
     :
  <>
- { userData.user_profile ? 
+ { user ? 
 <>
    <Card
       style={{
