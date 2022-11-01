@@ -40,7 +40,7 @@ const about  = () => {
 
   return (
     <>
-    <Navbar/>
+    
     <Row justify='center' align='middle'>
 
       <Col span={24}>
