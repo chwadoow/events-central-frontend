@@ -137,9 +137,9 @@ const SpecificEvent = () => {
           </Col>
           <Col span={12}>
             <Row justify="center" align="middle" style={{marginTop: 30}}>
-              <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
+              <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "60%"}}>
                 <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
-                <p style={{color: "#d1410a", fontSize: 15}}>
+                <p style={{color: "#d1410a", fontSize: 30}}>
                   <b>
                   <i>
                     { `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`}
@@ -147,6 +147,7 @@ const SpecificEvent = () => {
                   </b>
                 </p>
               </div>
+              <br />
             </Row>
           </Col>
         </Row>
@@ -174,11 +175,7 @@ const SpecificEvent = () => {
           </Col>
 
           <Col span={12}>
-            <Row justify="center" align="middle">
-              <div>
-                <p style={{fontWeight: "bold"}}><i>Allow Pop ups on your browser to add events to calendar</i></p>
-              </div>
-            </Row>
+            
             <Row justify="center" align="middle">
               <br />
                 <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
@@ -191,6 +188,11 @@ const SpecificEvent = () => {
                   </button>
                 </div>
               </Row>
+              <Row justify="center" align="middle">
+              <div>
+                <p style={{fontWeight: "bold"}}><i>Allow Pop ups on your browser to add events to calendar</i></p>
+              </div>
+            </Row>
           </Col>
         </Row>
       </Col>
