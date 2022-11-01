@@ -11,7 +11,7 @@ function Login({user, setUser}){
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState([])
-
+  // const [user, setUser] = useState({})
 
   function handleSubmit(event){
     // event.preventDefault();
@@ -30,8 +30,8 @@ function Login({user, setUser}){
       if(res.ok){
         res.json().then((data)=>
         {
-          window.localStorage.setItem('session', JSON.stringify(data));
-          console.log("logged in ? ", data) 
+          window.localStorage.setItem('session', JSON.stringify(data.id));
+          console.log("logged in ? ", data.id) 
           router.push('/')
           alert("You have loggged in successfully")
         } 

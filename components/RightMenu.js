@@ -33,27 +33,20 @@ function redirect() {
     const menu = (
       <Menu>
         <Menu.Item>
-            <a
-              href="/login"
-            >
-              Login
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            href="/userprofile"
-          >
-            View Profile
-          </a>
-        </Menu.Item>
-         <Menu.Item>
-          <a
-            onClick={handleLogout}
-          >
-            Logout 
-          </a>
+          <a href="/login">Login</a>
         </Menu.Item>
 
+        <Menu.Item>
+          <a href="/userprofile">View Profile</a>
+        </Menu.Item>
+
+        <Menu.Item>
+          <a href="/viewevents">View Events</a>
+        </Menu.Item>
+
+        <Menu.Item>
+          <a onClick={handleLogout}>Logout</a>
+        </Menu.Item>
       </Menu>
     );
 

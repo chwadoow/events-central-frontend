@@ -1,7 +1,13 @@
 import { Button, Form, Input, Radio } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const BuyTicketForm = ({ loading, event }) => {
+  //  useEffect(() => {
+  //    const session = localStorage.getItem("session");
+  //    console.log(session);
+  //  }, []);
+   const session = localStorage.getItem("session");
+   console.log(session);
   const [processing, setProcessing] = useState(false);
   const [vipTickets, setVipTickets] = useState(0);
   const [regularTickets, setRegularTickets] = useState(0);

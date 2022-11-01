@@ -2,7 +2,17 @@ import { Col, Row } from 'antd';
 import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react';
 
-const about  = () => {
+const About  = () => {
+  const [user, setUser] = useState(null)
+  useEffect(()=>
+  { 
+    setUser(JSON.parse(window.localStorage.getItem("session") ))
+  }
+  ,[])
+  console.log(user.id)
+
+
+  
   const [communityData, setCommunityData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
   const [randomIndexCommunity, setRandomIndex] = useState();
@@ -40,7 +50,6 @@ const about  = () => {
 
   return (
     <>
-    <Navbar/>
     <Row justify='center' align='middle'>
 
       <Col span={24}>
@@ -142,4 +151,4 @@ const about  = () => {
   );
 };
 
-export default about;
+export default About;
