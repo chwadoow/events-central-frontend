@@ -19,7 +19,6 @@ const [userData,setUserData] = useState([])
   useEffect(() => {
     setUser(JSON.parse(window.localStorage.getItem("session")));
   }, []);
-  console.log(user?.id);
 
 
   return (

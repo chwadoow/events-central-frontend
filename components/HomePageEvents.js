@@ -30,7 +30,7 @@ const HomePageEvents = ({events}) => {
                         >
                           <div>
                             <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
-                            <p>{event.event_date}</p>
+                            <p>{event.event_start_date}</p>
                             <p style={{color: "#d1410a"}}>{event.time_diff < 0 ?
                               (<p>Event has passed</p>)
                               : (
