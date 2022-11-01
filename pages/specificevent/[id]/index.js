@@ -7,7 +7,6 @@ import { gapi } from 'gapi-script';
 import DateCountdown from 'react-date-countdown-timer';
 
 const SpecificEvent = () => {
-  var date = new Date();
 
   var CLIENT_ID = "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
   var API_KEY = "AIzaSyDSu0IfbznPAlKhL8LKY6YZuwItkfLwLvE";
@@ -39,8 +38,6 @@ const SpecificEvent = () => {
       setConfirmLoading(false);
     }, 500);
   };
-
-  console.log(eventOne.early_booking_end_date)
   
   const handleAdd = () => {
     gapi.load("client:auth2", () => {

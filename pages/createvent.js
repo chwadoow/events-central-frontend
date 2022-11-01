@@ -126,12 +126,7 @@ const createvent = () => {
                 <Form.Item
                   label="Event Title"
                   style={{width: "70%"}}
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input the Event Title',
-                    },
-                  ]}
+                  required
                 >
                   <Input name="title" onChange={handleChange} value={formData.title} placeholder="eg. BDO tournament"/>
                 </Form.Item>

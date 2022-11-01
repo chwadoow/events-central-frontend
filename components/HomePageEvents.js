@@ -3,8 +3,6 @@ import Link from "next/link";
 import { Col, Card, Row } from "antd";
 
 const HomePageEvents = ({events}) => {
-  var date = new Date()
-  var currentDate = date.getTime()
   const filteredDates = events.filter((event)=> 
      (parseInt(event.time_diff) > 0)
     )
@@ -15,7 +13,7 @@ return (
         <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 20, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
           {filteredDates.map((event) => {
               return (
-                <>
+                <div key={event.id}>
                 
                   <Link href={`/specificevent/${event.id}`}>
                       <div >
@@ -50,7 +48,7 @@ return (
                   </Link>
                   &nbsp;
                   
-                </>
+                </div>
               );
           })}
         </div>
