@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
 import Script from 'next/script';
 import { gapi } from 'gapi-script';
-import DateCountdown from 'react-date-countdown-timer';
 
 const SpecificEvent = () => {
 
@@ -38,6 +37,21 @@ const SpecificEvent = () => {
       setConfirmLoading(false);
     }, 500);
   };
+
+  const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
+  const [myTimer, setMyTimer] = useState({});
+
+  const myfunc = setInterval(function() {
+    var now = new Date().getTime();
+    const timeleft = countDownDate - now;
+        
+    let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+    setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
+    }, 1000)
   
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
@@ -125,10 +139,10 @@ const SpecificEvent = () => {
             <Row justify="center" align="middle" style={{marginTop: 30}}>
               <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
                 <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
-                <p style={{color: "#d1410a"}}>
+                <p style={{color: "#d1410a", fontSize: 15}}>
                   <b>
                   <i>
-                    <DateCountdown dateTo={new Date(eventOne.early_booking_end_date).toISOString()} />
+                    { `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`}
                   </i>
                   </b>
                 </p>

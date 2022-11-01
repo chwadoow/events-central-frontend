@@ -1,15 +1,16 @@
 import Link from "next/link"
 import {useState} from "react"
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Col } from 'antd';
 
 
 function Login(){
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState([])
-  const loginData = { username: username, password: password}
+  const loginData = { email: email, password: password}
+
   function handleSubmit(){
-    fetch("http://localhost:3000/login",{
+    fetch("http://localhost:3000/users/sign_in",{
       method: "POST",
       headers: {
         "Content-Type" : "application/json"
@@ -17,9 +18,9 @@ function Login(){
       body :JSON.stringify(loginData)
     }).then((res)=> {
       if(res.ok){
-        res.json().then((user)=>console.log(user)).finally(setUsername(""),setPassword(""))
+        res.json().then((user)=>console.log(user)).finally(setEmail(""),setPassword(""))
       } else{
-        res.json().then((e)=> setError([e.error])).finally(setUsername(""),setPassword(""))
+        res.json().then((e)=> setError([e.error])).finally(setEmail(""),setPassword(""))
       }
     })
 }
@@ -38,14 +39,14 @@ function Login(){
         >
           <p className="form-title">LOG IN</p>
           <Form.Item
-            name="username"
-            rules={[{required: true, message: 'Please input your username!'}]}
+            name="email"
+            rules={[{required: true, message: 'Please input your email!'}]}
           >
             <Input
-              placeholder="Input username"
-              name="username"
+              placeholder="Input email"
+              name="email"
               value={loginData.username}
-              onChange={(event)=> setUsername(event.target.value)}
+              onChange={(event)=> setEmail(event.target.value)}
             />
           </Form.Item>
 
@@ -73,7 +74,7 @@ function Login(){
               LOGIN
             </Button>
           </Form.Item>
-          <p>If you dont have an account?<Link href="/signup"> Click me!</Link></p>
+          <p>If you dont have an account? <Link href="/signup">SignUp</Link> </p>
         </Form>
       </Col>
       </div>
