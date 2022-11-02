@@ -8,6 +8,9 @@ const about  = () => {
   const [randomIndexCommunity, setRandomIndex] = useState();
   const [randomIndexAbout, setRandomIndexAbout] = useState();
 
+  // const user = localStorage.getItem('session')
+  // console.log(user)
+
   useEffect(() => {
     changeCommunityImage()
   }, []);
