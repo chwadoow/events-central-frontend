@@ -1,10 +1,9 @@
-import { Col, Row, Modal } from "antd";
+import { Col, Row, Modal, Divider } from "antd";
 import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
 import Script from 'next/script';
 import { gapi } from 'gapi-script';
-import DateCountdown from 'react-date-countdown-timer';
 
 const SpecificEvent = () => {
 
@@ -38,6 +37,21 @@ const SpecificEvent = () => {
       setConfirmLoading(false);
     }, 500);
   };
+
+  const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
+  const [myTimer, setMyTimer] = useState({});
+
+  const myfunc = setInterval(function() {
+    var now = new Date().getTime();
+    const timeleft = countDownDate - now;
+        
+    let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+    let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+
+    setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
+    }, 1000)
   
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
@@ -121,14 +135,20 @@ const SpecificEvent = () => {
               </div>
             </Row>    
           </Col>
+          <Divider style={{border: "1px solid black"}} />
           <Col span={12}>
             <Row justify="center" align="middle" style={{marginTop: 30}}>
-              <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
+              <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "60%"}}>
                 <h3 style={{fontWeight: "bold"}}>Early Booking Timer</h3>
-                <p style={{color: "#d1410a"}}>
+                <p style={{color: "#d1410a", fontSize: 30}}>
                   <b>
                   <i>
-                    <DateCountdown dateTo={new Date(eventOne.early_booking_end_date).toISOString()} />
+                  {eventOne.time_diff < 0 ?
+                    (<p>Event has passed</p>)
+                    : (
+                      `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`
+                    )
+                  }
                   </i>
                   </b>
                 </p>
@@ -136,35 +156,39 @@ const SpecificEvent = () => {
             </Row>
           </Col>
         </Row>
+        <br />
       </Col>
 
       <br />
 
       <Col span={24}>
-        <Row>
+        <Row justify="center" align="middle">
           <Col span={12}>
             <Row justify="center" align="middle">
               <Col span={6}>
-                <div style={{ textAlign: "center", fontFamily: "nunito" }}>
-                  <h4 style={{fontWeight: "regular", fontSize: 25}}>Date</h4>
-                  <p>{new Date(eventOne.event_start_date).toDateString()}</p>
-                </div>
+                <Row justify="start" align="middle">
+                  <div style={{ textAlign: "center", fontFamily: "nunito" }}>
+                    <h4 style={{fontWeight: "regular", fontSize: 25}}>Date</h4>
+                    <p>{new Date(eventOne.event_start_date).toDateString()}</p>
+                  </div>
+                </Row>
               </Col>
+              &nbsp;
+              &nbsp;
+              &nbsp;
               <Col span={6}>
-                <div style={{textAlign: "right", fontFamily: "nunito" }}>
-                  <h4 style={{fontWeight: "regular", fontSize: 25}}>Location</h4>
-                  <p>{eventOne.location}</p>
-                </div> 
+                <Row justify="end" align="middle">
+                  <div style={{textAlign: "center", fontFamily: "nunito" }}>
+                    <h4 style={{fontWeight: "regular", fontSize: 25}}>Location</h4>
+                    <p>{eventOne.location}</p>
+                  </div> 
+                </Row>
               </Col>
             </Row>
           </Col>
 
           <Col span={12}>
-            <Row justify="center" align="middle">
-              <div>
-                <p style={{fontWeight: "bold"}}><i>Allow Pop ups on your browser to add events to calendar</i></p>
-              </div>
-            </Row>
+            
             <Row justify="center" align="middle">
               <br />
                 <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "40%"}}>
@@ -177,6 +201,11 @@ const SpecificEvent = () => {
                   </button>
                 </div>
               </Row>
+              <Row justify="center" align="middle">
+              <div>
+                <p style={{fontWeight: "bold"}}><i>Allow Pop ups on your browser to add events to calendar</i></p>
+              </div>
+            </Row>
           </Col>
         </Row>
       </Col>

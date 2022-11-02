@@ -24,6 +24,7 @@ function SignUp() {
   function handleCheckBox(event){
     setIsOrganizer(event.target.value)
   }
+  
   console.log(signData)
 
   function handleSubmit(e) {
@@ -66,7 +67,7 @@ function SignUp() {
             onFinish={handleSubmit} 
              name="login-form">
             <p className="form-title">SIGN UP </p>
-            <Form.Item
+            {/* <Form.Item
               name="username"
               rules={[{ message: "Please input your username!" }]}
             >
@@ -77,7 +78,7 @@ function SignUp() {
                 placeholder="Input Username"
                 onChange={(event) =>setUsername(event.target.value)}
               />
-            </Form.Item>
+            </Form.Item> */}
 
             <Form.Item
               name="email"
@@ -113,7 +114,7 @@ function SignUp() {
               </Button>
             </Form.Item>
             <p>
-              If you have an account?<Link href="/login">Log in</Link>
+              If you have an account? <Link href="/login">LogIn</Link>
             </p>
           </Form>
         </div>
