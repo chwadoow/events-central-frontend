@@ -135,8 +135,4 @@ edit
   )
 }
 
-<<<<<<< HEAD
 export default UserProfile
-=======
-export default Userprofile
->>>>>>> dcebd3f0717b2956f16df10184aae4e55ecfd674
