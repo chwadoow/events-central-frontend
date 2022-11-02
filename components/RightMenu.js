@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, Avatar, Grid, Dropdown} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
@@ -19,7 +19,6 @@ const RightMenu = () => {
   console.log(userData.is_organiser);
 
   let router= useRouter()
-   // condition base redirecting
 function redirect() {
   router.push('/')
 }
@@ -41,27 +40,20 @@ function redirect() {
     const menu = (
       <Menu>
         <Menu.Item>
-            <a
-              href="/login"
-            >
-              Login
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            href="/userprofile"
-          >
-            View Profile
-          </a>
-        </Menu.Item>
-         <Menu.Item>
-          <a
-            onClick={handleLogout}
-          >
-            Logout 
-          </a>
+          <a href="/login">Login</a>
         </Menu.Item>
 
+        <Menu.Item>
+          <a href="/userprofile">View Profile</a>
+        </Menu.Item>
+
+        <Menu.Item>
+          <a href="/viewevents">View Events</a>
+        </Menu.Item>
+
+        <Menu.Item>
+          <a onClick={handleLogout}>Logout</a>
+        </Menu.Item>
       </Menu>
     );
 
@@ -86,18 +78,14 @@ function redirect() {
         </Menu.Item>
         <Menu.Item>
           <div>
-          <Dropdown
-              overlay={menu}
-              trigger={["click"]}
-              placement="bottomLeft"
-          >
-            {/* <Link  href={`/userprofile`}> */}
+            <Dropdown overlay={menu} trigger={["click"]} placement="bottomLeft">
+              {/* <Link  href={`/userprofile`}> */}
               <Avatar size={35} icon={<UserOutlined />} />
               {/* </Link> */}
-          </Dropdown>
+            </Dropdown>
           </div>
         </Menu.Item>
-    </Menu>
+      </Menu>
     );
 }
 

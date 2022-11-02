@@ -1,18 +1,20 @@
-import { useRouter } from 'next/router'
-import {Button,Cascader,DatePicker,TimePicker,Form,Input,InputNumber,Radio,Select,Switch,TreeSelect} from 'antd';
-import  { useEffect, useState } from 'react';
-import moment from 'moment';
-const { option } = Select;
+import { Col, Row, DatePicker, Form, Input, Button } from 'antd'
+import TextArea from 'antd/lib/input/TextArea';
+import React, { useEffect, useState } from 'react'
+import { useRouter } from "next/router";
 
-const event= () => {
-  const router= useRouter();
-
-
-    const [formData, setFormData] = useState({
-    event_date: '',
-    event_time: '',
+const createvent = () => {
+  let router = useRouter()
+  const [isLoading, setIsLoading] = useState(true);
+  const [categoryData, setCategoryData] = useState({});
+  const [formData, setFormData] = useState({
+    category_id: '',
+    title: '',
+    event_start_date: '',
+    event_end_date: '',
+    ticket_format: '',
+    ticket_format: '',
     early_booking_end_date: '',
-    early_booking_end_time: '',
     early_booking_price_regular: '',
     early_booking_price_vip: '',
     location: '',
@@ -21,199 +23,270 @@ const event= () => {
     vip_no_of_tickets: '',
     regular_no_of_tickets: '',
     banner_img: '',
-    description:'',
-    image_url1:'',
-    image_url2:'',
-    category_id:'',
-    title:''
-    })
+    description: '',
+    image_url1: '',
+    image_url2: ''
+  })
 
- 
+  useEffect(()=>{
+    fetch(`http://localhost:3000/categories`)
+    .then(response => response.json())
+    .then((data)=> {
+      setCategoryData(data)
+      setIsLoading(false)
+    })
+  },[])
+
+  function handleChange(e){
+    setFormData({
+        ...formData, [e.target.name]: e.target.value,
+    });
+  }
+
+  console.log(formData)
+
   function handleSubmit(e){
-    e.preventDefault()
-    fetch(`http://localhost:3000/events`, {
+    e.preventDefault();
+    fetch(`http://localhost:3000/events`,{
         method: "POST",
         headers: {
-            "Content-Type" : "application/json"
+            "Content-Type": "application/json"
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formData)
     })
-    .then((r) => r.json())
-    .then((data) => console.log(data))
-    setFormData(
-        {
-          event_date: '',
-          event_time: '',
-          early_booking_end_date: '',
-          early_booking_end_time: '',
-          early_booking_price_regular: '',
-          early_booking_price_vip: '',
-          location: '',
-          regular_price: '',
-          vip_price: '',
-          vip_no_of_tickets: '',
-          regular_no_of_tickets: '',
-          banner_img: '',
-          description:'',
-          image_url1:'',
-          image_url2:'',
-          category_id:'',
-          title:''
-        }
-    )}
 
+    setFormData({
+      category_id: '',
+      title: '',
+      event_start_date: '',
+      event_end_date: '',
+      ticket_format: '',
+      ticket_format: '',
+      early_booking_end_date: '',
+      early_booking_price_regular: '',
+      early_booking_price_vip: '',
+      location: '',
+      regular_price: '',
+      vip_price: '',
+      vip_no_of_tickets: '',
+      regular_no_of_tickets: '',
+      banner_img: '',
+      description: '',
+      image_url1: '',
+      image_url2: ''
+    })
+    router.push("/");
+  }
 
-      // function for handling input of data.
-      function handleChange(e){
-        setFormData({...formData, [e.target.name]: e.target.value});
-    }
-    
+  if(isLoading === true) return (
+    <Row justify="center" align="middle">
+      <div style={{marginTop: "25%"}}>
+        <div className="loader"></div>
+      </div>
+    </Row>
+  )
+
   return (
-   
-    <div className='create'>
-    <Form
-      labelCol={{
-        span: 4,
-      }}
-      wrapperCol={{
-        span: 14,
-      }}
-      onSubmit={handleSubmit}
-     
-    >
-     
-  
-      <Form.Item label="category" >
-      <select onChange={handleChange}name="category_id" >
-      <option value="1">Music</option>
-      <option value="2">Business</option>
-      <option value="3">Games</option>
-      <option value="4">Hobbies</option>
-      <option value="5">Food & Drink</option>
-      <option value="6">Performing Arts</option>
-      <option value="7">Sciences</option>
-      <option value="8">Sport & Fitness</option>
-    </select>
-      </Form.Item>
+    <div>
+      <Col span={24}>
+        <Row justify='center' align='middle'>
+          <div style={{ textAlign: "center"}}>
+            <h1 style={{ fontWeight: "bolder", fontSize: 15}}><i>Register your Event</i></h1>
+          </div>
+        </Row> 
+      </Col>
+      <Col span={24}>
+        <Form 
+        layout="vertical"
+        size='small'
+        onSubmit={handleSubmit}
+        >
+          <Row justify='center' align='middle'>
 
-      <Form.Item label="title">
-        <Input onChange={handleChange}name='title' value={formData.title}/>
-      </Form.Item>
+            <Col span={12}>
+              <Row justify='center' align='middle'>
+                <Form.Item 
+                label="Category"
+                style={{width: "70%"}}
+                required
+                >
+                  <select
+                  name='category_id'
+                  onChange={handleChange}
+                  style={{width: "100%"}}
+                  >
+                    <option value="">--Please choose a category--</option>
+                    {categoryData.map((category) => {
+                      return (
+                        <option key={category.id} value={category.id} >
+                          {category.title}
+                        </option>
+                      )
+                    })}
+                  </select>
+                </Form.Item>
+                <br />
+                <Form.Item
+                  label="Event Title"
+                  style={{width: "70%"}}
+                  required
+                >
+                  <Input name="title" onChange={handleChange} value={formData.title} placeholder="eg. BDO tournament"/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Event Starting Date"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input type='datetime-local' name="event_start_date" onChange={handleChange} value={formData.event_start_date} style={{width: "100%"}} />
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Event Ending Date"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input type='datetime-local' name="event_end_date" onChange={handleChange} value={formData.event_end_date} style={{width: "100%"}} showTime/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Early Booking End Date"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input type='datetime-local' name="early_booking_end_date" onChange={handleChange} value={formData.early_booking_end_date} style={{width: "100%"}} showTime/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Ticket Format"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input name="ticket_format" onChange={handleChange} value={formData.ticket_format} placeholder='eg. BDOTourney' type='text'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Early Regular Booking Ticket Price ($)"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input min={0} name="early_booking_price_regular" onChange={handleChange} value={formData.early_booking_price_regular} type='number'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Early Vip Booking Ticket Price ($)"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input min={0} name="early_booking_price_vip" onChange={handleChange} value={formData.early_booking_price_vip} type='number'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Regular Price ($)"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input min={0} name="regular_price" onChange={handleChange} value={formData.regular_price} type='number'/>
+                </Form.Item>
 
-      <Form.Item label="event_date">
-        <input type='date' onChange={handleChange}name='event_date' value={formData.event_date}/>
-      </Form.Item>
+              </Row>
+            </Col>
 
-      <Form.Item label="event_time">
-     
-        <input type='time' value={formData.event_time} size="large" onChange={handleChange}name='event_time' />
+            <Col span={12}>
+              <Row justify='center' align='middle'>
+                <Form.Item 
+                label="Location"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input name="location" onChange={handleChange} value={formData.location} placeholder='eg. Nairobi' type='text'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                  label="Vip Price ($)"
+                  style={{width: "70%"}}
+                  required
+                  >
+                    <Input min={0} name="vip_price" onChange={handleChange} value={formData.vip_price} type='number'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Number of Vip Tickets"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input min={0} name="vip_no_of_tickets" onChange={handleChange} value={formData.vip_no_of_tickets} type='number'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Number of Regular Tickets"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input min={0} name="regular_no_of_tickets" onChange={handleChange} value={formData.regular_no_of_tickets} type='number'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Description"
+                style={{width: "70%"}}
+                required
+                >
+                  <TextArea name="description" onChange={handleChange} value={formData.description} rows={4} />
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Banner Image"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input name="banner_img" onChange={handleChange} value={formData.banner_img} type='text'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Image Url"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input name="image_url1" onChange={handleChange} value={formData.image_url1} type='text'/>
+                </Form.Item>
+                <br />
+                <Form.Item 
+                label="Second Image Url"
+                style={{width: "70%"}}
+                required
+                >
+                  <Input name="image_url2" onChange={handleChange} value={formData.image_url2} type='text'/>
+                </Form.Item>
 
-      </Form.Item>
+              </Row>
+            </Col>
 
-      <Form.Item label="early_booking_end_date">
-      <input type='date'  onChange={handleChange}name='early_booking_end_date'/>
-      </Form.Item>
+          </Row>
+          <Col span={24}>
+            <Row justify='center' align='middle'>
+              <Form.Item 
+              style={{width: "30%"}}
+              >
+                <Button 
+                type='submit'
+                onClick={handleSubmit}
+                style={{width: "100%", 
+                backgroundColor: "#d1410a", 
+                color: "#fff",
+                height: 30,
+                borderRadius: 10
+                }}>
+                  Submit
+                </Button>
+              </Form.Item>
+            </Row>
+          </Col>
 
-      <Form.Item label="early_booking_end_time">
-      <input type='time' value={formData.early_booking_end_time} onChange={handleChange}name='early_booking_end_time' />
-      </Form.Item>
-   
-     
-      <Form.Item label="Early_booking_price_regular">
-        <input  type='integer' value={formData.early_booking_price_regular}  onChange={handleChange}name='early_booking_price_regular'/>
-      </Form.Item>
-
-        
-      <Form.Item label="Early_booking_price_vip">
-        <input value={formData.early_booking_price_vip}  onChange={handleChange} name='early_booking_price_vip'/>
-      </Form.Item>
-      
-   
-
-      <Form.Item label="location">
-      <Input value={formData.location} onChange={handleChange} name='location'/>
-      </Form.Item>
-
-    
-
-      <Form.Item label="Regular ticket price">
-        <input value={formData.regular_price} onChange={handleChange}name='regular_price'/>
-      </Form.Item>
-
-      <Form.Item label="vip ticket price">
-        <input value={formData.vip_price}onChange={handleChange}name='vip_price'/>
-      </Form.Item>
-
-
-      <Form.Item
-      label="ticket_format"
-      name="set format"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-      <Input.Password />
-      
- 
-
-<Form.Item label="vip_no_of_tickets">
-  <input value={formData.vip_no_of_tickets} onChange={handleChange}name='vip_no_of_tickets' />
-</Form.Item>
-
-<Form.Item label="regular_no_of_tickets">
-  <input value={formData.regular_no_of_tickets} onChange={handleChange}name='regular_no_of_tickets' />
-</Form.Item>
-
-      </Form.Item>
-      <Form.Item
-      label="earling_booking_end_date"
-      name="set date"
-        rules={[
-          {
-            required: true,
-            message: 'Please input your password!',
-          },
-        ]}
-      >
-      <Input.Password />
-      
-
-      <Form.Item label="banner_img">
-      <Input  value={formData.banner_img}onChange={handleChange}name='banner_img' />
-      </Form.Item>
-
-      <Form.Item label="description">
-      <Input  value={formData.description}onChange={handleChange} name='description'/>
-      </Form.Item>
-
-
-      <Form.Item label="image_url1">
-      <Input  value={formData.image_url1}onChange={handleChange}name='image_url1'/>
-      </Form.Item>
-
-      <Form.Item label="image_url1">
-      <Input value={formData.image_url2} onChange={handleChange}name='image_url2'/>
-      </Form.Item>
-      
-
-      </Form.Item>
-      
-      <Form.Item>
-        <Button type="Submit" 
-        // onClick={handleAuth}
-        >Submit
-        </Button>
-        </Form.Item>
-    </Form>
-    
-   </div>
+        </Form>
+      </Col>
+    </div>
   )
 }
-  
-export default event;
 
-
-     
+export default createvent

@@ -11,7 +11,7 @@ function Login({user, setUser}){
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
   const [error, setError] = useState([])
-
+  // const [user, setUser] = useState({})
 
   function handleSubmit(event){
     // event.preventDefault();
@@ -53,6 +53,8 @@ function Login({user, setUser}){
         <div className="illustration-wrapper">
           <img src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700" alt="Login"/>
         </div>
+        
+     
 
       {/* <Col xs={24} md={12}> */}
       <Form onFinish={handleSubmit} name="login-form">
@@ -95,7 +97,7 @@ function Login({user, setUser}){
               LOGIN
             </Button>
           </Form.Item>
-          <p>If you dont have an account?<Link href="/signup"> Click me!</Link></p>
+          <p>If you dont have an account? <Link href="/signup">SignUp</Link> </p>
         </Form>
       {/* </Col> */}
       </div>
