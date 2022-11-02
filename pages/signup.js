@@ -17,8 +17,8 @@ function SignUp() {
   const signData = {
     username: username,
     password: password,
-    isOrganizer: isOrganizer,
-    emailAddress: emailAddress
+    is_organizer: isOrganizer,
+    email: emailAddress
   }
 
   function handleCheckBox(event){
@@ -67,7 +67,7 @@ function SignUp() {
             onFinish={handleSubmit} 
              name="login-form">
             <p className="form-title">SIGN UP </p>
-            {/* <Form.Item
+            <Form.Item
               name="username"
               rules={[{ message: "Please input your username!" }]}
             >
@@ -78,7 +78,7 @@ function SignUp() {
                 placeholder="Input Username"
                 onChange={(event) =>setUsername(event.target.value)}
               />
-            </Form.Item> */}
+            </Form.Item>
 
             <Form.Item
               name="email"
@@ -101,7 +101,7 @@ function SignUp() {
             </Form.Item>
 
             <Form.Item>
-              <Checkbox onChange={handleCheckBox} value="true">Is Organizer?</Checkbox>
+              <Checkbox onChange={handleCheckBox} value={true}>Is Organizer?</Checkbox>
             </Form.Item>
 
             <Form.Item>

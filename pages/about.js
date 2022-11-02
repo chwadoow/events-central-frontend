@@ -9,7 +9,7 @@ const About  = () => {
     setUser(JSON.parse(window.localStorage.getItem("session") ))
   }
   ,[])
-  console.log(user.id)
+  // console.log(user.id)
 
 
   
