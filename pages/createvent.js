@@ -4,40 +4,10 @@ import  { useEffect, useState } from 'react';
 import moment from 'moment';
 const { option } = Select;
 
-const event= ({user,setUser}) => {
-  
-
-  useEffect(() => {
-    console.log("user from create event", window.localStorage.getItem('session')) 
-    
-    const session = sessionStorage.getItem('session')
-    if(session && !user.id){
-      fetch("http://localhost:3000/me", {
-        headers: {
-          Authorization: "Bearer " + session,
-        },
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data)
-        setUser(data)
-        console.log(user);
-      })
-    }
-    }, [user]);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/me")
-  //   .then((response) =>{
-  //       if(response.ok){
-  //         response.json().then((user) => setUser(user));
-  //       }
-  //   });
-  // }, []) 
+const event= () => {
+  const router= useRouter();
 
 
-
-  let router= useRouter()
     const [formData, setFormData] = useState({
     event_date: '',
     event_time: '',
@@ -58,27 +28,7 @@ const event= ({user,setUser}) => {
     title:''
     })
 
-  // useEffect(()=>{
-	// 	fetch('http://localhost:3000/auth')
-	// 	.then(res=>{
-	// 		if(res.status === 401){
-	// 			router.push('/login')
-	// 		}
-	// 	})
-
-  // },[]);
-
-  // function handleAuth(){
-  //   fetch('http://localhost:3000/auth')
-	// 	.then(res=>{
-	// 		if(res.status === 401){
-	// 			router.push('/login')
-	// 		}
-	// 	})
-  // }
  
-  
-
   function handleSubmit(e){
     e.preventDefault()
     fetch(`http://localhost:3000/events`, {
