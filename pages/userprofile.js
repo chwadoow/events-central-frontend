@@ -3,8 +3,12 @@ import { Row, Col } from 'antd';
 import { Image } from 'antd';
 import { Carousel } from 'antd';
 import { Descriptions } from 'antd';
+import { Layout } from 'antd';
+import { Button } from 'antd';
 
+const { Header, Footer, Sider, Content } = Layout;
 
+import { Table } from "antd";
 
 
 import 'antd/dist/antd.css';
@@ -17,143 +21,128 @@ import { Avatar, Card } from 'antd';
 function UserProfile() {
 const [user,setUser]=useState(null)
 const [userProfile,setUserProfile]=useState([])
+
+
     useEffect(() => {
       // getter
  setUser(  JSON.parse(window.localStorage.getItem('session')));   
 
-{user ?
+ user ?
+
  fetch(`http://localhost:3000/user_profiles/${user.id}`)
  .then(response => response.json())
  .then((data)=> {
 setUserProfile(data)
- })
- :console.log("not yet")}
- 
+ }):console.log("yeah")
+
+ console.log(userProfile)
 
     }, [])
 
-
-
-
-  
-
-
-
-
-
-
   return (
     <>
-    <Row>
-    <Col 
-    style={{width: "100%"}}  >
-  <Card
-    style={{
-      width: '100%' ,
-    }}
 
-  >
-    <Avatar src="https://joeschmoe.io/api/v1/random" />
-    
-  </Card>
-    </Col>
-   
-    
-  </Row>
+<Layout  >
+      <Header  style={{backgroundColor: "#fffcc0"}}>
 
-  <Row
-    style={{
-      width: "100%",
-      textAlign: 'center'
+<div    style={{float: "left"}}>
+moz
+</div>
+
+<div   style={{float: "right"}}>
+
+<EditOutlined/>
+edit
+
+</div>
+
+
+      </Header>
+
+
+      <Layout>
+
+
+ <Content>
+       
+    
+ 
+
+
+
+
+
+ <Row >
+
+      <Col span={10}>
+      <Image src={userProfile.avatar_img}/>
       
+      </Col>
+
+      <Col span={14}>
+
+          <Row>
+              <Col span={12}>
+                  <Card title="name" bordered={true}>
+                             {userProfile.full_name}
+                  </Card>
+
+              </Col>
+              <Col span={12}>
+                  <Card title="phone" bordered={true}>
+                             {userProfile.phone_number}
+                  </Card>
+
+              </Col>
+            </Row>
+            <Row>
+              <Col span={12}>
+                  <Card title="gender" bordered={true}>
+                             {userProfile.gender}
+                  </Card>
+
+              </Col>
+
+              <Col span={12}>
+                  <Card title="bio" bordered={true}>
+                             {userProfile.bio}
+                  </Card>
+
+              </Col>
+            </Row>
+
+
+
+
+      </Col>
+
+
+      
+</Row>
+
+
+
+
+    
+ 
   
-    }}
-  >
-  <Descriptions
-      title="Hello,welcome to your profile info"
-      bordered
-      column={{
-        xxl: 6,
-        xl: 3,
-        lg: 3,
-        md: 3,
-        sm: 2,
-        xs: 1,
-      }}
-      style={{
-        width: "130%"
-      }}
-    >
-      <Descriptions.Item label="name">{userProfile.full_name} </Descriptions.Item>
-      <Descriptions.Item label="gender">{userProfile.gender}</Descriptions.Item>
-      <Descriptions.Item label="phone">{userProfile.phone_number}</Descriptions.Item>
-      <Descriptions.Item label='email'>{userProfile.email}</Descriptions.Item>
-      <Descriptions.Item label="bio">{userProfile.bio}</Descriptions.Item>
-     
- 
-    </Descriptions>
+ </Content>
+      </Layout>
 
+<br></br>
+      <Footer
+        style={{textAlign:'center', 
+        backgroundColor: '#ffffff' }}>
 
-  </Row>
-     <Row>
-     {/* <Col xs={20} sm={20} md={20} lg={20} xl={20}
- >
-   <Card
-    //  style={{
-    //    width: '70%' ,
-    //  }}
- 
-   >
-   Edit
-     
-   </Card>
-     </Col> */}
-     <Col xs={24} sm={24} md={24} lg={24} xl={24}
-    >
-   <Card
-     style={{
-       textAlign: "center"
-     }}
- 
-   >
-   <EditOutlined/>
-   Edit
-     
-   </Card>
-     </Col>
-    
-     
-   </Row>
+<Button type="dashed" block >
+      View attended events
+    </Button>
+      
+      </Footer>
+    </Layout>
+  
 
-
-   <Row
-  //     style={{
-  //   textAlign: "center"
-  // }}
-   >
-<Col   
-
-
->
-    <p>past Events</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    </Col>
-   </Row>
-   </>
+    </>
   )
 }
 
