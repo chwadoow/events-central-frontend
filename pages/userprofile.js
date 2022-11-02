@@ -19,25 +19,27 @@ import { Avatar, Card } from 'antd';
 
 
 function UserProfile() {
-const [user,setUser]=useState(null)
+
 const [userProfile,setUserProfile]=useState([])
 
 
-    useEffect(() => {
-      // getter
- setUser(  JSON.parse(window.localStorage.getItem('session')));   
 
- !!user ?
+  
+const [user, setUser] = useState({})
+useEffect(()=>{
+  const session = JSON.parse(localStorage.getItem("session"))
 
- fetch(`http://localhost:3000/user_profiles/${user.id}`)
+
+
+  fetch(`http://localhost:3000/user_profiles/${session}`)
  .then(response => response.json())
  .then((data)=> {
 setUserProfile(data)
- }):console.log("yeah")
+ })
 
- console.log(userProfile)
+},[])
 
-    }, [])
+
 
   return (
     <>
