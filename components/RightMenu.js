@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, Avatar, Grid, Dropdown} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
@@ -8,7 +8,15 @@ import { useRouter } from 'next/router'
 const { useBreakpoint } = Grid;
 
 const RightMenu = () => {
-  // console.log(user)
+  
+  const [userData, setUserData] = useState({})
+  useEffect(()=>{
+    const session = JSON.parse(localStorage.getItem("session"))
+    fetch(`http://localhost:3000/users/${session}`)
+    .then(response => response.json())
+    .then(data => setUserData(data))
+  },[])
+  console.log(userData.is_organiser);
 
   let router= useRouter()
    // condition base redirecting
@@ -62,9 +70,17 @@ function redirect() {
        <Menu.Item >
           <a href="/"><b>Home</b></a>
         </Menu.Item>
-        <Menu.Item >
-          <a href="/createvent"><b>Create an Event</b></a>
-        </Menu.Item>
+        
+        {userData.is_organiser ? (
+          <Menu.Item>
+            <a href="/createvent">
+              <b>Create an Event</b>
+            </a>
+          </Menu.Item>
+        ) : (
+          " "
+        )}
+
         <Menu.Item >
           <a href="/about"><b>About Us</b></a>
         </Menu.Item>
