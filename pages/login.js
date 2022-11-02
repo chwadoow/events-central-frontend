@@ -30,8 +30,8 @@ function Login({user, setUser}){
       if(res.ok){
         res.json().then((data)=>
         {
-          window.localStorage.setItem('session', JSON.stringify(data));
-          console.log("logged in ? ", data) 
+          window.localStorage.setItem('session', JSON.stringify(data.id));
+          console.log("logged in ? ", data.id) 
           router.push('/')
           alert("You have loggged in successfully")
         } 
