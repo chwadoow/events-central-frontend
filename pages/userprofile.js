@@ -45,7 +45,7 @@ setUserProfile(data)
     <>
 
 <Layout  >
-      <Header  style={{backgroundColor: "#a0d2eb"}}>
+      <Header  style={{backgroundColor: "white"}}>
 
 <div    style={{float: "left"}}>
 
@@ -75,7 +75,7 @@ edit
       
       </Col>
 
-      <Col span={14}>
+      <Col span={14}  style={{  boxShadow:'  2px 2px 2px 2px'}}>
 
           <Row>
               <Col span={12}>
