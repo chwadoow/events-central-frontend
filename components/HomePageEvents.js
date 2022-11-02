@@ -17,12 +17,13 @@ const HomePageEvents = ({events}) => {
                   <Link href={`/specificevent/${event.id}`}>
                       <div >
 
-                        <Card style={{ 
+                        <Card className="homeCard" style={{ 
                           textAlign: "left", 
                           width: 280, 
-                          maxHeight: 600, 
+                          height: 500, 
                           padding: 2, 
                           cursor: "pointer",
+                          overflowY: "scroll"
                           }}
 
                           cover={<img alt={event.title} src={event.banner_img} height="200px"/>}

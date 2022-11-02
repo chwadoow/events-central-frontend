@@ -3,16 +3,6 @@ import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react';
 
 const About  = () => {
-  const [user, setUser] = useState(null)
-  useEffect(()=>
-  { 
-    setUser(JSON.parse(window.localStorage.getItem("session") ))
-  }
-  ,[])
-  console.log(user.id)
-
-
-  
   const [communityData, setCommunityData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
   const [randomIndexCommunity, setRandomIndex] = useState();
