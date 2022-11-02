@@ -70,7 +70,7 @@ const BuyTicketForm = ({ loading, event }) => {
   ).toString("base64");
 
   const number = mobileNumber.substring(1);
-
+    console.log(process.env.SHORTCODE)
   async function handleClick() {
     setProcessing(true);
 

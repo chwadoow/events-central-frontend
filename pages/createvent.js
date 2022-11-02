@@ -1,8 +1,10 @@
 import { Col, Row, DatePicker, Form, Input, Button } from 'antd'
 import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect, useState } from 'react'
+import { useRouter } from "next/router";
 
 const createvent = () => {
+  let router = useRouter()
   const [isLoading, setIsLoading] = useState(true);
   const [categoryData, setCategoryData] = useState({});
   const [formData, setFormData] = useState({
@@ -73,6 +75,7 @@ const createvent = () => {
       image_url1: '',
       image_url2: ''
     })
+    router.push("/");
   }
 
   if(isLoading === true) return (
