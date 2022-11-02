@@ -32,8 +32,9 @@ function Login({user, setUser}){
         {
           window.localStorage.setItem('session', JSON.stringify(data.id));
           console.log("logged in ? ", data.id) 
-          router.push('/')
           alert("You have loggged in successfully")
+          router.push('/')
+          
         } 
          
         )

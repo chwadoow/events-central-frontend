@@ -9,9 +9,7 @@ const BuyTicketForm = ({ loading, event }) => {
   const [regularTickets, setRegularTickets] = useState(0);
   const [componentSize, setComponentSize] = useState("default");
   const [mobileNumber, setPhoneNumber] = useState("");
-  const onFormLayoutChange = ({ size }) => {
-    setComponentSize(size);
-  };
+ 
   let date = new Date();
 
   let timestamp =
@@ -125,19 +123,8 @@ const BuyTicketForm = ({ loading, event }) => {
         span: 14,
       }}
       layout="horizontal"
-      initialValues={{
-        size: componentSize,
-      }}
-      onValuesChange={onFormLayoutChange}
-      size={componentSize}
+      size="small"
     >
-      <Form.Item label="Form Size" name="size">
-        <Radio.Group>
-          <Radio.Button value="small">Small</Radio.Button>
-          <Radio.Button value="default">Default</Radio.Button>
-          <Radio.Button value="large">Large</Radio.Button>
-        </Radio.Group>
-      </Form.Item>
       <Form.Item label="Ticket No:">
         <label>{`GamCOD` + `${ticketNumber + 1}`}</label>
       </Form.Item>
@@ -181,7 +168,7 @@ const BuyTicketForm = ({ loading, event }) => {
         />
       </Form.Item>
       <Form.Item>
-        <Button
+        <Button style={{backgroundColor: "#d1410a", cursor: "pointer", width: "70%", margin: 20, color: "#fff", borderRadius: 10, height: 40, border: "none"}}
           type="primary"
           htmlType="submit"
           loading={processing}
