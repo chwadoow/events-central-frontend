@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, Avatar, Grid, Dropdown} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
@@ -8,10 +8,17 @@ import { useRouter } from 'next/router'
 const { useBreakpoint } = Grid;
 
 const RightMenu = () => {
-  // console.log(user)
+  
+  const [userData, setUserData] = useState({})
+  useEffect(()=>{
+    const session = JSON.parse(localStorage.getItem("session"))
+    fetch(`http://localhost:3000/users/${session}`)
+    .then(response => response.json())
+    .then(data => setUserData(data))
+  },[])
+  console.log(userData.is_organiser);
 
   let router= useRouter()
-   // condition base redirecting
 function redirect() {
   router.push('/')
 }
@@ -33,27 +40,20 @@ function redirect() {
     const menu = (
       <Menu>
         <Menu.Item>
-            <a
-              href="/login"
-            >
-              Login
-            </a>
-        </Menu.Item>
-        <Menu.Item>
-          <a
-            href="/userprofile"
-          >
-            View Profile
-          </a>
-        </Menu.Item>
-         <Menu.Item>
-          <a
-            onClick={handleLogout}
-          >
-            Logout 
-          </a>
+          <a href="/login">Login</a>
         </Menu.Item>
 
+        <Menu.Item>
+          <a href="/userprofile">View Profile</a>
+        </Menu.Item>
+
+        <Menu.Item>
+          <a href="/viewevents">View Events</a>
+        </Menu.Item>
+
+        <Menu.Item>
+          <a onClick={handleLogout}>Logout</a>
+        </Menu.Item>
       </Menu>
     );
 
@@ -62,26 +62,30 @@ function redirect() {
        <Menu.Item >
           <a href="/"><b>Home</b></a>
         </Menu.Item>
-        <Menu.Item >
-          <a href="/createvent"><b>Create an Event</b></a>
-        </Menu.Item>
+        
+        {userData.is_organiser ? (
+          <Menu.Item>
+            <a href="/createvent">
+              <b>Create an Event</b>
+            </a>
+          </Menu.Item>
+        ) : (
+          " "
+        )}
+
         <Menu.Item >
           <a href="/about"><b>About Us</b></a>
         </Menu.Item>
         <Menu.Item>
           <div>
-          <Dropdown
-              overlay={menu}
-              trigger={["click"]}
-              placement="bottomLeft"
-          >
-            {/* <Link  href={`/userprofile`}> */}
+            <Dropdown overlay={menu} trigger={["click"]} placement="bottomLeft">
+              {/* <Link  href={`/userprofile`}> */}
               <Avatar size={35} icon={<UserOutlined />} />
               {/* </Link> */}
-          </Dropdown>
+            </Dropdown>
           </div>
         </Menu.Item>
-    </Menu>
+      </Menu>
     );
 }
 
