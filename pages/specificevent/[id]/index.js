@@ -1,4 +1,4 @@
-import { Col, Row, Modal } from "antd";
+import { Col, Row, Modal, Divider } from "antd";
 import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
@@ -135,6 +135,7 @@ const SpecificEvent = () => {
               </div>
             </Row>    
           </Col>
+          <Divider style={{border: "1px solid black"}} />
           <Col span={12}>
             <Row justify="center" align="middle" style={{marginTop: 30}}>
               <div style={{ textAlign: "center", border: 1, borderStyle: "solid", cursor: "pointer", borderRadius: 10, width: "60%"}}>
@@ -142,34 +143,46 @@ const SpecificEvent = () => {
                 <p style={{color: "#d1410a", fontSize: 30}}>
                   <b>
                   <i>
-                    { `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`}
+                  {eventOne.time_diff < 0 ?
+                    (<p>Event has passed</p>)
+                    : (
+                      `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`
+                    )
+                  }
                   </i>
                   </b>
                 </p>
               </div>
-              <br />
             </Row>
           </Col>
         </Row>
+        <br />
       </Col>
 
       <br />
 
       <Col span={24}>
-        <Row>
+        <Row justify="center" align="middle">
           <Col span={12}>
             <Row justify="center" align="middle">
               <Col span={6}>
-                <div style={{ textAlign: "center", fontFamily: "nunito" }}>
-                  <h4 style={{fontWeight: "regular", fontSize: 25}}>Date</h4>
-                  <p>{new Date(eventOne.event_start_date).toDateString()}</p>
-                </div>
+                <Row justify="start" align="middle">
+                  <div style={{ textAlign: "center", fontFamily: "nunito" }}>
+                    <h4 style={{fontWeight: "regular", fontSize: 25}}>Date</h4>
+                    <p>{new Date(eventOne.event_start_date).toDateString()}</p>
+                  </div>
+                </Row>
               </Col>
+              &nbsp;
+              &nbsp;
+              &nbsp;
               <Col span={6}>
-                <div style={{textAlign: "right", fontFamily: "nunito" }}>
-                  <h4 style={{fontWeight: "regular", fontSize: 25}}>Location</h4>
-                  <p>{eventOne.location}</p>
-                </div> 
+                <Row justify="end" align="middle">
+                  <div style={{textAlign: "center", fontFamily: "nunito" }}>
+                    <h4 style={{fontWeight: "regular", fontSize: 25}}>Location</h4>
+                    <p>{eventOne.location}</p>
+                  </div> 
+                </Row>
               </Col>
             </Row>
           </Col>
