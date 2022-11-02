@@ -27,7 +27,7 @@ const [userProfile,setUserProfile]=useState([])
       // getter
  setUser(  JSON.parse(window.localStorage.getItem('session')));   
 
- user ?
+ !!user ?
 
  fetch(`http://localhost:3000/user_profiles/${user.id}`)
  .then(response => response.json())
@@ -43,10 +43,11 @@ setUserProfile(data)
     <>
 
 <Layout  >
-      <Header  style={{backgroundColor: "#fffcc0"}}>
+      <Header  style={{backgroundColor: "#a0d2eb"}}>
 
 <div    style={{float: "left"}}>
-moz
+
+  Welcome 
 </div>
 
 <div   style={{float: "right"}}>
@@ -63,18 +64,11 @@ edit
       <Layout>
 
 
- <Content>
-       
-    
- 
-
-
-
-
+ <Content   style={{backgroundColor: "#ffffff"}}>
 
  <Row >
 
-      <Col span={10}>
+      <Col span={10} style={{textAlign:'center'}}>
       <Image src={userProfile.avatar_img}/>
       
       </Col>
@@ -83,11 +77,12 @@ edit
 
           <Row>
               <Col span={12}>
-                  <Card title="name" bordered={true}>
+                  <Card title="name" bordered={true}   >
                              {userProfile.full_name}
                   </Card>
 
               </Col>
+             
               <Col span={12}>
                   <Card title="phone" bordered={true}>
                              {userProfile.phone_number}
@@ -120,16 +115,10 @@ edit
       
 </Row>
 
-
-
-
-    
- 
-  
  </Content>
       </Layout>
 
-<br></br>
+
       <Footer
         style={{textAlign:'center', 
         backgroundColor: '#ffffff' }}>
