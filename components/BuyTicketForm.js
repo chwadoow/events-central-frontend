@@ -1,7 +1,9 @@
 import { Button, Form, Input, Radio } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const BuyTicketForm = ({ loading, event }) => {
+   const session = localStorage.getItem("session");
+   console.log(session);
   const [processing, setProcessing] = useState(false);
   const [vipTickets, setVipTickets] = useState(0);
   const [regularTickets, setRegularTickets] = useState(0);
@@ -68,7 +70,7 @@ const BuyTicketForm = ({ loading, event }) => {
   ).toString("base64");
 
   const number = mobileNumber.substring(1);
-
+    console.log(process.env.SHORTCODE)
   async function handleClick() {
     setProcessing(true);
 
@@ -76,18 +78,7 @@ const BuyTicketForm = ({ loading, event }) => {
       // get the token
       const resp = await fetch("http://localhost:7000/api/mpesa-auth");
       const data = await resp.json();
-      console.log({
-        BusinessShortCode: 174379,
-        Password: password,
-        Timestamp: timestamp,
-        Amount: totalAmount,
-        PartyA: `254${number}`,
-        PartyB: 174379,
-        PhoneNumber: `254${number}`,
-        CallBackURL: "https://mydomain.com/pat",
-        AccountReference: `254${number}`,
-        TransactionDesc: "ETickets",
-      });
+      
       const paySend = await fetch(
         "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
         {
