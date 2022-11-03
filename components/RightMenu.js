@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+import { UserOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Menu, Avatar, Grid, Dropdown, notification} from 'antd';
 import { UserOutlined } from '@ant-design/icons';
@@ -16,7 +18,6 @@ const RightMenu = () => {
     .then(response => response.json())
     .then(data => setUserData(data))
   },[])
-  console.log(userData.is_organiser);
 
   let router= useRouter()
 function redirect() {

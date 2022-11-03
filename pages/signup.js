@@ -17,16 +17,14 @@ function SignUp() {
   const signData = {
     username: username,
     password: password,
-    is_organizer: isOrganizer,
+    is_organiser: isOrganizer,
     email: emailAddress
   }
 
   function handleCheckBox(event){
     setIsOrganizer(event.target.value)
+    console.log(event.target.value)
   }
-  
-  console.log(signData)
-
   function handleSubmit(e) {
     // e.preventDefault();
 
