@@ -17,6 +17,9 @@ a {
     margin-left: 15%;
   }
 }
+.homeCard::-webkit-scrollbar {
+  display: none;
+}
 
 .create{
   height: 100%;
