@@ -1,8 +1,8 @@
 import Link from "next/link"
 import {useState} from "react"
 import { useRouter } from 'next/router'
-import { Form, Input, Button, Checkbox } from 'antd';
-import { NoStyleItemContext } from "antd/lib/form/context";
+import { Form, Input, Button, Checkbox , notification} from 'antd';
+import { NoStyleItemContext } from "antd/lib/form/context"
 
 
 function Login({user, setUser}){
@@ -12,6 +12,7 @@ function Login({user, setUser}){
   const [password, setPassword] = useState("")
   const [error, setError] = useState([])
   // const [user, setUser] = useState({})
+
 
   function handleSubmit(event){
     // event.preventDefault();
@@ -32,9 +33,7 @@ function Login({user, setUser}){
         {
           window.localStorage.setItem('session', JSON.stringify(data.id));
           console.log("logged in ? ", data.id) 
-          alert("You have loggged in successfully")
           router.push('/')
-          
         } 
          
         )
@@ -52,7 +51,7 @@ function Login({user, setUser}){
         <div className="login-page">
       <div className="login-box">
         <div className="illustration-wrapper">
-          <img src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700" alt="Login"/>
+          <img src="https://images.pexels.com/photos/382297/pexels-photo-382297.jpeg?cs=srgb&dl=pexels-salah-alawadhi-382297.jpg&fm=jpg" alt="Login"/>
         </div>
         
      
@@ -94,6 +93,14 @@ function Login({user, setUser}){
           <Form.Item>
             <Button 
             // onClick={handleSubmit}
+            onClick={() => {
+              notification.open({
+                message: 'Login Status',
+                description:
+                  'Login Successfully!',
+                duration: 1.5,
+              });
+            }}
             htmlType="submit" className="login-form-button" >
               LOGIN
             </Button>
