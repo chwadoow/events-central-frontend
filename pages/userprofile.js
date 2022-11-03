@@ -21,6 +21,8 @@ import { Avatar, Card } from 'antd';
 
 function UserProfile( homebanners) {
 
+  const [showForm,setShowForm]= useState(true)
+
 const [userProfile,setUserProfile]=useState([])
 
 const[userData,setUserData]=useState('')
@@ -56,6 +58,9 @@ console.log(userData.events)
   return (
     <>
 
+{   showForm ?
+<>
+
 <Layout  >
       <Header  style={{backgroundColor: "white"}}>
 
@@ -65,9 +70,10 @@ console.log(userData.events)
 </div>
 
 <div   style={{float: "right"}}>
-
+<Button  onClick={e=>setShowForm(!showForm)}> 
 <EditOutlined/>
 edit
+</Button>
 
 </div>
 
@@ -80,40 +86,12 @@ edit
 
  <Content   style={{backgroundColor: "#ffffff"}}>
 
- {/* <Row >
-        <Col span={24}>
-          <Carousel 
-          autoplay
-          autoplaySpeed={3000}
-          easing
-          effect="scrollx"
-          dots={false}
-          draggable
-          pauseOnHover={true}
-          >
-              
-             
-                  <>
-                    <img 
-                      src={'https://p4.wallpaperbetter.com/wallpaper/562/719/645/bar-club-dance-dancing-wallpaper-preview.jpg'}
-                   
-                      style={{
-                        width: "100%",
-                        height: "50vh",
-                        padding: '10px'
-                      }}
-                    />
-                  </>
-                
-          </Carousel>
-        </Col>
-      </Row> */}
 
       <Row >
 
 <Col span={24} style={{textAlign:'center',columnRuleStyle: 'dotted'}}>
  
-<Image src={userProfile.avatar_img}/>
+<Image src={userProfile.avatar_img} />
 
 </Col>
 
@@ -222,6 +200,26 @@ edit
       
       </Footer>
     </Layout>
+    </>
+
+    : 
+    
+<>
+
+
+</>
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    }
   
 
     </>
@@ -232,52 +230,4 @@ export default UserProfile
 
 
 
-{/* 
- <Row >
 
-      <Col span={7} style={{textAlign:'center'}}>
-      <Image src={userProfile.avatar_img}/>
-      
-      </Col>
-
-      <Col span={14}  style={{  boxShadow:'  2px 2px 2px 2px'}}>
-
-          <Row>
-              <Col span={12}>
-                  <Card title="name" bordered={true}   >
-                             {userProfile.full_name}
-                  </Card>
-
-              </Col>
-             
-              <Col span={12}>
-                  <Card title="phone" bordered={true}>
-                             {userProfile.phone_number}
-                  </Card>
-
-              </Col>
-            </Row>
-            <Row>
-              <Col span={12}>
-                  <Card title="gender" bordered={true}>
-                             {userProfile.gender}
-                  </Card>
-
-              </Col>
-
-              <Col span={12}>
-                  <Card title="bio" bordered={true}>
-                             {userProfile.bio}
-                  </Card>
-
-              </Col>
-            </Row>
-
-
-
-
-      </Col>
-
-
-      
-</Row> */}
