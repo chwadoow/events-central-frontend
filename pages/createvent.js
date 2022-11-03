@@ -53,21 +53,6 @@ const createvent = () => {
     e.preventDefault();
     const data = new FormData();
     
-    // data.append("post[category_id]", e.target.category_id.value);
-    // data.append("post[title]", e.target.title.value);
-    // data.append("post[event_start_date]", e.target.event_start_date.value);
-    // data.append("post[event_end_date]", e.target.event_end_date.value);
-    // data.append("post[ticket_format]", e.target.ticket_format.value);
-    // data.append("post[early_booking_end_date]", e.target.early_booking_end_date.value);
-    // data.append("post[early_booking_price_regular]", e.target.early_booking_price_regular.value);
-    // data.append("post[early_booking_price_vip]", e.target.early_booking_price_vip.value);
-    // data.append("post[location]", e.target.location.value);
-    // data.append("post[regular_price]", e.target.regular_price.value);
-    // data.append("post[vip_price]", e.target.vip_price.value);
-    // data.append("post[vip_no_of_tickets]", e.target.vip_no_of_tickets.value);
-    // data.append("post[regular_no_of_tickets]", e.target.regular_no_of_tickets.value);
-    // data.append("post[description]", e.target.description.value);
-    
     Object.keys(formData).forEach(key => {
       data.append(key, formData[key])
     });
@@ -75,10 +60,6 @@ const createvent = () => {
     Object.keys(imgsUpload).forEach(key => {
       data.append(key, imgsUpload[key])
     });
-
-    // data.append("post[banner_img]", e.target.banner_img.files[0]);
-    // data.append("post[image_url1]", e.target.image_url1.files[0]);
-    // data.append("post[image_url2]", e.target.image_url2.files[0]);
 
     submitToApi(data);
   }
