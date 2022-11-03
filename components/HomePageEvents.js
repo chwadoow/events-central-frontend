@@ -26,7 +26,7 @@ const HomePageEvents = ({events}) => {
                           overflowY: "scroll"
                           }}
 
-                          cover={<img alt={event.title} src={event.banner_img} height="200px"/>}
+                          cover={<img alt={event.title} src={event.banner_img_url} height="200px"/>}
                           hoverable
                         >
                           <div>

@@ -81,7 +81,7 @@ function event(){
                         cover={
                           <img
                             alt={event.title}
-                            src={event.banner_img}
+                            src={event.banner_img_url}
                             height="200px"
                           />
                         }
