@@ -43,6 +43,9 @@ const SpecificEvent = () => {
     }, 500);
   };
 
+  const closeModal = () => {
+    setOpen(false);
+  };
   const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
   const [myTimer, setMyTimer] = useState({});
 
@@ -334,6 +337,7 @@ const SpecificEvent = () => {
                         loading={confirmLoading}
                         onClick={handleOk}
                         event={eventOne}
+                        closeModal={closeModal}
                       />
                     </Modal>
                   </div>

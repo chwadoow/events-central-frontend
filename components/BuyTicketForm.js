@@ -1,14 +1,16 @@
+import { useRouter } from "next/router";
 import { Button, Form, Input, Radio } from "antd";
 import React, { useState, useEffect } from "react";
 
-const BuyTicketForm = ({ loading, event }) => {
-  const session = localStorage.getItem("session");
+const BuyTicketForm = ({ loading, event, closeModal }) => {
+  const session = JSON.parse(localStorage.getItem("session"));
+  const router = useRouter();
+  const { id } = router.query;
   const [processing, setProcessing] = useState(false);
   const [vipTickets, setVipTickets] = useState(0);
   const [regularTickets, setRegularTickets] = useState(0);
   const [componentSize, setComponentSize] = useState("default");
   const [mobileNumber, setPhoneNumber] = useState("");
-
   let date = new Date();
   let timestamp =
     date.getFullYear() +
@@ -66,26 +68,33 @@ const BuyTicketForm = ({ loading, event }) => {
   ).toString("base64");
 
   const number = mobileNumber.substring(1);
-  async function handleClick() {
-      // fetch("http://localhost:7000/tickets",{
-      //   method: "POST",
-      //   header:{
-
-      //   },
-      //   body : JSON.stringify({
-      //     ticket_no: eventTicket,
-      //     // user_id: 
-      //     // event_id:
-      //     // number_of_vip_tickets:
-      //     // number_of_regular_tickets:
-      //   })
-      // })
+  // async function handleClick() {
+  function handleClick() {
+    const formData = {
+      ticket_no: eventTicket,
+      user_id: session,
+      event_id: parseInt(id),
+      number_of_vip_tickets: parseInt(vipTickets),
+      number_of_regular_tickets: parseInt(regularTickets),
+    };
+    fetch("http://[::1]:3000/tickets", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        alert(data.message);
+        closeModal;
+        router.push("/");
+      });
     // setProcessing(true);
-
     // try {
     //   const resp = await fetch("http://localhost:7000/api/mpesa-auth");
     //   const data = await resp.json();
-
     //   const paySend = await fetch(
     //     "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
     //     {
@@ -107,9 +116,7 @@ const BuyTicketForm = ({ loading, event }) => {
     //       }),
     //     }
     //   );
-
     //   const paySendInfo = await paySend.json();
-
     //   // .then((response)=> {
     //   //   z.log(response)
     //   // response.status(200).json(data)}).catch((error)=>
@@ -120,7 +127,7 @@ const BuyTicketForm = ({ loading, event }) => {
     //   setProcessing(false);
     // }
   }
-    const eventTicket = event.ticket_format + `${ticketNumber + 1}`;
+  const eventTicket = event.ticket_format + `${ticketNumber + 1}`;
   return (
     <Form
       labelCol={{
@@ -133,7 +140,6 @@ const BuyTicketForm = ({ loading, event }) => {
       size="small"
     >
       <Form.Item label="Ticket No:">
-        {/* <label>{`GamCOD` + `${ticketNumber + 1}`}</label> */}
         <label>{eventTicket}</label>
       </Form.Item>
       <Form.Item label="VIP">
