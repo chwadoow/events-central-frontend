@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
-import { Button, Form, Input, Radio } from "antd";
-import React, { useState, useEffect } from "react";
+import { Button, Form, Input, message } from "antd";
+import React, { useState } from "react";
 
-const BuyTicketForm = ({ loading, event, closeModal }) => {
+const BuyTicketForm = ({ loading, event, onClick }) => {
   const session = JSON.parse(localStorage.getItem("session"));
   const router = useRouter();
   const { id } = router.query;
-  const [processing, setProcessing] = useState(false);
   const [vipTickets, setVipTickets] = useState(0);
   const [regularTickets, setRegularTickets] = useState(0);
   const [componentSize, setComponentSize] = useState("default");
@@ -195,8 +194,11 @@ const BuyTicketForm = ({ loading, event, closeModal }) => {
           }}
           type="primary"
           htmlType="submit"
-          loading={processing}
-          onClick={handleClick}
+          loading={loading}
+          onClick={() => {
+            onClick()
+            message.success("Payment Successful!")
+          }}
         >
           Submit
         </Button>
