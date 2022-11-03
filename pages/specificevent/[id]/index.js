@@ -2,19 +2,21 @@ import { Col, Row, Modal, Divider, Button } from "antd";
 import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
-import Script from 'next/script';
-import { gapi } from 'gapi-script';
+import Script from "next/script";
+import { gapi } from "gapi-script";
 
 const SpecificEvent = () => {
   const session = JSON.parse(localStorage.getItem("session"));
   var CLIENT_ID = "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
   var API_KEY = "AIzaSyDSu0IfbznPAlKhL8LKY6YZuwItkfLwLvE";
-  var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
-  var SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+  var DISCOVERY_DOCS = [
+    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+  ];
+  var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
   const [eventOne, setEventOne] = useState({});
   const router = useRouter();
-  const {id} = router.query;
+  const { id } = router.query;
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -45,33 +47,33 @@ const SpecificEvent = () => {
 
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
-
       gapi.client.init({
         apiKey: API_KEY,
         clientId: CLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES
-      })
+        scope: SCOPES,
+      });
 
-      gapi.client.load('calendar', 'v3',)
+      gapi.client.load("calendar", "v3");
 
-      gapi.auth2.getAuthInstance().signIn()
-      .then(() => {
-
-        var event = {
-          'summary': eventOne.title,
-          'location': eventOne.location,
-          'description': eventOne.description,
-          'colorId': '6',
-          'start': {
-            'dateTime': new Date(eventOne.event_start_date).toJSON(),
-            'timeZone': 'Africa/Nairobi'
-          },
-          'end': {
-            'dateTime': new Date(eventOne.event_end_date).toJSON(),
-            'timeZone': 'Africa/Nairobi'
-          },
-        };
+      gapi.auth2
+        .getAuthInstance()
+        .signIn()
+        .then(() => {
+          var event = {
+            summary: eventOne.title,
+            location: eventOne.location,
+            description: eventOne.description,
+            colorId: "6",
+            start: {
+              dateTime: new Date(eventOne.event_start_date).toJSON(),
+              timeZone: "Africa/Nairobi",
+            },
+            end: {
+              dateTime: new Date(eventOne.event_end_date).toJSON(),
+              timeZone: "Africa/Nairobi",
+            },
+          };
 
         var request = gapi.client.calendar.events.insert({
           'calendarId': 'primary',
@@ -126,7 +128,7 @@ const SpecificEvent = () => {
       showModal()
     }
   }
- 
+
   return (
     <>
       <Script src="https://apis.google.com/js/api.js" type="text/javascript" />
@@ -360,6 +362,7 @@ const SpecificEvent = () => {
                         loading={confirmLoading}
                         onClick={handleOk}
                         event={eventOne}
+                        closeModal={closeModal}
                       />
                     </Modal>
                   </div>
@@ -439,6 +442,6 @@ const SpecificEvent = () => {
       </Row>
     </>
   );
-}
+};
 
 export default SpecificEvent;
