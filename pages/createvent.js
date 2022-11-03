@@ -1,4 +1,4 @@
-import { Col, Row, Form, Input, Button, message, Steps } from 'antd'
+import { Col, Row, Form, Input, Button, message, Steps} from 'antd'
 import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect, useState } from 'react'
 import { useRouter } from "next/router";
@@ -9,12 +9,13 @@ const createvent = () => {
   let router = useRouter()
   const [isLoading, setIsLoading] = useState(true);
   const [categoryData, setCategoryData] = useState({});
+  const [imgsUpload, setImgsUpload] = useState({});
+  const [current, setCurrent] = useState(0);
   const [formData, setFormData] = useState({
     category_id: '',
     title: '',
     event_start_date: '',
     event_end_date: '',
-    ticket_format: '',
     ticket_format: '',
     early_booking_end_date: '',
     early_booking_price_regular: '',
@@ -24,18 +25,20 @@ const createvent = () => {
     vip_price: '',
     vip_no_of_tickets: '',
     regular_no_of_tickets: '',
-    banner_img: '',
     description: '',
-    image_url1: '',
-    image_url2: ''
-  });
-  const [current, setCurrent] = useState(0);
-  const next = () => {
-    setCurrent(current + 1);
-  };
-  const prev = () => {
-    setCurrent(current - 1);
-  };
+  })
+
+  function handleChange(e){
+    setFormData({
+        ...formData, [e.target.name]: e.target.value,
+    });
+  }
+
+  function handleImages(e){
+    setImgsUpload({
+      ...imgsUpload, [e.target.name]: e.target.files[0],
+    });
+  }
 
   useEffect(()=>{
     fetch(`http://localhost:3000/categories`)
@@ -46,41 +49,46 @@ const createvent = () => {
     })
   },[])
 
-  function handleChange(e){
-    setFormData({
-        ...formData, [e.target.name]: e.target.value,
-    });
-  }
   function handleSubmit(e){
     e.preventDefault();
+    const data = new FormData();
+    
+    // data.append("post[category_id]", e.target.category_id.value);
+    // data.append("post[title]", e.target.title.value);
+    // data.append("post[event_start_date]", e.target.event_start_date.value);
+    // data.append("post[event_end_date]", e.target.event_end_date.value);
+    // data.append("post[ticket_format]", e.target.ticket_format.value);
+    // data.append("post[early_booking_end_date]", e.target.early_booking_end_date.value);
+    // data.append("post[early_booking_price_regular]", e.target.early_booking_price_regular.value);
+    // data.append("post[early_booking_price_vip]", e.target.early_booking_price_vip.value);
+    // data.append("post[location]", e.target.location.value);
+    // data.append("post[regular_price]", e.target.regular_price.value);
+    // data.append("post[vip_price]", e.target.vip_price.value);
+    // data.append("post[vip_no_of_tickets]", e.target.vip_no_of_tickets.value);
+    // data.append("post[regular_no_of_tickets]", e.target.regular_no_of_tickets.value);
+    // data.append("post[description]", e.target.description.value);
+    
+    Object.keys(formData).forEach(key => {
+      data.append(key, formData[key])
+    });
+
+    Object.keys(imgsUpload).forEach(key => {
+      data.append(key, imgsUpload[key])
+    });
+
+    // data.append("post[banner_img]", e.target.banner_img.files[0]);
+    // data.append("post[image_url1]", e.target.image_url1.files[0]);
+    // data.append("post[image_url2]", e.target.image_url2.files[0]);
+
+    submitToApi(data);
+  }
+
+  function submitToApi(data){
     fetch(`http://localhost:3000/events`,{
         method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(formData)
+        body: data
     })
 
-    setFormData({
-      category_id: '',
-      title: '',
-      event_start_date: '',
-      event_end_date: '',
-      ticket_format: '',
-      ticket_format: '',
-      early_booking_end_date: '',
-      early_booking_price_regular: '',
-      early_booking_price_vip: '',
-      location: '',
-      regular_price: '',
-      vip_price: '',
-      vip_no_of_tickets: '',
-      regular_no_of_tickets: '',
-      banner_img: '',
-      description: '',
-      image_url1: '',
-      image_url2: ''
-    })
     message.success('Event has been created and Posted!')
     router.push("/");
   }
@@ -128,7 +136,7 @@ const createvent = () => {
             <Form
             layout="vertical"
             size='default'
-            onSubmit={handleSubmit}
+            onSubmit={(e) => handleSubmit(e)}
             style={{width: "100%", marginLeft: "30%", marginRight: "30%"}}
             >
               {current == [0] &&
@@ -160,7 +168,7 @@ const createvent = () => {
                   style={{width: "100%"}}
                   required
                 >
-                  <Input name="title" onChange={handleChange} value={formData.title} placeholder="eg. BDO tournament"/>
+                  <Input onChange={handleChange} value={formData.title} name="title" placeholder="eg. BDO tournament"/>
                 </Form.Item>
 
                 <Form.Item 
@@ -269,29 +277,32 @@ const createvent = () => {
                   <TextArea name="description" onChange={handleChange} value={formData.description} rows={4} />
                 </Form.Item>
                 
-                <Form.Item 
-                label="Banner Image"
-                style={{width: "100%"}}
-                required
-                >
-                  <Input name="banner_img" onChange={handleChange} value={formData.banner_img} type='text'/>
-                </Form.Item>
-                
-                <Form.Item 
-                label="Image Url"
-                style={{width: "100%"}}
-                required
-                >
-                  <Input name="image_url1" onChange={handleChange} value={formData.image_url1} type='text'/>
-                </Form.Item>
-                
-                <Form.Item 
-                label="Second Image Url"
-                style={{width: "100%"}}
-                required
-                >
-                  <Input name="image_url2" onChange={handleChange} value={formData.image_url2} type='text'/>
-                </Form.Item>
+                <div >
+                  <Form.Item 
+                  label="Banner Image Upload"
+                  style={{width: "100%"}}
+                  required
+                  >
+                    <input type="file" onChange={handleImages} name="banner_img" id="banner_img" />
+                  </Form.Item>
+                  
+                  <Form.Item 
+                  label="First Image Upload"
+                  style={{width: "100%"}}
+                  required
+                  >
+                    <input type="file" onChange={handleImages} name="image_url1" id="image_url1" />
+                  </Form.Item>
+                  
+                  <Form.Item 
+                  label="Second Image Upload"
+                  style={{width: "100%"}}
+                  required
+                  >
+                    <input type="file" onChange={handleImages} name="image_url2" id="image_url2" />
+                  </Form.Item>
+                </div>
+
                 <Col span={24}>
                   <Row justify='center' align='middle'>
                     <Form.Item 
@@ -299,7 +310,7 @@ const createvent = () => {
                     >
                       <Button 
                       type='submit'
-                      onClick={handleSubmit}
+                      onClick={(e) => handleSubmit(e)}
                       style={{width: "100%", 
                       backgroundColor: "#d1410a", 
                       color: "#fff",

@@ -136,7 +136,7 @@ const SpecificEvent = () => {
       <Row justify="center" align="middle">
         <Col span={24}>
           <img
-            src={eventOne.banner_img}
+            src={eventOne.banner_img_url}
             alt="Tech"
             style={{
               width: "100%",
@@ -395,7 +395,7 @@ const SpecificEvent = () => {
                   >
                     <Row justify="center" align="middle">
                       <img
-                        src={eventOne.image_url1}
+                        src={eventOne.first_img_url}
                         alt="Tech"
                         style={{
                           width: "100%",
@@ -421,7 +421,7 @@ const SpecificEvent = () => {
                     <Row justify="center" align="middle">
                       <Col>
                         <img
-                          src={eventOne.image_url2}
+                          src={eventOne.second_img_url}
                           alt="Tech"
                           style={{
                             width: "100%",
