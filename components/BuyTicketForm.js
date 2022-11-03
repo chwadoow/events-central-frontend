@@ -3,12 +3,11 @@ import { Button, Form, Input, message } from "antd";
 import React, { useState } from "react";
 
 const BuyTicketForm = ({ loading, event, onClick }) => {
-  const session = JSON.parse(localStorage.getItem("session"));
+  
   const router = useRouter();
   const { id } = router.query;
   const [vipTickets, setVipTickets] = useState(0);
   const [regularTickets, setRegularTickets] = useState(0);
-  const [componentSize, setComponentSize] = useState("default");
   const [mobileNumber, setPhoneNumber] = useState("");
   let date = new Date();
   let timestamp =
@@ -71,12 +70,12 @@ const BuyTicketForm = ({ loading, event, onClick }) => {
   function handleClick() {
     const formData = {
       ticket_no: eventTicket,
-      user_id: session,
+      user_id: "",
       event_id: parseInt(id),
       number_of_vip_tickets: parseInt(vipTickets),
       number_of_regular_tickets: parseInt(regularTickets),
     };
-    fetch("http://[::1]:3000/tickets", {
+    fetch("http://[::1]:3000/api/tickets", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -5,9 +5,9 @@ import { Col, Row } from "antd";
 import { Carousel } from 'antd';
 
 export const getStaticProps = async () => {
-  const res1 = await fetch("http://localhost:3000/events");
-  const res2 = await fetch("http://localhost:3000/categories");
-  const res3 = await fetch("http://localhost:3000/home_banners");
+  const res1 = await fetch("http://localhost:3000/api/events");
+  const res2 = await fetch("http://localhost:3000/api/categories");
+  const res3 = await fetch("http://localhost:3000/api/home_banners");
   const events = await res1.json()
   const categories = await res2.json()
   const homebanners = await res3.json()

@@ -6,7 +6,6 @@ import Script from "next/script";
 import { loadGapiInsideDOM } from 'gapi-script';
 
 const SpecificEvent = () => {
-  const session = JSON.parse(localStorage.getItem("session"));
   const [gapi, setGapi] =useState();
 
   var CLIENT_ID = "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
@@ -33,7 +32,7 @@ const SpecificEvent = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(()=>{
-      fetch(`http://localhost:3000/events/${id}`).then((response)=> response.json()).then((data)=> {
+      fetch(`http://localhost:3000/api/events/${id}`).then((response)=> response.json()).then((data)=> {
         setEventOne(data)
         setIsLoading(false)
       })
@@ -111,12 +110,13 @@ const SpecificEvent = () => {
     </Row>
   )
   function handleBuyTicket(){
-    if (session === null){
-      message.info("Log in, to buy tickets")
-      router.push("/login")
-    }else{
-      showModal()
-    }
+    // if (session === null){
+    //   message.info("Log in, to buy tickets")
+    //   router.push("/login")
+    // }else{
+    //   showModal()
+    // }
+    showModal();
   }
 
   return (

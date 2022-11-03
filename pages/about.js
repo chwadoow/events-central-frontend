@@ -1,5 +1,4 @@
 import { Col, Row } from 'antd';
-import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react';
 
 const About  = () => {
@@ -7,9 +6,6 @@ const About  = () => {
   const [aboutUsData, setAboutUsData] = useState([]);
   const [randomIndexCommunity, setRandomIndex] = useState();
   const [randomIndexAbout, setRandomIndexAbout] = useState();
-
-  // const user = localStorage.getItem('session')
-  // console.log(user)
 
   useEffect(() => {
     changeCommunityImage()
@@ -20,13 +16,13 @@ const About  = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/communities`)
+    fetch(`http://localhost:3000/api/communities`)
     .then(r => r.json())
     .then(data => setCommunityData(data))
   }, []);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/abouts`)
+    fetch(`http://localhost:3000/api/abouts`)
     .then(r => r.json())
     .then(data => setAboutUsData(data))
   }, []);

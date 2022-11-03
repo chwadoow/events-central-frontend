@@ -9,11 +9,8 @@ function event(){
   const router = useRouter();
   const {id} = router.query;
 
-  var date = new Date()
-  var currentDate = date.getTime()
-
   useEffect(()=>{
-  fetch(`http://localhost:3000/categories/${id}`)
+  fetch(`http://localhost:3000/api/categories/${id}`)
   .then(response => response.json())
   .then((data)=> {
     setCategoryData(data)

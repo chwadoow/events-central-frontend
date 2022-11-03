@@ -41,7 +41,7 @@ const createvent = () => {
   }
 
   useEffect(()=>{
-    fetch(`http://localhost:3000/categories`)
+    fetch(`http://localhost:3000/api/categories`)
     .then(response => response.json())
     .then((data)=> {
       setCategoryData(data)
@@ -65,7 +65,7 @@ const createvent = () => {
   }
 
   function submitToApi(data){
-    fetch(`http://localhost:3000/events`,{
+    fetch(`http://localhost:3000/api/events`,{
         method: "POST",
         body: data
     })
