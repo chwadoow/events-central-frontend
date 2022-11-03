@@ -25,9 +25,6 @@ function SignUp() {
     setIsOrganizer(event.target.value)
     console.log(event.target.value)
   }
-  
-  console.log(signData)
-
   function handleSubmit(e) {
     // e.preventDefault();
 

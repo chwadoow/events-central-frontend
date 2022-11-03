@@ -2,16 +2,14 @@ import { Button, Form, Input, Radio } from "antd";
 import React, { useState, useEffect } from "react";
 
 const BuyTicketForm = ({ loading, event }) => {
-   const session = localStorage.getItem("session");
-   console.log(session);
+  const session = localStorage.getItem("session");
   const [processing, setProcessing] = useState(false);
   const [vipTickets, setVipTickets] = useState(0);
   const [regularTickets, setRegularTickets] = useState(0);
   const [componentSize, setComponentSize] = useState("default");
   const [mobileNumber, setPhoneNumber] = useState("");
- 
-  let date = new Date();
 
+  let date = new Date();
   let timestamp =
     date.getFullYear() +
     ("0" + (date.getMonth() + 1)).slice(-2) +
@@ -68,52 +66,61 @@ const BuyTicketForm = ({ loading, event }) => {
   ).toString("base64");
 
   const number = mobileNumber.substring(1);
-    console.log(process.env.SHORTCODE)
   async function handleClick() {
-    setProcessing(true);
+      // fetch("http://localhost:7000/tickets",{
+      //   method: "POST",
+      //   header:{
 
-    try {
-      // get the token
-      const resp = await fetch("http://localhost:7000/api/mpesa-auth");
-      const data = await resp.json();
-      
-      const paySend = await fetch(
-        "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
-        {
-          method: "POST",
-          header: {
-            Authorization: `Bearer ${data["access_token"]}`,
-          },
-          body: JSON.stringify({
-            BusinessShortCode: 174379,
-            Password: password,
-            Timestamp: timestamp,
-            Amount: totalAmount,
-            PartyA: `254${number}`,
-            PartyB: 174379,
-            PhoneNumber: `254${number}`,
-            CallBackURL: "https://mydomain.com/pat",
-            AccountReference: `254${number}`,
-            TransactionDesc: "ETickets",
-          }),
-        }
-      );
+      //   },
+      //   body : JSON.stringify({
+      //     ticket_no: eventTicket,
+      //     // user_id: 
+      //     // event_id:
+      //     // number_of_vip_tickets:
+      //     // number_of_regular_tickets:
+      //   })
+      // })
+    // setProcessing(true);
 
-      const paySendInfo = await paySend.json()
+    // try {
+    //   const resp = await fetch("http://localhost:7000/api/mpesa-auth");
+    //   const data = await resp.json();
 
-      console.log(paySendInfo)
+    //   const paySend = await fetch(
+    //     "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
+    //     {
+    //       method: "POST",
+    //       header: {
+    //         Authorization: `Bearer ${data["access_token"]}`,
+    //       },
+    //       body: JSON.stringify({
+    //         BusinessShortCode: 174379,
+    //         Password: password,
+    //         Timestamp: timestamp,
+    //         Amount: totalAmount,
+    //         PartyA: `254${number}`,
+    //         PartyB: 174379,
+    //         PhoneNumber: `254${number}`,
+    //         CallBackURL: "https://mydomain.com/pat",
+    //         AccountReference: `254${number}`,
+    //         TransactionDesc: "ETickets",
+    //       }),
+    //     }
+    //   );
 
-      // .then((response)=> {
-      //   console.log(response)
-      // response.status(200).json(data)}).catch((error)=>
-      // {console.log(error.message)})
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setProcessing(false);
-    }
+    //   const paySendInfo = await paySend.json();
+
+    //   // .then((response)=> {
+    //   //   z.log(response)
+    //   // response.status(200).json(data)}).catch((error)=>
+    //   // {console.log(error.message)})
+    // } catch (error) {
+    //   console.log(error);
+    // } finally {
+    //   setProcessing(false);
+    // }
   }
-
+    const eventTicket = event.ticket_format + `${ticketNumber + 1}`;
   return (
     <Form
       labelCol={{
@@ -126,7 +133,8 @@ const BuyTicketForm = ({ loading, event }) => {
       size="small"
     >
       <Form.Item label="Ticket No:">
-        <label>{`GamCOD` + `${ticketNumber + 1}`}</label>
+        {/* <label>{`GamCOD` + `${ticketNumber + 1}`}</label> */}
+        <label>{eventTicket}</label>
       </Form.Item>
       <Form.Item label="VIP">
         <label>Tickets Remaining</label>
@@ -168,7 +176,17 @@ const BuyTicketForm = ({ loading, event }) => {
         />
       </Form.Item>
       <Form.Item>
-        <Button style={{backgroundColor: "#d1410a", cursor: "pointer", width: "70%", margin: 20, color: "#fff", borderRadius: 10, height: 40, border: "none"}}
+        <Button
+          style={{
+            backgroundColor: "#d1410a",
+            cursor: "pointer",
+            width: "70%",
+            margin: 20,
+            color: "#fff",
+            borderRadius: 10,
+            height: 40,
+            border: "none",
+          }}
           type="primary"
           htmlType="submit"
           loading={processing}

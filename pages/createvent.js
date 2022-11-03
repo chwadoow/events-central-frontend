@@ -42,9 +42,6 @@ const createvent = () => {
         ...formData, [e.target.name]: e.target.value,
     });
   }
-
-  console.log(formData)
-
   function handleSubmit(e){
     e.preventDefault();
     fetch(`http://localhost:3000/events`,{

@@ -1,31 +1,35 @@
 import { Col, Row, Modal, Divider } from "antd";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
-import Script from 'next/script';
-import { gapi } from 'gapi-script';
+import Script from "next/script";
+import { gapi } from "gapi-script";
 
 const SpecificEvent = () => {
-   const session = JSON.parse(localStorage.getItem("session"));
-   console.log(session)
-  var CLIENT_ID = "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
+  const session = JSON.parse(localStorage.getItem("session"));
+  var CLIENT_ID =
+    "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
   var API_KEY = "AIzaSyDSu0IfbznPAlKhL8LKY6YZuwItkfLwLvE";
-  var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
-  var SCOPES = 'https://www.googleapis.com/auth/calendar.events';
+  var DISCOVERY_DOCS = [
+    "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
+  ];
+  var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
   const [eventOne, setEventOne] = useState({});
   const router = useRouter();
-  const {id} = router.query;
+  const { id } = router.query;
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  
-  useEffect(()=>{
-      fetch(`http://localhost:3000/events/${id}`).then((response)=> response.json()).then((data)=> {
-        setEventOne(data)
-        setIsLoading(false)
-      })
-  },[])
+
+  useEffect(() => {
+    fetch(`http://localhost:3000/events/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setEventOne(data);
+        setIsLoading(false);
+      });
+  }, []);
 
   const showModal = () => {
     setOpen(true);
@@ -42,80 +46,88 @@ const SpecificEvent = () => {
   const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
   const [myTimer, setMyTimer] = useState({});
 
-  const myfunc = setInterval(function() {
+  const myfunc = setInterval(function () {
     var now = new Date().getTime();
     const timeleft = countDownDate - now;
-        
+
     let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    let hours = Math.floor(
+      (timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
     let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
     let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
 
-    setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
-    }, 1000)
-  
+    setMyTimer({
+      days: days,
+      hours: hours,
+      minutes: minutes,
+      seconds: seconds,
+    });
+  }, 1000);
+
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
-
       gapi.client.init({
         apiKey: API_KEY,
         clientId: CLIENT_ID,
         discoveryDocs: DISCOVERY_DOCS,
-        scope: SCOPES
-      })
+        scope: SCOPES,
+      });
 
-      gapi.client.load('calendar', 'v3',)
+      gapi.client.load("calendar", "v3");
 
-      gapi.auth2.getAuthInstance().signIn()
-      .then(() => {
+      gapi.auth2
+        .getAuthInstance()
+        .signIn()
+        .then(() => {
+          var event = {
+            summary: eventOne.title,
+            location: eventOne.location,
+            description: eventOne.description,
+            colorId: "6",
+            start: {
+              dateTime: new Date(eventOne.event_start_date).toJSON(),
+              timeZone: "Africa/Nairobi",
+            },
+            end: {
+              dateTime: new Date(eventOne.event_end_date).toJSON(),
+              timeZone: "Africa/Nairobi",
+            },
+          };
 
-        var event = {
-          'summary': eventOne.title,
-          'location': eventOne.location,
-          'description': eventOne.description,
-          'colorId': '6',
-          'start': {
-            'dateTime': new Date(eventOne.event_start_date).toJSON(),
-            'timeZone': 'Africa/Nairobi'
-          },
-          'end': {
-            'dateTime': new Date(eventOne.event_end_date).toJSON(),
-            'timeZone': 'Africa/Nairobi'
-          },
-        };
+          var request = gapi.client.calendar.events.insert({
+            calendarId: "primary",
+            resource: event,
+          });
 
-        var request = gapi.client.calendar.events.insert({
-          'calendarId': 'primary',
-          'resource': event
-        })
-
-        request.execute(event => {
-          window.open(event.htmlLink)
-        })
-      })
-    })
-  }
+          request.execute((event) => {
+            window.open(event.htmlLink);
+          });
+        });
+    });
+  };
 
   const handleCancel = () => {
     setOpen(false);
   };
 
-  if(isLoading === true) return (
-    <Row justify="center" align="middle">
-      <div style={{marginTop: "25%"}}>
-        <div className="loader"></div>
-      </div>
-    </Row>
-  )
-  function handleBuyTicket(){
-    if (session === null){
-      alert("Log in, to buy tickets")
-      router.push("/login")
-    }else{
-      showModal()
+  if (isLoading === true)
+    return (
+      <Row justify="center" align="middle">
+        <div style={{ marginTop: "25%" }}>
+          <div className="loader"></div>
+        </div>
+      </Row>
+    );
+  function handleBuyTicket() {
+    if (session === null) {
+      alert("Log in, to buy tickets");
+      router.push("/login");
+    } else {
+      showModal();
     }
   }
- 
+
   return (
     <>
       <Script src="https://apis.google.com/js/api.js" type="text/javascript" />
@@ -401,6 +413,6 @@ const SpecificEvent = () => {
       </Row>
     </>
   );
-}
+};
 
 export default SpecificEvent;
