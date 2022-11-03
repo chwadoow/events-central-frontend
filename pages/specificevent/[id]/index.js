@@ -42,7 +42,7 @@ const SpecificEvent = () => {
     setTimeout(() => {
       setOpen(false);
       setConfirmLoading(false);
-    }, 500);
+    }, 300);
   };
 
   const handleAdd = () => {
@@ -362,7 +362,6 @@ const SpecificEvent = () => {
                         loading={confirmLoading}
                         onClick={handleOk}
                         event={eventOne}
-                        closeModal={closeModal}
                       />
                     </Modal>
                   </div>
