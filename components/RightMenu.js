@@ -13,17 +13,18 @@ const RightMenu = () => {
       .then((response) => response.json())
       .then((data) => setUserData(data));
   }, []);
+
   let router = useRouter();
   function redirect() {
     router.push("/");
   }
-
+  console.log("error" in userData);
   const handleLogout = () => {
     fetch("http://localhost:3000/logout", { method: "DELETE" }).then((res) => {
       if (res.ok) {
         localStorage.clear();
-        redirect();
         alert("logged out");
+        redirect();
       }
     });
   };
@@ -32,28 +33,28 @@ const RightMenu = () => {
 
   const menu = (
     <Menu>
-      {Boolean(userData) === true ? (
-        " "
-      ) : (
+      {"error" in userData ? (
         <Menu.Item>
           <a href="/login">Login</a>
         </Menu.Item>
+      ) : (
+        " "
       )}
 
-      {Boolean(userData) == true ? (
+      {"error" in userData ? (
+        " "
+      ) : (
         <Menu.Item>
           <a href="/userprofile">View Profile</a>
         </Menu.Item>
-      ) : (
-        " "
       )}
 
-      {Boolean(userData) == true ? (
+      {"error" in userData ? (
+        " "
+      ) : (
         <Menu.Item>
           <a onClick={handleLogout}>Logout</a>
         </Menu.Item>
-      ) : (
-        " "
       )}
     </Menu>
   );
