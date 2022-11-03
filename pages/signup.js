@@ -17,15 +17,14 @@ function SignUp() {
   const signData = {
     username: username,
     password: password,
-    isOrganizer: isOrganizer,
-    emailAddress: emailAddress
+    is_organiser: isOrganizer,
+    email: emailAddress
   }
 
   function handleCheckBox(event){
     setIsOrganizer(event.target.value)
+    console.log(event.target.value)
   }
-  console.log(signData)
-
   function handleSubmit(e) {
     // e.preventDefault();
 
@@ -100,7 +99,7 @@ function SignUp() {
             </Form.Item>
 
             <Form.Item>
-              <Checkbox onChange={handleCheckBox} value="true">Is Organizer?</Checkbox>
+              <Checkbox onChange={handleCheckBox} value={true}>Is Organizer?</Checkbox>
             </Form.Item>
 
             <Form.Item>
@@ -113,7 +112,7 @@ function SignUp() {
               </Button>
             </Form.Item>
             <p>
-              If you have an account?<Link href="/login">Log in</Link>
+              If you have an account? <Link href="/login">LogIn</Link>
             </p>
           </Form>
         </div>

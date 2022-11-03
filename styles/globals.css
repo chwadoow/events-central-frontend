@@ -17,6 +17,9 @@ a {
     margin-left: 15%;
   }
 }
+.homeCard::-webkit-scrollbar {
+  display: none;
+}
 
 .create{
   height: 100%;
@@ -136,7 +139,13 @@ a {
   100% { transform: rotate(360deg); }
 }
 
+<<<<<<< HEAD
 .containerr{
   display: flex;
   justify-content: space-evenly;
 }
+=======
+.eventBtns:hover {
+  background-color: black;
+}
+>>>>>>> dc294abed56c4ab32c8c6a68a141ed25b03c34c0

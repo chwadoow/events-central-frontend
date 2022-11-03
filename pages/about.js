@@ -2,11 +2,14 @@ import { Col, Row } from 'antd';
 import Navbar from '../components/Navbar';
 import React, { useEffect, useState } from 'react';
 
-const about  = () => {
+const About  = () => {
   const [communityData, setCommunityData] = useState([]);
   const [aboutUsData, setAboutUsData] = useState([]);
   const [randomIndexCommunity, setRandomIndex] = useState();
   const [randomIndexAbout, setRandomIndexAbout] = useState();
+
+  // const user = localStorage.getItem('session')
+  // console.log(user)
 
   useEffect(() => {
     changeCommunityImage()
@@ -40,7 +43,7 @@ const about  = () => {
 
   return (
     <>
-    <Navbar/>
+    
     <Row justify='center' align='middle'>
 
       <Col span={24}>
@@ -142,4 +145,4 @@ const about  = () => {
   );
 };
 
-export default about;
+export default About;

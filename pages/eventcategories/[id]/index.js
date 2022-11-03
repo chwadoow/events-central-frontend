@@ -67,30 +67,46 @@ function event(){
               return (
                 <Row key={event.id}>
                   <Link href={`/specificevent/${event.id}`}>
-                      <div >
-                        <Card style={{ 
-                          textAlign: "left", 
-                          width: 280, 
-                          height: 420, 
-                          padding: 2, 
+                    <div>
+                      <Card
+                        className="homeCard"
+                        style={{
+                          textAlign: "left",
+                          width: 280,
+                          height: 500,
+                          padding: 2,
                           cursor: "pointer",
-                          }}
-                          cover={<img alt={event.title} src={event.image_url1} height="200px"/>}
-                          hoverable
-                        >
-                          <div>
-                            <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
-                            <p>{event.event_date}</p>
-                            <p style={{color: "#d1410a"}}>{parseInt(((new Date(`${event.event_date}`.split("-").join("/")).getTime()) - currentDate )/(1000 * 60 * 60 * 24)) + " days remaining"}</p>
-                            <p>{event.location}</p>
-                          </div>
-                          
-                        </Card>
-                      </div>
+                          overflowY: "scroll",
+                        }}
+                        cover={
+                          <img
+                            alt={event.title}
+                            src={event.banner_img}
+                            height="200px"
+                          />
+                        }
+                        hoverable
+                      >
+                        <div>
+                          <h1 style={{ fontWeight: "bolder", fontSize: "15" }}>
+                            {event.title}
+                          </h1>
+                          <p>{event.event_date}</p>
+                          <p style={{ color: "#d1410a" }}>
+                            {event.time_diff < 0 ? (
+                              <p>Event has passed</p>
+                            ) : (
+                              event.time_diff + " days remaining"
+                            )}
+                          </p>
+                          <p>{event.location}</p>
+                        </div>
+                      </Card>
+                    </div>
                   </Link>
                   &nbsp;
                 </Row>
-              )
+              );
             })
           ) : (
             <Col span={24}>

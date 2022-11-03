@@ -6,10 +6,10 @@ return (
     <Row>
       <Col span={24}>
         <div style={{ marginRight: 10, marginLeft: 10, borderRadius: 20, gap: 20, justifyContent: "center", flexWrap: "wrap", display: "inline-flex", flexDirection: 'row' }}>
-          {(Array.isArray(categories) ? categories : []).map((event) => {
+          {categories.map((category) => {
               return (
-                <div key={event.id}>
-                  <Link href={`/eventcategories/${event.id}`}>
+                <div key={category.id}>
+                  <Link href={`/eventcategories/${category.id}`}>
                     <div style={{
                        textAlign: "center", 
                        border: 1, 
@@ -21,7 +21,7 @@ return (
                        borderRadius: 10,
                        boxShadow: "5px 5px #d1410a"
                        }}>
-                      <p style={{marginTop: 10}}><b>{event.title}</b></p>
+                      <p style={{marginTop: 10}}><b>{category.title}</b></p>
                     </div>
                   </Link>
                   &nbsp;

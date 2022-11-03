@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+ import {Card} from "antd";
+
+
 
 function eventview() {
   const [events, setEvents] = useState([]);
@@ -9,7 +12,7 @@ function eventview() {
     // getter
     const session = JSON.parse(localStorage.getItem("session"));
 
-    fetch(`http://localhost:3000/users/1`)
+    fetch(`http://localhost:3000/users`)
       .then((response) => response.json())
       .then((data) => {
         setEvents(data);
@@ -39,7 +42,18 @@ function eventview() {
                 padding: 2,
                 cursor: "pointer",
               }}
-              cover={
+              cover={<p>{event.event_date}</p>
+              // <p</p> style={{ color: "#d1410a" }}>
+              //   {parseInt(
+                  // (new Date(
+              //       `${event.event_date}`.split("-").join("/")
+              //     ).getTime() -
+              //       currentDate
+              //       ) 
+
+              //       (1000 * 60 * 60 * 24)
+              //   ) + " days remaining"}
+              // </p>
                 <img alt={event.title} src={event.image_url1} height="200px" />
               }
               hoverable
@@ -49,15 +63,17 @@ function eventview() {
                   {event.title}
                 </h1>
                 <p>{event.event_date}</p>
-                <p style={{ color: "#d1410a" }}>
-                  {parseInt(
-                    (new Date(
-                      `${event.event_date}`.split("-").join("/")
-                    ).getTime() -
-                      currentDate) /
-                      (1000 * 60 * 60 * 24)
-                  ) + " days remaining"}
-                </p>
+                // <p style={{ color: "#d1410a" }}>
+                //   {parseInt(
+                //     (new Date(
+                //       `${event.event_date}`.split("-").join("/")
+                //     ).getTime() -
+                //       currentDate
+                //       ) 
+
+                //       (1000 * 60 * 60 * 24)
+                //   ) + " days remaining"}
+                // </p>
                 <p>{event.location}</p>
               </div>
             </Card>
