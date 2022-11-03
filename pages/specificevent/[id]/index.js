@@ -1,4 +1,4 @@
-import { Col, Row, Modal, Divider } from "antd";
+import { Col, Row, Modal, Divider, Button } from "antd";
 import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
@@ -6,8 +6,7 @@ import Script from 'next/script';
 import { gapi } from 'gapi-script';
 
 const SpecificEvent = () => {
-   const session = JSON.parse(localStorage.getItem("session"));
-   console.log(session)
+  const session = JSON.parse(localStorage.getItem("session"));
   var CLIENT_ID = "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
   var API_KEY = "AIzaSyDSu0IfbznPAlKhL8LKY6YZuwItkfLwLvE";
   var DISCOVERY_DOCS = ['https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest'];
@@ -19,13 +18,18 @@ const SpecificEvent = () => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [myTimer, setMyTimer] = useState({});
   
   useEffect(()=>{
       fetch(`http://localhost:3000/events/${id}`).then((response)=> response.json()).then((data)=> {
         setEventOne(data)
         setIsLoading(false)
       })
-  },[])
+  },[]);
+
+  useEffect(() => {
+    startIt();
+  });
 
   const showModal = () => {
     setOpen(true);
@@ -39,21 +43,6 @@ const SpecificEvent = () => {
     }, 500);
   };
 
-  const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
-  const [myTimer, setMyTimer] = useState({});
-
-  const myfunc = setInterval(function() {
-    var now = new Date().getTime();
-    const timeleft = countDownDate - now;
-        
-    let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-    let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-
-    setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
-    }, 1000)
-  
   const handleAdd = () => {
     gapi.load("client:auth2", () => {
 
@@ -96,6 +85,28 @@ const SpecificEvent = () => {
     })
   }
 
+  const startIt = () => {
+    const myfunc = setInterval(function() {
+      const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
+      var now = new Date().getTime();
+      const timeleft = countDownDate - now;
+          
+      let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+  
+      setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
+
+      if (timeleft < 0){
+        clearInterval(myfunc)
+      }
+  
+    }, 1000)
+    
+  }
+  
+
   const handleCancel = () => {
     setOpen(false);
   };
@@ -109,7 +120,7 @@ const SpecificEvent = () => {
   )
   function handleBuyTicket(){
     if (session === null){
-      alert("Log in, to buy tickets")
+      message.info("Log in, to buy tickets")
       router.push("/login")
     }else{
       showModal()
@@ -137,7 +148,7 @@ const SpecificEvent = () => {
 
         <Col span={24}>
           <Row justify="center" align="middle">
-            <Col span={12}>
+            <Col span={24}>
               <Row justify="center" align="middle">
                 <div>
                   <h1
@@ -152,37 +163,64 @@ const SpecificEvent = () => {
                 </div>
               </Row>
             </Col>
-            <Divider style={{ border: "1px solid black" }} />
-            <Col span={12}>
-              <Row justify="center" align="middle" style={{ marginTop: 30 }}>
-                <div
-                  style={{
-                    textAlign: "center",
-                    border: 1,
-                    borderStyle: "solid",
-                    cursor: "pointer",
-                    borderRadius: 10,
-                    width: "60%",
-                  }}
-                >
-                  <h3 style={{ fontWeight: "bold" }}>Early Booking Timer</h3>
-                  <p style={{ color: "#d1410a", fontSize: 30 }}>
-                    <b>
-                      <i>
-                        {eventOne.time_diff < 0 ? (
-                          <p>Event has passed</p>
-                        ) : (
-                          `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`
-                        )}
-                      </i>
-                    </b>
-                  </p>
-                </div>
-              </Row>
-            </Col>
           </Row>
           <br />
         </Col>
+
+        <Col span={24}>
+            <Row justify="center" align="middle">
+            <Col span={12}>
+                <Row justify="center" align="middle">
+                  {eventOne.early_timer > 0 ?
+                  (<div style={{ textAlign: "left", fontFamily: "nunito" }}>
+                    <h1 style={{ fontWeight: "bold", fontSize: 25 }}>Early Bird Tickets</h1>
+                    <p style={{fontSize: 20,}}><b>Regular Tickets Price ($):</b> {eventOne.early_booking_price_regular}</p>
+                    <p style={{fontSize: 20,}}><b>Vip Tickets Price ($):</b> {eventOne.early_booking_price_vip}</p>
+                  </div>
+                  ) : (
+                    <div style={{ textAlign: "center", fontFamily: "nunito" }}>
+                      <h1 style={{ fontWeight: "bold", fontSize: 25 }}>Regular Tickets</h1>
+                      <p style={{fontSize: 20,}}>Regular Tickets ($): {eventOne.regular_price}</p>
+                      <p style={{fontSize: 20,}}>Vip Tickets ($): {eventOne.vip_price}</p>
+                    </div>
+                  )
+                  }
+                </Row>
+              </Col>
+              <Col span={12}>
+                <Row justify="center" align="middle" style={{ marginTop: 30 }}>
+                  <div
+                    style={{
+                      textAlign: "center",
+                      border: 1,
+                      borderStyle: "solid",
+                      cursor: "pointer",
+                      borderRadius: 10,
+                      width: "60%",
+                    }}
+                  >
+                    <i><h3 style={{ fontWeight: "bold" }}>Early Booking Timer</h3></i>
+                    <p style={{fontSize: 20}}><b>Date:</b> {new Date(eventOne.early_booking_end_date).toDateString()}</p>
+                    <br />
+                    <p style={{ color: "#d1410a", fontSize: 30 }}>
+                      <b>
+                        <i>
+                          {eventOne.time_diff < 0 ? (
+                            <p>Event has passed</p>
+                          ) : (
+                            `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`
+                          )}
+                        </i>
+                      </b>
+                    </p>
+                  </div>
+                </Row>
+                <br />
+              </Col>
+              
+            </Row>
+            
+          </Col>
 
         <br />
 
@@ -193,10 +231,10 @@ const SpecificEvent = () => {
                 <Col span={6}>
                   <Row justify="start" align="middle">
                     <div style={{ textAlign: "center", fontFamily: "nunito" }}>
-                      <h4 style={{ fontWeight: "regular", fontSize: 25 }}>
+                      <h4 style={{ fontWeight: "bold", fontSize: 25 }}>
                         Date
                       </h4>
-                      <p>
+                      <p style={{fontSize: 20,}}>
                         {new Date(eventOne.event_start_date).toDateString()}
                       </p>
                     </div>
@@ -206,10 +244,10 @@ const SpecificEvent = () => {
                 <Col span={6}>
                   <Row justify="end" align="middle">
                     <div style={{ textAlign: "center", fontFamily: "nunito" }}>
-                      <h4 style={{ fontWeight: "regular", fontSize: 25 }}>
+                      <h4 style={{ fontWeight: "bold", fontSize: 25 }}>
                         Location
                       </h4>
-                      <p>{eventOne.location}</p>
+                      <p style={{fontSize: 20,}}>{eventOne.location}</p>
                     </div>
                   </Row>
                 </Col>
@@ -230,21 +268,21 @@ const SpecificEvent = () => {
                   }}
                 >
                   <h3 style={{ fontWeight: "bold" }}>Add To Calendar</h3>
-                  <button
-                    style={{
-                      backgroundColor: "#d1410a",
-                      cursor: "pointer",
-                      width: "70%",
-                      margin: 20,
-                      color: "#fff",
-                      borderRadius: 10,
-                      height: 40,
-                      border: "none",
-                    }}
-                    onClick={handleAdd}
+                  <Button
+                  className="eventBtns"
+                  style={{
+                    backgroundColor: "#d1410a",
+                    cursor: "pointer",
+                    width: "70%",
+                    margin: 20,
+                    color: "#fff",
+                    fontWeight: "bold",
+                    borderRadius: 10,
+                  }}
+                  onClick={handleAdd}
                   >
                     Add
-                  </button>
+                  </Button>
                 </div>
               </Row>
               <Row justify="center" align="middle">
@@ -295,21 +333,21 @@ const SpecificEvent = () => {
                     }}
                   >
                     <h3 style={{ fontWeight: "bold" }}>Attend Event</h3>
-                    <button
+                    <Button
+                      className="eventBtns"
                       style={{
                         backgroundColor: "#d1410a",
                         cursor: "pointer",
                         width: "70%",
                         margin: 20,
                         color: "#fff",
+                        fontWeight: "bold",
                         borderRadius: 10,
-                        height: 40,
-                        border: "none",
                       }}
                       onClick={handleBuyTicket}
                     >
                       Buy Ticket
-                    </button>
+                    </Button>
                     <Modal
                       title="Pay with Mpesa"
                       open={open}
