@@ -86,8 +86,8 @@ const BuyTicketForm = ({ loading, event, onClick }) => {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        alert(data.message);
-        closeModal;
+        onClick();
+        message.success("Payment Successful!");
         router.push("/");
       });
     // setProcessing(true);
@@ -195,10 +195,7 @@ const BuyTicketForm = ({ loading, event, onClick }) => {
           type="primary"
           htmlType="submit"
           loading={loading}
-          onClick={() => {
-            onClick()
-            message.success("Payment Successful!")
-          }}
+          onClick={handleClick}
         >
           Submit
         </Button>
