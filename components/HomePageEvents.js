@@ -1,25 +1,10 @@
 import Link from "next/link";
 import { Col, Card, Row } from "antd";
 
-<<<<<<< HEAD
-const HomePageEvents = ({ events }) => {
-  var date = new Date();
-  var currentDate = date.getTime();
-  const filteredDates = (Array.isArray(events) ? events : []).filter(
-    (event) =>
-      parseInt(
-        (new Date(`${event.event_date}`.split("-").join("/")).getTime() -
-          currentDate) /
-          (1000 * 60 * 60 * 24)
-      ) > 0
-  );
-  console.log(events)
-=======
 const HomePageEvents = ({events}) => {
   const filteredDates = events.filter((event)=> 
      (parseInt(event.time_diff) > 0)
     )
->>>>>>> dc294abed56c4ab32c8c6a68a141ed25b03c34c0
 
   return (
     <Row justify="center" align="middle">

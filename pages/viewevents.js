@@ -1,87 +1,87 @@
-import React, { useState, useEffect } from "react";
- import {Card} from "antd";
+// import React, { useState, useEffect } from "react";
+//  import {Card} from "antd";
 
 
 
-function eventview() {
-  const [events, setEvents] = useState([]);
+// function eventview() {
+//   const [events, setEvents] = useState([]);
 
-  const [users, setUsers] = useState([]);
+//   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    // getter
-    const session = JSON.parse(localStorage.getItem("session"));
+//   useEffect(() => {
+//     // getter
+//     const session = JSON.parse(localStorage.getItem("session"));
 
-    fetch(`http://localhost:3000/users`)
-      .then((response) => response.json())
-      .then((data) => {
-        setEvents(data);
-      });
-  }, []);
+//     fetch(`http://localhost:3000/users`)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         setEvents(data);
+//       });
+//   }, []);
 
-  console.log(events);
-  // useEffect(()=>{
-  //    fetch(`http://localhost:3000/events`)
-  //     .then(response => response.json())
-  //     .then((data)=> {
-  //   setEvents(data)
+//   console.log(events);
+//   // useEffect(()=>{
+//   //    fetch(`http://localhost:3000/events`)
+//   //     .then(response => response.json())
+//   //     .then((data)=> {
+//   //   setEvents(data)
 
-  //    })
-  //    },[])
+//   //    })
+//   //    },[])
 
-  return (
-    <>
+//   return (
+//     <>
       
-      {events.events?.map((event) => {
-          <div>
-            <Card
-              style={{
-                textAlign: "left",
-                width: 280,
-                height: 420,
-                padding: 2,
-                cursor: "pointer",
-              }}
-              cover={<p>{event.event_date}</p>
-              // <p</p> style={{ color: "#d1410a" }}>
-              //   {parseInt(
-                  // (new Date(
-              //       `${event.event_date}`.split("-").join("/")
-              //     ).getTime() -
-              //       currentDate
-              //       ) 
+//       {events.events?.map((event) => {
+//           <div>
+//             <Card
+//               style={{
+//                 textAlign: "left",
+//                 width: 280,
+//                 height: 420,
+//                 padding: 2,
+//                 cursor: "pointer",
+//               }}
+//               cover={<p>{event.event_date}</p>
+//               // <p</p> style={{ color: "#d1410a" }}>
+//               //   {parseInt(
+//                   // (new Date(
+//               //       `${event.event_date}`.split("-").join("/")
+//               //     ).getTime() -
+//               //       currentDate
+//               //       ) 
 
-              //       (1000 * 60 * 60 * 24)
-              //   ) + " days remaining"}
-              // </p>
-                <img alt={event.title} src={event.image_url1} height="200px" />
-              }
-              hoverable
-            >
-              <div>
-                <h1 style={{ fontWeight: "bolder", fontSize: "15" }}>
-                  {event.title}
-                </h1>
-                <p>{event.event_date}</p>
-                // <p style={{ color: "#d1410a" }}>
-                //   {parseInt(
-                //     (new Date(
-                //       `${event.event_date}`.split("-").join("/")
-                //     ).getTime() -
-                //       currentDate
-                //       ) 
+//               //       (1000 * 60 * 60 * 24)
+//               //   ) + " days remaining"}
+//               // </p>
+//                 <img alt={event.title} src={event.image_url1} height="200px" />
+//               }
+//               hoverable
+//             >
+//               <div>
+//                 <h1 style={{ fontWeight: "bolder", fontSize: "15" }}>
+//                   {event.title}
+//                 </h1>
+//                 <p>{event.event_date}</p>
+//                 // <p style={{ color: "#d1410a" }}>
+//                 //   {parseInt(
+//                 //     (new Date(
+//                 //       `${event.event_date}`.split("-").join("/")
+//                 //     ).getTime() -
+//                 //       currentDate
+//                 //       ) 
 
-                //       (1000 * 60 * 60 * 24)
-                //   ) + " days remaining"}
-                // </p>
-                <p>{event.location}</p>
-              </div>
-            </Card>
-          </div>
-        // );
-      })}
-    </>
-  );
-}
+//                 //       (1000 * 60 * 60 * 24)
+//                 //   ) + " days remaining"}
+//                 // </p>
+//                 <p>{event.location}</p>
+//               </div>
+//             </Card>
+//           </div>
+//         // );
+//       })}
+//     </>
+//   );
+// }
 
-export default eventview;
+// export default eventview;
