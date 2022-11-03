@@ -1,8 +1,10 @@
 import Link from "next/link"
 import {useState} from "react"
 import { useRouter } from 'next/router'
-import { Form, Input, Button, Checkbox } from 'antd';
+import { Form, Input, Button, Checkbox , notification} from 'antd';
 import { NoStyleItemContext } from "antd/lib/form/context";
+
+
 
 
 function Login({user, setUser}){
@@ -12,6 +14,7 @@ function Login({user, setUser}){
   const [password, setPassword] = useState("")
   const [error, setError] = useState([])
   // const [user, setUser] = useState({})
+
 
   function handleSubmit(event){
     // event.preventDefault();
@@ -33,7 +36,7 @@ function Login({user, setUser}){
           window.localStorage.setItem('session', JSON.stringify(data.id));
           console.log("logged in ? ", data.id) 
           router.push('/')
-          alert("You have loggged in successfully")
+          // alert("You have loggged in successfully")
         } 
          
         )
@@ -93,6 +96,14 @@ function Login({user, setUser}){
           <Form.Item>
             <Button 
             // onClick={handleSubmit}
+            onClick={() => {
+              notification.open({
+                message: 'Login Status',
+                description:
+                  'Login Successfully!',
+                duration: 1.5,
+              });
+            }}
             htmlType="submit" className="login-form-button" >
               LOGIN
             </Button>
