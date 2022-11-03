@@ -93,6 +93,12 @@ const SpecificEvent = () => {
     })
   }
 
+  var earlyEnding = new Date(eventOne.early_booking_end_date); 
+  var datetime = earlyEnding.toDateString() + " "
+                + earlyEnding.getHours() + ":"  
+                + earlyEnding.getMinutes() + ":" 
+                + earlyEnding.getSeconds()+"0"
+
   const handleCancel = () => {
     setOpen(false);
   };
@@ -181,8 +187,8 @@ const SpecificEvent = () => {
                       width: "60%",
                     }}
                   >
-                    <i><h3 style={{ fontWeight: "bold" }}>Early Booking Date</h3></i>
-                    <p style={{fontSize: 20}}><b>Date:</b> {new Date(eventOne.early_booking_end_date).toDateString()}</p>
+                    <i><h3 style={{ fontWeight: "bold" }}>Early Booking End Date</h3></i>
+                    <p style={{fontSize: 20}}>{datetime}</p>
                     <br />
                   </div>
                 </Row>
