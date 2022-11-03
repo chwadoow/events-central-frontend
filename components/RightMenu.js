@@ -78,7 +78,7 @@ const RightMenu = () => {
         <div>
           <Dropdown overlay={menu} trigger={["click"]} placement="bottomLeft">
             {/* <Link  href={`/userprofile`}> */}
-            <Avatar size={45} icon={<UserOutlined />} />
+            <Avatar size={40} icon={<UserOutlined />} />
             {/* </Link> */}
           </Dropdown>
         </div>
