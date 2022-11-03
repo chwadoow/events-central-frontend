@@ -95,10 +95,10 @@
       flex-direction: column;
       box-shadow: none;
     }
-    .illustration-wrapper {
+    /* .illustration-wrapper { */
       /* max-width: 100%; */
       /* min-height: auto; */
-    }
+    /* } */
     #login-form {
       max-width: 100%;
     }
