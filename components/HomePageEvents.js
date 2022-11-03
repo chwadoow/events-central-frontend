@@ -26,19 +26,21 @@ const HomePageEvents = ({events}) => {
                           overflowY: "scroll"
                           }}
 
-                          cover={<img alt={event.title} src={event.banner_img} height="200px"/>}
+                          cover={<img alt={event.title} src={event.banner_img_url} height="200px"/>}
                           hoverable
                         >
                           <div>
                             <h1 style={{fontWeight: "bolder", fontSize: "15"}}>{event.title}</h1>
-                            <p>{new Date(event.event_start_date).getUTCDate()}</p>
+                            <p style={{fontSize: 15}}><b><i>Date</i></b></p>
+                            <p>{new Date(event.event_start_date).toDateString()}</p>
                             <p style={{color: "#d1410a"}}>{event.time_diff < 0 ?
                               (<p>Event has passed</p>)
                               : (
-                                event.time_diff + " days remaining"
+                                <i>{event.time_diff + " days remaining"}</i>
                               )
                               }
                             </p>
+                            <p style={{fontSize: 15}}><b><i>Location</i></b></p>
                             <p>{event.location}</p>
                           </div>
                           

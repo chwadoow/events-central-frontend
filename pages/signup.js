@@ -57,7 +57,7 @@ function SignUp() {
         <div className="login-box">
           <div className="illustration-wrapper">
             <img
-              src="https://mixkit.imgix.net/art/preview/mixkit-left-handed-man-sitting-at-a-table-writing-in-a-notebook-27-original-large.png?q=80&auto=format%2Ccompress&h=700"
+              src="https://images.pexels.com/photos/382297/pexels-photo-382297.jpeg?cs=srgb&dl=pexels-salah-alawadhi-382297.jpg&fm=jpg"
               alt="Login"
             />
           </div>
