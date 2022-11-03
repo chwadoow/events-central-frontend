@@ -3,10 +3,12 @@ import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 import BuyTicketForm from "../../../components/BuyTicketForm";
 import Script from "next/script";
-import { gapi } from "gapi-script";
+import { loadGapiInsideDOM } from 'gapi-script';
 
 const SpecificEvent = () => {
   const session = JSON.parse(localStorage.getItem("session"));
+  const [gapi, setGapi] =useState();
+
   var CLIENT_ID = "447222188463-85lhlk9i68pmspkinnergh07j228n2i7.apps.googleusercontent.com";
   var API_KEY = "AIzaSyDSu0IfbznPAlKhL8LKY6YZuwItkfLwLvE";
   var DISCOVERY_DOCS = [
@@ -14,13 +16,21 @@ const SpecificEvent = () => {
   ];
   var SCOPES = "https://www.googleapis.com/auth/calendar.events";
 
+  useEffect(() => {
+   gapiM();
+  }, [])
+
+  const gapiM = async () => {
+    const gapi = await loadGapiInsideDOM();
+    setGapi(gapi)
+  }
+
   const [eventOne, setEventOne] = useState({});
   const router = useRouter();
   const { id } = router.query;
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [myTimer, setMyTimer] = useState({});
   
   useEffect(()=>{
       fetch(`http://localhost:3000/events/${id}`).then((response)=> response.json()).then((data)=> {
@@ -28,10 +38,6 @@ const SpecificEvent = () => {
         setIsLoading(false)
       })
   },[]);
-
-  useEffect(() => {
-    startIt();
-  });
 
   const showModal = () => {
     setOpen(true);
@@ -87,27 +93,11 @@ const SpecificEvent = () => {
     })
   }
 
-  const startIt = () => {
-    const myfunc = setInterval(function() {
-      const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
-      var now = new Date().getTime();
-      const timeleft = countDownDate - now;
-          
-      let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
-  
-      setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
-
-      if (timeleft < 0){
-        clearInterval(myfunc)
-      }
-  
-    }, 1000)
-    
-  }
-  
+  var earlyEnding = new Date(eventOne.early_booking_end_date); 
+  var datetime = earlyEnding.toDateString() + " "
+                + earlyEnding.getHours() + ":"  
+                + earlyEnding.getMinutes() + ":" 
+                + earlyEnding.getSeconds()+"0"
 
   const handleCancel = () => {
     setOpen(false);
@@ -194,27 +184,12 @@ const SpecificEvent = () => {
                   <div
                     style={{
                       textAlign: "center",
-                      border: 1,
-                      borderStyle: "solid",
-                      cursor: "pointer",
-                      borderRadius: 10,
                       width: "60%",
                     }}
                   >
-                    <i><h3 style={{ fontWeight: "bold" }}>Early Booking Timer</h3></i>
-                    <p style={{fontSize: 20}}><b>Date:</b> {new Date(eventOne.early_booking_end_date).toDateString()}</p>
+                    <i><h3 style={{ fontWeight: "bold" }}>Early Booking End Date</h3></i>
+                    <p style={{fontSize: 20}}>{datetime}</p>
                     <br />
-                    <p style={{ color: "#d1410a", fontSize: 30 }}>
-                      <b>
-                        <i>
-                          {eventOne.time_diff < 0 ? (
-                            <p>Event has passed</p>
-                          ) : (
-                            `${myTimer.days}days ${myTimer.hours}hours ${myTimer.minutes}mins ${myTimer.seconds}secs`
-                          )}
-                        </i>
-                      </b>
-                    </p>
                   </div>
                 </Row>
                 <br />
@@ -266,12 +241,12 @@ const SpecificEvent = () => {
                     borderStyle: "solid",
                     cursor: "pointer",
                     borderRadius: 10,
-                    width: "40%",
+                    width: "40%"
                   }}
                 >
                   <h3 style={{ fontWeight: "bold" }}>Add To Calendar</h3>
-                  <Button
-                  className="eventBtns"
+                  <button
+                  onClick={handleAdd}
                   style={{
                     backgroundColor: "#d1410a",
                     cursor: "pointer",
@@ -280,11 +255,12 @@ const SpecificEvent = () => {
                     color: "#fff",
                     fontWeight: "bold",
                     borderRadius: 10,
+                    height: 30,
+                    border: "none"
                   }}
-                  onClick={handleAdd}
                   >
                     Add
-                  </Button>
+                  </button>
                 </div>
               </Row>
               <Row justify="center" align="middle">
@@ -326,17 +302,18 @@ const SpecificEvent = () => {
               <div style={{ textAlign: "center", width: "100%" }}>
                 <Row justify="center" align="middle">
                   <div
-                    style={{
-                      border: 1,
-                      borderStyle: "solid",
-                      cursor: "pointer",
-                      borderRadius: 10,
-                      width: "40%",
-                    }}
+                  style={{
+                    textAlign: "center",
+                    border: 1,
+                    borderStyle: "solid",
+                    cursor: "pointer",
+                    borderRadius: 10,
+                    width: "40%"
+                  }}
                   >
                     <h3 style={{ fontWeight: "bold" }}>Attend Event</h3>
-                    <Button
-                      className="eventBtns"
+                    <button
+                      onClick={handleBuyTicket}
                       style={{
                         backgroundColor: "#d1410a",
                         cursor: "pointer",
@@ -345,11 +322,12 @@ const SpecificEvent = () => {
                         color: "#fff",
                         fontWeight: "bold",
                         borderRadius: 10,
+                        height: 30,
+                        border: "none"
                       }}
-                      onClick={handleBuyTicket}
                     >
                       Buy Ticket
-                    </Button>
+                    </button>
                     <Modal
                       title="Pay with Mpesa"
                       open={open}
