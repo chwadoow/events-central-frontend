@@ -2,9 +2,7 @@ import { useRouter } from 'next/router'
 import { UserOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { Menu, Avatar, Grid, Dropdown, notification} from 'antd';
-import { UserOutlined } from '@ant-design/icons';
 import Link from 'next/link';
-import { useRouter } from 'next/router'
 
 
 const { useBreakpoint } = Grid;
