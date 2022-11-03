@@ -20,7 +20,7 @@ const SpecificEvent = () => {
   const [open, setOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [myTimer, setMyTimer] = useState({});
+  // const [myTimer, setMyTimer] = useState({});
   
   useEffect(()=>{
       fetch(`http://localhost:3000/events/${id}`).then((response)=> response.json()).then((data)=> {
@@ -29,9 +29,9 @@ const SpecificEvent = () => {
       })
   },[]);
 
-  useEffect(() => {
-    startIt();
-  });
+  // useEffect(() => {
+  //   startIt();
+  // });
 
   const showModal = () => {
     setOpen(true);
@@ -87,26 +87,26 @@ const SpecificEvent = () => {
     })
   }
 
-  const startIt = () => {
-    const myfunc = setInterval(function() {
-      const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
-      var now = new Date().getTime();
-      const timeleft = countDownDate - now;
+  // const startIt = () => {
+  //   const myfunc = setInterval(function() {
+  //     const countDownDate = new Date(eventOne.early_booking_end_date).getTime();
+  //     var now = new Date().getTime();
+  //     const timeleft = countDownDate - now;
           
-      let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
-      let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
-      let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
+  //     let days = Math.floor(timeleft / (1000 * 60 * 60 * 24));
+  //     let hours = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  //     let minutes = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
+  //     let seconds = Math.floor((timeleft % (1000 * 60)) / 1000);
   
-      setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
+  //     setMyTimer({days: days, hours: hours, minutes: minutes, seconds: seconds})
 
-      if (timeleft < 0){
-        clearInterval(myfunc)
-      }
+  //     if (timeleft < 0){
+  //       clearInterval(myfunc)
+  //     }
   
-    }, 1000)
+  //   }, 1000)
     
-  }
+  // }
   
 
   const handleCancel = () => {
@@ -194,17 +194,13 @@ const SpecificEvent = () => {
                   <div
                     style={{
                       textAlign: "center",
-                      border: 1,
-                      borderStyle: "solid",
-                      cursor: "pointer",
-                      borderRadius: 10,
                       width: "60%",
                     }}
                   >
-                    <i><h3 style={{ fontWeight: "bold" }}>Early Booking Timer</h3></i>
+                    <i><h3 style={{ fontWeight: "bold" }}>Early Booking Date</h3></i>
                     <p style={{fontSize: 20}}><b>Date:</b> {new Date(eventOne.early_booking_end_date).toDateString()}</p>
                     <br />
-                    <p style={{ color: "#d1410a", fontSize: 30 }}>
+                    {/* <p style={{ color: "#d1410a", fontSize: 30 }}>
                       <b>
                         <i>
                           {eventOne.time_diff < 0 ? (
@@ -214,7 +210,7 @@ const SpecificEvent = () => {
                           )}
                         </i>
                       </b>
-                    </p>
+                    </p> */}
                   </div>
                 </Row>
                 <br />
@@ -266,12 +262,12 @@ const SpecificEvent = () => {
                     borderStyle: "solid",
                     cursor: "pointer",
                     borderRadius: 10,
-                    width: "40%",
+                    width: "40%"
                   }}
                 >
                   <h3 style={{ fontWeight: "bold" }}>Add To Calendar</h3>
-                  <Button
-                  className="eventBtns"
+                  <button
+                  onClick={handleAdd}
                   style={{
                     backgroundColor: "#d1410a",
                     cursor: "pointer",
@@ -280,11 +276,12 @@ const SpecificEvent = () => {
                     color: "#fff",
                     fontWeight: "bold",
                     borderRadius: 10,
+                    height: 30,
+                    border: "none"
                   }}
-                  onClick={handleAdd}
                   >
                     Add
-                  </Button>
+                  </button>
                 </div>
               </Row>
               <Row justify="center" align="middle">
@@ -326,17 +323,18 @@ const SpecificEvent = () => {
               <div style={{ textAlign: "center", width: "100%" }}>
                 <Row justify="center" align="middle">
                   <div
-                    style={{
-                      border: 1,
-                      borderStyle: "solid",
-                      cursor: "pointer",
-                      borderRadius: 10,
-                      width: "40%",
-                    }}
+                  style={{
+                    textAlign: "center",
+                    border: 1,
+                    borderStyle: "solid",
+                    cursor: "pointer",
+                    borderRadius: 10,
+                    width: "40%"
+                  }}
                   >
                     <h3 style={{ fontWeight: "bold" }}>Attend Event</h3>
-                    <Button
-                      className="eventBtns"
+                    <button
+                      onClick={handleBuyTicket}
                       style={{
                         backgroundColor: "#d1410a",
                         cursor: "pointer",
@@ -345,11 +343,12 @@ const SpecificEvent = () => {
                         color: "#fff",
                         fontWeight: "bold",
                         borderRadius: 10,
+                        height: 30,
+                        border: "none"
                       }}
-                      onClick={handleBuyTicket}
                     >
                       Buy Ticket
-                    </Button>
+                    </button>
                     <Modal
                       title="Pay with Mpesa"
                       open={open}
