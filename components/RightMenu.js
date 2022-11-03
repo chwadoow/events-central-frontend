@@ -8,7 +8,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { UserOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
-import { Menu, Avatar, Grid, Dropdown} from 'antd';
+import { Menu, Avatar, Grid, Dropdown, notification} from 'antd';
+import Link from 'next/link';
 
 
 const { useBreakpoint } = Grid;
@@ -32,13 +33,22 @@ function redirect() {
   router.push('/')
 }
 
+const openNotification = () => {
+  notification.open({
+    message: 'LogOut Status',
+    description:
+      'Logged Out Successfully!',
+    duration: 1.5,
+  });
+}
+
      const handleLogout = () => {
         fetch('http://localhost:3000/logout', {method: "DELETE"})
            .then(res => {
              if (res.ok) {
                 localStorage.clear()
                  redirect()
-                 alert("logged out")
+                //  alert("logged out")
               }
             })
      } 
@@ -61,7 +71,12 @@ function redirect() {
         </Menu.Item>
 
         <Menu.Item>
-          <a onClick={handleLogout}>Logout</a>
+          <a 
+          onClick={() => {
+            handleLogout();
+            openNotification();
+          }}
+          >Logout</a>
         </Menu.Item>
       </Menu>
     );
