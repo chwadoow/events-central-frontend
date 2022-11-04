@@ -13,6 +13,8 @@ clone to the github Repo git@github.com:chwadoow/events-central-frontend.git Unz
 
 # Technology Used
 Ant-design- This was used for styling
+Next js- 
+
 
 
 # License
