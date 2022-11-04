@@ -4,7 +4,7 @@ Event Ticket and Management system.
 # Founders
 The builders of this project are as follows: Mutagah Kihahu,Jessica Jennifer,Keith Wesley,Moses Ngige and Francis Kibira
 
-# Description
+# DESCRIPTION
 
 This project is a simple responsive front end website that has next jsas the front end.
 
