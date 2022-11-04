@@ -62,7 +62,7 @@ setUserData(data)})},[])
 
 
 
-console.log(formData)
+// console.log(formData)
 
 function handleChange(e){
   setFormData({
@@ -260,7 +260,7 @@ edit
             layout="vertical"
             size='default'
             onSubmit={(e) => handleSubmit(e)}
-            style={{width: "100%", marginLeft: "30%", marginRight: "30%"}}
+            style={{width: "100%"}}
             >
 
                 <Form.Item
