@@ -20,7 +20,7 @@ import {
   SettingOutlined,
 } from "@ant-design/icons";
 import { Avatar, Card } from "antd";
-~function UserProfile(homebanners) {
+function UserProfile(homebanners) {
   const [userProfile, setUserProfile] = useState([]);
 
   const [userData, setUserData] = useState("");
@@ -152,6 +152,6 @@ import { Avatar, Card } from "antd";
       </Layout>
     </>
   );
-};
+}
 
 export default UserProfile;
