@@ -8,7 +8,7 @@ The builders of this project are as follows: Mutagah Kihahu,Jessica Jennifer,Kei
 
 This project is a simple responsive front end website that has next jsas the front end.
 
-# Installation process 
+# INSTALLATION PROCESS
 clone to the github Repo git@github.com:chwadoow/events-central-frontend.git Unzip the downloaded files in a folder of choice.Open the index file from the zipped file with any browser.
 
 # TECHNOLOGY USED
