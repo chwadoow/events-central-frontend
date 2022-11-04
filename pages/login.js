@@ -1,7 +1,7 @@
 import Link from "next/link"
 import {useState} from "react"
 import { useRouter } from 'next/router'
-import { Form, Input, Button, Checkbox , notification} from 'antd';
+import { Form, Input, Button, Checkbox , notification} from '@ant-design/';
 import { NoStyleItemContext } from "antd/lib/form/context"
 
 
@@ -33,14 +33,10 @@ function Login({user, setUser}){
         {
           window.localStorage.setItem('session', JSON.stringify(data.id));
           console.log("logged in ? ", data.id) 
-<<<<<<< HEAD
-<<<<<<< HEAD
-          router.push('/')
-=======
->>>>>>> dc294abed56c4ab32c8c6a68a141ed25b03c34c0
+
           alert("You have loggged in successfully")
-=======
->>>>>>> c6ee02aa9bc4a32bb53bacec56abd7d1c23d965c
+
+ 
           router.push('/')
         } 
          

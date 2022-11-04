@@ -20,7 +20,7 @@ function MyApp({ Component, pageProps }) {
       .then((response) => response.json())
       .then((data) => {
         console.log(data)
-        window.localStorage('session', JSON.stringify(data));
+        // window.localStorage('session', JSON.stringify(data));
       })
     } else {
       router.push('/login');

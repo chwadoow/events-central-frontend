@@ -51,7 +51,7 @@ setUserData(data)})},[])
 
 
 
-console.log(userData.events)
+console.log(userData)
 
   return (
     <>

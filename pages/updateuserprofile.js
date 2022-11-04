@@ -1,18 +1,21 @@
-import { LinearProgress, Typography, Box, Button, FormControl, FormHelperText, Input, InputLabel, ThemeProvider, createTheme } from '@mui/material';
+ import { LinearProgress, Typography, Box, Button, FormControl, FormHelperText, Input, InputLabel, ThemeProvider, } from '@antd';
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { Container } from '@mui/system';
 
-const SpecificPlayer = () => {
+
+const updateuserprofile = () => {
 
   const { id } = useParams();
   const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    role_played: '',
-    team_id: '',
+    user_id: '',
+    full_name: '',
+    avatar_img: '',
+    phone_number: '',
+    bio:'',
+    gender:'',
+
   })
-  const [thePlayer, setThePlayer] = useState([]);
+  const [, setUserProfile] = useState([]);
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -20,9 +23,9 @@ const SpecificPlayer = () => {
   })
 
   useEffect(() => {
-    fetch(`https://esports-api-wesley.herokuapp.com/players/${id}`)
+    fetch(`http://localhost:3000/user_profiles`)
     .then(r => r.json())
-    .then(data => setThePlayer(data))
+    .then(data => setUpdateUser(data))
   }, [])
 
   function handleChange(e){
@@ -31,42 +34,43 @@ const SpecificPlayer = () => {
     });
   }
 
-  function handleUpdatePlayer() {
-    fetch(`https://esports-api-wesley.herokuapp.com/players/${id}`, {
+  function handleUpdateUserPRofile() {
+    fetch(`http://localhost:3000/user_profiles/`, {
     method: "PATCH",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-        name: formData.name,
-        age: formData.age,
-        role_played: formData.role_played,
-        team_id: formData.team_id,
+        name: formData.user_id,
+        full_name: formData.full_name,
+        avatar_img: formData.avatar_img,
+        phone_number: formData.phone_number,
+        bio: formData.bio
     }),
   })
     .then((r) => r.json())
     .then((updatedItem) => {
-      setThePlayer(updatedItem)
+      setuserprofile(updatedItem)
       setFormData({
-        name: '',
-        age: '',
-        role_played: '',
-        team_id: '',
+        use_id: '',
+        full_name: '',
+        avatar_img: '',
+        phone_number: '',
+        bio:'',
     })
     });
   }
 
-  if (!thePlayer) return <LinearProgress style={{backgroundColor: "#0d80fd"}} />;
-
+  
   return (
-    <ThemeProvider theme={darkTheme}>
+    
       <div>
             <div>
             <Container className='formContainer'>
             <div 
             style={{ fontSize: "20px", fontWeight: "bold", marginTop: "50px" }}
             >
-                Edit Player Details
+                Edit User Details
             </div>
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
             <div>
@@ -78,23 +82,23 @@ const SpecificPlayer = () => {
             </div>
             <div>
             <FormControl sx={{ m: 1, width: '35ch' }}>
-                <InputLabel>Age</InputLabel>
+                <InputLabel></InputLabel>
                 <Input name="age" value={formData.age} onChange={handleChange}/>
-                <FormHelperText>Please Enter Player Age</FormHelperText>
+                <FormHelperText>Please enter User Profile</FormHelperText>
                 </FormControl>
             </div>
             <div>
                 <FormControl sx={{ m: 1, width: '35ch' }}>
-                    <InputLabel>Role Played</InputLabel>
-                    <Input name="role_played" value={formData.role_played} onChange={handleChange}/>
-                    <FormHelperText>Please Enter Player Role</FormHelperText>
+                    <InputLabel>User profile</InputLabel>
+                    <Input name="user _profile" value={formData.role_played} onChange={handleChange}/>
+                    <FormHelperText>Please Enter User Profile</FormHelperText>
                 </FormControl>
             </div>
             <div>
                 <FormControl sx={{ m: 1, width: '35ch' }}>
-                    <InputLabel>Team_id</InputLabel>
-                    <Input name="team_id" value={formData.team_id} onChange={handleChange}/>
-                    <FormHelperText>Please Enter Team id</FormHelperText>
+                    <InputLabel>User_id</InputLabel>
+                    <Input name="user_id" value={formData.team_id} onChange={handleChange}/>
+                    <FormHelperText>Please Enter User id</FormHelperText>
                 </FormControl>
             </div>
             </Box>
@@ -108,29 +112,32 @@ const SpecificPlayer = () => {
         </Container>
         </div>
         <Box>
-        <section className="amTheCaptainNow">
-          <h2 className="gaming-title">{thePlayer.name}</h2>
-            <div className="myStory">
+        <section className="">
+          <h2 className="">{thePlayer.name}</h2>
+            <div className="">
             <div className="myImg">
               <div className='card-container'>
                 <div className='image-container'>
-                  <img src={thePlayer.image_url} alt='playerImage'/>
+                  <img src={t} alt=''/>
                 </div>
               </div>
             </div>
                 <div className="aboutText">
-                    <h5>Age: {thePlayer.age}</h5>
-                    <h5>Role Played: {thePlayer.role_played}</h5>
-                    <h5>Team_id: {thePlayer.team_id}</h5>
-                    <h5>Slogan:</h5>
+                    <h5>user_id: {User.id}</h5>
+                    <h5>full_name: {user.full_name}</h5>
+                    <h5>avatar_img: {User.avatar_img}</h5>
+                    <h5>phone_number{User.phone_number}:</h5>
+                    <h5>bio{User.bio}:</h5>
+                    <h5>gender{User.gender}:</h5>
+
                     <p>{thePlayer.slogan} </p>
                 </div>
             </div>
           </section>
         </Box>
       </div>
-    </ThemeProvider>
+   
   )
 }
 
-export default SpecificPlayer
+export default updateuserprofile
