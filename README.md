@@ -4,11 +4,11 @@ Event Ticket and Management system.
 # BUILDERS.
 The builders of this project are as follows: Mutagah Kihahu,Jessica Jennifer,Keith Wesley,Moses Ngige and Francis Kibira
 
-# DESCRIPTION
+# DESCRIPTION.
 
 This project is a simple responsive front end website that has next jsas the front end.
 
-# INSTALLATION PROCESS
+# INSTALLATION PROCESS.
 clone to the github Repo git@github.com:chwadoow/events-central-frontend.git Unzip the downloaded files in a folder of choice.Open the index file from the zipped file with any browser.
 
 # TECHNOLOGY USED
