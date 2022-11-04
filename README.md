@@ -11,7 +11,7 @@ This project is a simple responsive front end website that has next jsas the fro
 # INSTALLATION PROCESS.
 clone to the github Repo git@github.com:chwadoow/events-central-frontend.git Unzip the downloaded files in a folder of choice.Open the index file from the zipped file with any browser.
 
-# TECHNOLOGY USED
+# TECHNOLOGY USED.
 Ant-design- This was used for styling
 Next js- 
 
