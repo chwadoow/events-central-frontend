@@ -1,4 +1,4 @@
-# Title 
+# TITLE
 Event Ticket and Management system.
 
 # BUILDERS
