@@ -75,8 +75,8 @@ const updateuserprofile = () => {
             <Box sx={{ display: 'flex', flexWrap: 'wrap' }}>
             <div>
                 <FormControl sx={{ m: 1, width: '35ch' }}>
-                    <InputLabel>Full Name</InputLabel>
-                    <Input name="name" value={formData.name} onChange={handleChange}/>
+                    <InputLabel>username</InputLabel>
+                    <Input name="username" value={formData.username} onChange={handleChange}/>
                     <FormHelperText>Please Enter Full Name</FormHelperText>
                 </FormControl>
             </div>
@@ -104,7 +104,7 @@ const updateuserprofile = () => {
             </Box>
             <div>
             <FormControl sx={{ display: "flex", flexWrap: "wrap", m: 1, width: '10ch' }}>
-                <Button variant='contained' type='submit' onClick={handleUpdatePlayer}>
+                <Button variant='contained' type='submit' onClick={handleUpdateUserPRofile}>
                     EDIT
                 </Button>
             </FormControl>
@@ -113,11 +113,11 @@ const updateuserprofile = () => {
         </div>
         <Box>
         <section className="">
-          <h2 className="">{thePlayer.name}</h2>
+          <h2 className="">{th}</h2>
             <div className="">
-            <div className="myImg">
-              <div className='card-container'>
-                <div className='image-container'>
+            <div className="">
+              <div className=''>
+                <div className=''>
                   <img src={t} alt=''/>
                 </div>
               </div>
@@ -130,7 +130,7 @@ const updateuserprofile = () => {
                     <h5>bio{User.bio}:</h5>
                     <h5>gender{User.gender}:</h5>
 
-                    <p>{thePlayer.slogan} </p>
+                    
                 </div>
             </div>
           </section>
