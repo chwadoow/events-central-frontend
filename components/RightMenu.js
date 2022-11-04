@@ -1,27 +1,18 @@
 import { useRouter } from 'next/router'
 import { UserOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
-import { Menu, Avatar, Grid, Dropdown, notification} from 'antd';
-
+import React, { useContext } from 'react';
+import { Menu, Avatar, Grid, Dropdown } from 'antd';
 
 const { useBreakpoint } = Grid;
 
 const RightMenu = () => {
   
-let router= useRouter()
+  let router= useRouter()
+  
+  function redirect() {
+    router.push('/')
+  }
 
-function redirect() {
-  router.push('/')
-}
-
-const openNotification = () => {
-  notification.open({
-    message: 'LogOut Status',
-    description:
-      'Logged Out Successfully!',
-    duration: 1.5,
-  });
-}
     const { md } = useBreakpoint();
 
     const menu = (

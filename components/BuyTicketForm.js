@@ -18,9 +18,14 @@ const BuyTicketForm = ({ loading, event, onClick }) => {
     ("0" + date.getMinutes()).slice(-2) +
     ("0" + date.getSeconds()).slice(-2);
 
-  let currentDate = date.getTime();
+  let currentDate = new Date().getTime()
   let token;
   let totalAmount = 0;
+
+  const endingDate = new Date(event.early_booking_end_date).getTime()
+
+  console.log(endingDate - currentDate)
+
   const conditionedPricingVIP =
     parseInt(
       (new Date(

@@ -1,13 +1,12 @@
 import { Alert, Button, Col, Form, Input, message, Row } from 'antd'
 import { useRouter } from 'next/router';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
 const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
-  const [user, setUser] = useState({});
   const router = useRouter();
 
   function handleSubmit(e) {
@@ -28,7 +27,8 @@ const SignUpForm = () => {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          setUser(user)
+          window.localStorage.setItem('token', JSON.stringify(user));
+          // setUserData(user)
           message.success("successfully logged in!")
           router.push("/");
         });
@@ -38,7 +38,6 @@ const SignUpForm = () => {
     });
   }
 
-  console.log(user)
   return (
     <div>
       <Col span={24}>
@@ -46,7 +45,7 @@ const SignUpForm = () => {
           <Form
           layout="vertical"
           size='default'
-          // onSubmit={(e) => handleSubmit(e)}
+          onSubmit={(e) => handleSubmit(e)}
           style={{width: "100%"}}
           >
             <p style={{fontWeight: "bolder", fontSize: 50}}>Sign Up</p>
