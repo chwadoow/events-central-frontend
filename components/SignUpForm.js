@@ -27,9 +27,10 @@ const SignUpForm = () => {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => {
-          window.localStorage.setItem('token', JSON.stringify(user));
-          // setUserData(user)
-          message.success("successfully logged in!")
+          window.localStorage.setItem('token', JSON.stringify(user.status.data.id));
+          window.localStorage.setItem('jti', JSON.stringify(user.status.data.jti));
+          
+          message.success("successfully signed up!")
           router.push("/");
         });
       } else {

@@ -1,11 +1,13 @@
-import { Button, Col, Form, Input, Row } from 'antd'
+import { Button, Col, Form, Input, message, Row } from 'antd'
 import React, { useState } from 'react'
+import { useRouter } from 'next/router';
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   })
+  const router = useRouter();
 
   function handleChange(e){
     setFormData({
@@ -15,6 +17,31 @@ const LoginForm = () => {
 
   function handleSubmit(e){
     e.preventDefault();
+    fetch("http://localhost:3000/users/sign_in", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          email: formData.email,
+          password: formData.password,
+        }
+      }),
+    }).then((res) => {
+      if (res.ok) {
+        res.json().then((user) => {
+          window.localStorage.setItem('jti', JSON.stringify(user.status.data.jti));
+          window.localStorage.setItem('session', JSON.stringify(user.status.data.id));
+
+          message.success("successfully logged in!")
+
+          router.push("/");
+        });
+      } else {
+        res.json().then((err) => setErrors(err.status.errors));
+      }
+    });
     
   }
   
